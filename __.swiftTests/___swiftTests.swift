@@ -10,26 +10,60 @@ import XCTest
 
 class ___swiftTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testEach() {
+        
+        var sum = 0
+        
+        __.each([1,2,3],{
+            item in
+            sum += item
+            })
+        
+        XCTAssert(sum == 6)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testMap() {
+        
+        let result = __.map([1,2,3], {
+            item in
+            item * 2
+            })
+        
+        println(result)
+        
+        XCTAssert(result == [2,4,6])
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testReduce(){
+        var result = __.reduce([1,2,3,4], iterator: {
+                x, y in
+                x + y
+            }, memo: 0)
+        
+        XCTAssert(result==10)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+    func testFind() {
+        
+        let result0 = __.find([1,2,3], {
+                item in
+                item == 2
+            })
+        XCTAssert(result0!==2)
+        
+        let result1 = __.find([1,2,3], {
+            item in
+            item == 4
+            })
+        
+        var flag = false;
+        if result1 {
+            flag = false
+        } else {
+            flag = true
         }
+        
+        XCTAssert(flag)
+        
     }
-    
 }

@@ -10,6 +10,8 @@
 		36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36029B0C193D7EA000FA0239 /* AppDelegate.swift */; };
 		36029B0F193D7EA000FA0239 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36029B0E193D7EA000FA0239 /* Images.xcassets */; };
 		36029B1B193D7EA000FA0239 /* ___swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36029B1A193D7EA000FA0239 /* ___swiftTests.swift */; };
+		365B6A05193DDD2F00FF5D8A /* __.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365B6A04193DDD2F00FF5D8A /* __.swift */; };
+		365B6A0D193DE30700FF5D8A /* __.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365B6A04193DDD2F00FF5D8A /* __.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,7 @@
 		36029B14193D7EA000FA0239 /* __.swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = __.swiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36029B19193D7EA000FA0239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36029B1A193D7EA000FA0239 /* ___swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___swiftTests.swift"; sourceTree = "<group>"; };
+		365B6A04193DDD2F00FF5D8A /* __.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 		36029B09193D7EA000FA0239 /* __.swift */ = {
 			isa = PBXGroup;
 			children = (
+				365B6A04193DDD2F00FF5D8A /* __.swift */,
 				36029B0C193D7EA000FA0239 /* AppDelegate.swift */,
 				36029B0E193D7EA000FA0239 /* Images.xcassets */,
 				36029B0A193D7EA000FA0239 /* Supporting Files */,
@@ -201,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */,
+				365B6A05193DDD2F00FF5D8A /* __.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				365B6A0D193DE30700FF5D8A /* __.swift in Sources */,
 				36029B1B193D7EA000FA0239 /* ___swiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +383,7 @@
 				36029B20193D7EA000FA0239 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		36029B21193D7EA000FA0239 /* Build configuration list for PBXNativeTarget "__.swiftTests" */ = {
 			isa = XCConfigurationList;
@@ -385,6 +392,7 @@
 				36029B23193D7EA000FA0239 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
