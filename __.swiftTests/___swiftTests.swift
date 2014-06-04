@@ -86,6 +86,30 @@ class ___swiftTests: XCTestCase {
         XCTAssert(result==[1,3])
     }
     
+    func testEvery(){
+    
+        var result0 = __.every([true, true, true])
+        
+        XCTAssert(result0)
+        
+        var result1 = __.every([true, true, false])
+        
+        XCTAssert(!result1)
+    
+    }
+    
+    func testSome(){
+        
+        var result0 = __.some([false, false, false])
+        
+        XCTAssert(!result0)
+        
+        var result1 = __.some([false, true, false])
+        
+        XCTAssert(result1)
+        
+    }
+    
     
     func testContains(){
         
@@ -96,5 +120,14 @@ class ___swiftTests: XCTestCase {
         let result1 = __.contains([1,2,3,4], value: 5)
         
         XCTAssert(!result1)
+    }
+    
+    func testPluck(){
+        
+        let data = [["name": "annie", "age": "10"], ["name": "anna", "age": "500"], ["name": "frog", "age": "18"]]
+        
+        let result = __.pluck(data, key: "age")
+        
+        XCTAssert(result == ["10", "500", "18"])
     }
 }

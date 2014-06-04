@@ -65,12 +65,40 @@ class __ {
         return result;
     }
     
+    class func every(list: Bool[]) -> Bool {
+        for item in list {
+            if !item {
+                return false
+            }
+        }
+        return true
+    }
+    
+    class func some(list: Bool[]) -> Bool {
+        for item in list {
+            if item {
+                return true
+            }
+        }
+        return false
+    }
+    
     class func contains<ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
         var flag: Bool = false;
         for item in list {
             flag = flag || (item == value)
         }
         return flag
+    }
+    
+    class func pluck<KeyType: Equatable, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> ValueType[] {
+        var result = ValueType[]()
+        for item in list {
+            if let value = item[key] {
+                result += value
+            }
+        }
+        return result
     }
 
 }
