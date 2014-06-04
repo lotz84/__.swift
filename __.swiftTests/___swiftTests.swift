@@ -132,4 +132,33 @@ class ___swiftTests: XCTestCase {
         
         XCTAssert(result == ["walking", "work", "lunch"])
     }
+    
+    func testMax(){
+        let max = __.max([5,3,7,5,1,9,3])
+        XCTAssert(max==9)
+    }
+    
+    func testMin(){
+        let min = __.min(["f","e","b","d","a","c","g"])
+        XCTAssert(min == "a")
+    }
+    
+    func testSortBy(){
+        
+        let result0 = __.sortBy([4,3,7,5,8,2,6,1], iterator: {x in x})
+        
+        XCTAssert(result0 == [1,2,3,4,5,6,7,8])
+        
+        func size(text: String) -> Int {
+            var length = 0
+            for c in text {
+                length++
+            }
+            return length
+        }
+        
+        let result1 = __.sortBy(["Hello", " Swift", "!!"], iterator: size)
+        
+        XCTAssert(result1 == ["!!", "Hello", " Swift"])
+    }
 }

@@ -100,5 +100,57 @@ class __ {
         }
         return result
     }
-
+    
+    class func max<ItemType: Comparable>(list: ItemType[]) -> ItemType {
+        var max: ItemType?
+        for item in list {
+            if max {
+                if max < item {
+                    max = item
+                }
+            } else {
+                max = item
+            }
+        }
+        return max!
+    }
+    
+    class func min<ItemType: Comparable>(list: ItemType[]) -> ItemType {
+        var min: ItemType?
+        for item in list {
+            if min {
+                if min > item {
+                    min = item
+                }
+            } else {
+                min = item
+            }
+        }
+        return min!
+    }
+    
+    class func sortBy<ItemType, CompareType: Comparable>(list: ItemType[], iterator: ItemType -> CompareType) -> ItemType[] {
+        if list.isEmpty { return [] }
+        
+        var smaller = ItemType[]()
+        var bigger = ItemType[]()
+        
+        let first = list[0]
+        let count = list.count
+        
+        for i in 1..count {
+            if iterator(first) < iterator(list[i]) {
+                bigger += list[i]
+            } else {
+                smaller += list[i]
+            }
+        }
+        
+        var result = sortBy(smaller, iterator: iterator)
+        result += first
+        result += sortBy(bigger, iterator: iterator);
+        
+        return result;
+    }
+    
 }
