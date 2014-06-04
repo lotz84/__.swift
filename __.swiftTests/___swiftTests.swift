@@ -75,4 +75,26 @@ class ___swiftTests: XCTestCase {
         
         XCTAssert(result==[2,4])
     }
+    
+    func testReject(){
+        
+        var result = __.reject([1,2,3,4], {
+            x in
+            x % 2 == 0
+            })
+        
+        XCTAssert(result==[1,3])
+    }
+    
+    
+    func testContains(){
+        
+        let result0 = __.contains([1,2,3,4], value: 1)
+        
+        XCTAssert(result0)
+        
+        let result1 = __.contains([1,2,3,4], value: 5)
+        
+        XCTAssert(!result1)
+    }
 }

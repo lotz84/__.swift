@@ -55,4 +55,22 @@ class __ {
         return result;
     }
 
+    class func reject<ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
+        var result = ItemType[]()
+        for item in list {
+            if !filter(item) {
+                result.append(item)
+            }
+        }
+        return result;
+    }
+    
+    class func contains<ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
+        var flag: Bool = false;
+        for item in list {
+            flag = flag || (item == value)
+        }
+        return flag
+    }
+
 }
