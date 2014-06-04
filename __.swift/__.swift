@@ -153,4 +153,51 @@ class __ {
         return result;
     }
     
+    class func groupBy<ItemType, EquitableType: Equatable>(list: ItemType[], iterator: ItemType -> EquitableType) -> Dictionary<EquitableType, ItemType[]> {
+        var result = Dictionary<EquitableType, ItemType[]>()
+        
+        for item in list {
+            let key = iterator(item)
+            if let array = result[key] {
+                result[key] = array + [item]
+            } else {
+                result[key] = [item]
+            }
+        }
+        
+        return result
+    }
+    
+    class func indexBy<KeyType, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> Dictionary<ValueType, (Dictionary<KeyType,ValueType>)>{
+        var result = Dictionary<ValueType, (Dictionary<KeyType,ValueType>)>()
+        for item in list {
+            result[item[key]!] = item
+        }
+        return result
+    }
+    
+    class func countBy<ItemType, NameType>(list: ItemType[], iterator: ItemType -> NameType) -> Dictionary<NameType, Int> {
+        var result = Dictionary<NameType, Int>()
+        for item in list {
+            if let count = result[iterator(item)] {
+                result[iterator(item)] = count + 1
+            } else {
+                result[iterator(item)] = 1
+            }
+        }
+        return result
+    }
+    
+    class func shuffle<ItemType>(list: ItemType[]) -> ItemType[] {
+        let length = list.count
+        var random = Int[]()
+        while random.count < length {
+            let index: Int = Int(arc4random() % UInt32(length))
+            if !contains(random, value: index) {
+                random += index
+            }
+        }
+        return map(random, iterator: {index in list[index]})
+    }
+
 }

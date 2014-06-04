@@ -161,4 +161,44 @@ class ___swiftTests: XCTestCase {
         
         XCTAssert(result1 == ["!!", "Hello", " Swift"])
     }
+    
+    func testGroupBy(){
+        
+        let result = __.groupBy([1.3, 2.1, 2.4], iterator: floor)
+        
+        let list0 = result[1.0]!
+        let list1 = result[2.0]!
+        
+        XCTAssert( (list0 == [1.3]) && (list1 == [2.1, 2.4]) )
+    }
+    
+    func testIndexBy(){
+        
+        let data = [
+            ["plan": "walking",       "time": "8 a.m."],
+            ["plan": "work",          "time": "10 a.m."],
+            ["plan": "lunch",         "time": "12 a.m."],
+            ["plan": "meet friend",   "time": "12 a.m."]
+        ]
+        
+        let result = __.indexBy(data, key: "time")
+        
+        XCTAssert( result["8 a.m."]!["plan"]! == "walking" )
+    }
+    
+    func testCountBy(){
+        
+        let result = __.countBy([1, 2, 3, 4, 5], iterator: {
+            x in
+            x % 2 == 0 ? "even": "odd"
+        })
+        
+        XCTAssert(result["odd"]! == 3)
+    }
+    
+    func testShuffle(){
+        let result = __.shuffle(["a", "b", "c", "d", "e", "f", "g", "h"])
+                
+        XCTAssert(result.count == 8)
+    }
 }
