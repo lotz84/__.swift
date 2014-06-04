@@ -64,6 +64,15 @@ class ___swiftTests: XCTestCase {
         }
         
         XCTAssert(flag)
+    }
+
+    func testFilter(){
+
+        var result = __.filter([1,2,3,4], {
+            x in
+            x % 2 == 0
+            })
         
+        XCTAssert(result==[2,4])
     }
 }

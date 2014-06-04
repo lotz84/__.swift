@@ -45,4 +45,14 @@ class __ {
         return nil;
     }
     
+    class func filter <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
+        var result = ItemType[]()
+        for item in list {
+            if filter(item) {
+                result.append(item)
+            }
+        }
+        return result;
+    }
+
 }
