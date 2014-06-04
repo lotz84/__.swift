@@ -29,8 +29,6 @@ class ___swiftTests: XCTestCase {
             item * 2
             })
         
-        println(result)
-        
         XCTAssert(result == [2,4,6])
     }
     
@@ -124,10 +122,14 @@ class ___swiftTests: XCTestCase {
     
     func testPluck(){
         
-        let data = [["name": "annie", "age": "10"], ["name": "anna", "age": "500"], ["name": "frog", "age": "18"]]
+        let data = [
+            ["plan": "walking", "time": "8 a.m."],
+            ["plan": "work",    "time": "10 a.m."],
+            ["plan": "lunch",   "time": "12 a.m."]
+        ]
         
-        let result = __.pluck(data, key: "age")
+        let result = __.pluck(data, key: "plan")
         
-        XCTAssert(result == ["10", "500", "18"])
+        XCTAssert(result == ["walking", "work", "lunch"])
     }
 }
