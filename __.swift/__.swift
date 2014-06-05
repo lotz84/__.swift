@@ -10,25 +10,25 @@ import Foundation
 
 class __ {
 
-    class func each <ItemType>(list: ItemType[], iterator: ItemType -> Any)  {
+    class func each <T>(list: T[], iterator: T -> Any)  {
         list.map { iterator($0) }
     }
     
     // alias for each
-    class func forEach <ItemType>(list: ItemType[], iterator: ItemType -> Any) {
+    class func forEach <T>(list: T[], iterator: T -> Any) {
         self.each(list, iterator: iterator)
     }
     
-    class func map <ItemType, resultType>(list: ItemType[], iterator: ItemType -> resultType) -> resultType[] {
+    class func map <T, U>(list: T[], iterator: T -> U) -> U[] {
         return list.map { iterator($0) }
     }
     
     // alias for map
-    class func collect <ItemType, resultType>(list: ItemType[], iterator: ItemType -> resultType) -> resultType[] {
+    class func collect <T, U>(list: T[], iterator: T -> U) -> U[] {
         return self.map(list, iterator: iterator)
     }
     
-    class func reduce <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
+    class func reduce <T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
         
         var result = memo
         
@@ -40,16 +40,16 @@ class __ {
     }
     
     // alias for reduce
-    class func inject <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
+    class func inject <T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
         return self.reduce(list, memo: memo, iterator: iterator)
     }
     
     // alias for reduce
-    class func foldl <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
+    class func foldl <T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
         return self.reduce(list, memo: memo, iterator: iterator)
     }
     
-    class func find <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType? {
+    class func find <T>(list: T[], filter: T -> Bool) -> T? {
         for item in list {
             if filter(item) {
                 return item
@@ -59,13 +59,13 @@ class __ {
     }
     
     // alias for find
-    class func detect <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType? {
+    class func detect <T>(list: T[], filter: T -> Bool) -> T? {
         return self.find(list, filter: filter)
     }
     
     
-    class func filter <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
-        var result = ItemType[]()
+    class func filter <T>(list: T[], filter: T -> Bool) -> T[] {
+        var result = T[]()
         for item in list {
             if filter(item) {
                 result += item
@@ -75,16 +75,16 @@ class __ {
     }
 
     // alias for filter
-    class func select <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
+    class func select <T>(list: T[], filter: T -> Bool) -> T[] {
         return self.filter(list, filter: filter)
     }
     
-    class func reject<ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
+    class func reject<T>(list: T[], filter: T -> Bool) -> T[] {
         
         // I tried to compose ! and filter directly
         // but I have no idea do it exactly
 
-        func notFilter(item: ItemType) -> Bool {
+        func notFilter(item: T) -> Bool {
             return !filter(item)
         }
         
@@ -125,7 +125,7 @@ class __ {
     }
     
     // Simple linear search
-    class func contains <ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
+    class func contains <E: Equatable>(list: E[], value: E) -> Bool {
         for item in list {
             if item == value {
                 return true
@@ -135,12 +135,12 @@ class __ {
     }
     
     // alias for contains
-    class func include <ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
+    class func include <E: Equatable>(list: E[], value: E) -> Bool {
         return self.contains(list, value: value);
     }
     
-    class func pluck<KeyType: Equatable, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> ValueType[] {
-        var result = ValueType[]()
+    class func pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[] {
+        var result = V[]()
         for item in list {
             if let value = item[key] {
                 result += value
@@ -149,17 +149,17 @@ class __ {
         return result
     }
     
-    class func max<ItemType: Comparable>(list: ItemType[]) -> ItemType! {
+    class func max<C: Comparable>(list: C[]) -> C! {
         return self.tournament(list, comparator: {$0 < $1 } )
     }
     
-    class func min<ItemType: Comparable>(list: ItemType[]) -> ItemType! {
+    class func min<C: Comparable>(list: C[]) -> C! {
         return self.tournament(list, comparator: {$0 > $1 } )
     }
     
     // This function is used in max and min function
     // Since max and min function pass the test, we decide tournament function is work correctly
-    class func tournament<ItemType: Comparable>(list: ItemType[], comparator: (ItemType, ItemType) -> Bool) -> ItemType! {
+    class func tournament<C: Comparable>(list: C[], comparator: (C, C) -> Bool) -> C! {
         if list.isEmpty { return nil }
         var candidate = list[0]
         for item in list {
@@ -171,11 +171,11 @@ class __ {
     }
     
     // quick sort
-    class func sortBy<ItemType, CompareType: Comparable>(list: ItemType[], iterator: ItemType -> CompareType) -> ItemType[] {
+    class func sortBy<T, C: Comparable>(list: T[], iterator: T -> C) -> T[] {
         if list.isEmpty { return [] }
         
-        var smaller = ItemType[]()
-        var bigger = ItemType[]()
+        var smaller = T[]()
+        var bigger = T[]()
         
         let first = list[0]
         let length = list.count
@@ -195,8 +195,8 @@ class __ {
         return result
     }
     
-    class func groupBy<ItemType, EquitableType: Equatable>(list: ItemType[], iterator: ItemType -> EquitableType) -> Dictionary<EquitableType, ItemType[]> {
-        var result = Dictionary<EquitableType, ItemType[]>()
+    class func groupBy<K, V>(list: V[], iterator: V -> K) -> Dictionary<K, V[]> {
+        var result = Dictionary<K, V[]>()
         
         for item in list {
             let key = iterator(item)
@@ -210,16 +210,16 @@ class __ {
         return result
     }
     
-    class func indexBy<KeyType, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> Dictionary<ValueType,(Dictionary<KeyType,ValueType>)> {
-        var result = Dictionary<ValueType, (Dictionary<KeyType,ValueType>)>()
+    class func indexBy<K, V>(list: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V> > {
+        var result = Dictionary<V, Dictionary<K,V> >()
         for item in list {
             result[item[key]!] = item
         }
         return result
     }
     
-    class func countBy<ItemType, NameType>(list: ItemType[], iterator: ItemType -> NameType) -> Dictionary<NameType, Int> {
-        var result = Dictionary<NameType, Int>()
+    class func countBy<T, U>(list: T[], iterator: T -> U) -> Dictionary<U, Int> {
+        var result = Dictionary<U, Int>()
         for item in list {
             if let count = result[iterator(item)] {
                 result[iterator(item)] = count + 1
@@ -230,7 +230,7 @@ class __ {
         return result
     }
     
-    class func shuffle<ItemType>(list: ItemType[]) -> ItemType[] {
+    class func shuffle<T>(list: T[]) -> T[] {
         let length = list.count
         var random = Int[]()
         while random.count < length {
@@ -242,13 +242,13 @@ class __ {
         return self.map(random, iterator: {index in list[index]})
     }
     
-    class func sample<ItemType>(list: ItemType[]) -> ItemType {
+    class func sample<T>(list: T[]) -> T {
         let index = Int(arc4random() % UInt32(list.count))
         return list[index]
     }
     
-    class func sample<ItemType>(list: ItemType[], n:Int) -> ItemType[] {
-        var result = ItemType[]()
+    class func sample<T>(list: T[], n:Int) -> T[] {
+        var result = T[]()
         let random = self.shuffle(Array(0..list.count))
         for i in 0..n {
             result += list[random[i]]
@@ -256,11 +256,12 @@ class __ {
         return result
     }
     
-    class func size<ItemType>(list: ItemType[]) -> Int {
+    class func size<T>(list: T[]) -> Int {
         return list.count
     }
     
-    class func size<KeyType, ValueType>(dict: Dictionary<KeyType,ValueType>) -> Int {
+    class func size<K, V>(dict: Dictionary<K, V>) -> Int {
         return Array(dict.keys).count
     }
+    
 }
