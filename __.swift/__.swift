@@ -10,25 +10,25 @@ import Foundation
 
 class __ {
 
-    class func each <T>(list: T[], iterator: T -> Any)  {
+    class func each<T>(list: T[], iterator: T -> Any)  {
         list.map { iterator($0) }
     }
     
     // alias for each
-    class func forEach <T>(list: T[], iterator: T -> Any) {
+    class func forEach<T>(list: T[], iterator: T -> Any) {
         self.each(list, iterator: iterator)
     }
     
-    class func map <T, U>(list: T[], iterator: T -> U) -> U[] {
+    class func map<T, U>(list: T[], iterator: T -> U) -> U[] {
         return list.map { iterator($0) }
     }
     
     // alias for map
-    class func collect <T, U>(list: T[], iterator: T -> U) -> U[] {
+    class func collect<T, U>(list: T[], iterator: T -> U) -> U[] {
         return self.map(list, iterator: iterator)
     }
     
-    class func reduce <T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
+    class func reduce<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
         
         var result = memo
         
@@ -40,16 +40,16 @@ class __ {
     }
     
     // alias for reduce
-    class func inject <T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
+    class func inject<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
         return self.reduce(list, memo: memo, iterator: iterator)
     }
     
     // alias for reduce
-    class func foldl <T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
+    class func foldl<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
         return self.reduce(list, memo: memo, iterator: iterator)
     }
     
-    class func find <T>(list: T[], filter: T -> Bool) -> T? {
+    class func find<T>(list: T[], filter: T -> Bool) -> T? {
         for item in list {
             if filter(item) {
                 return item
@@ -59,12 +59,12 @@ class __ {
     }
     
     // alias for find
-    class func detect <T>(list: T[], filter: T -> Bool) -> T? {
+    class func detect<T>(list: T[], filter: T -> Bool) -> T? {
         return self.find(list, filter: filter)
     }
     
     
-    class func filter <T>(list: T[], filter: T -> Bool) -> T[] {
+    class func filter<T>(list: T[], filter: T -> Bool) -> T[] {
         var result = T[]()
         for item in list {
             if filter(item) {
@@ -75,7 +75,7 @@ class __ {
     }
 
     // alias for filter
-    class func select <T>(list: T[], filter: T -> Bool) -> T[] {
+    class func select<T>(list: T[], filter: T -> Bool) -> T[] {
         return self.filter(list, filter: filter)
     }
     
@@ -125,7 +125,7 @@ class __ {
     }
     
     // Simple linear search
-    class func contains <E: Equatable>(list: E[], value: E) -> Bool {
+    class func contains<E: Equatable>(list: E[], value: E) -> Bool {
         for item in list {
             if item == value {
                 return true
@@ -135,7 +135,7 @@ class __ {
     }
     
     // alias for contains
-    class func include <E: Equatable>(list: E[], value: E) -> Bool {
+    class func include<E: Equatable>(list: E[], value: E) -> Bool {
         return self.contains(list, value: value);
     }
     
