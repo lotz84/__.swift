@@ -150,25 +150,24 @@ class __ {
     }
     
     class func max<ItemType: Comparable>(list: ItemType[]) -> ItemType! {
-        if list.isEmpty { return nil }
-        var max = list[0]
-        for item in list {
-            if max < item {
-                max = item
-            }
-        }
-        return max
+        return self.tournament(list, comparator: {$0 < $1 } )
     }
     
     class func min<ItemType: Comparable>(list: ItemType[]) -> ItemType! {
+        return self.tournament(list, comparator: {$0 > $1 } )
+    }
+    
+    // This function is used in max and min function
+    // Since max and min function pass the test, we decide tournament function is work correctly
+    class func tournament<ItemType: Comparable>(list: ItemType[], comparator: (ItemType, ItemType) -> Bool) -> ItemType! {
         if list.isEmpty { return nil }
-        var min = list[0]
+        var candidate = list[0]
         for item in list {
-            if min > item {
-                min = item
+            if comparator(candidate,item) {
+                candidate = item
             }
         }
-        return min
+        return candidate
     }
     
     // quick sort
