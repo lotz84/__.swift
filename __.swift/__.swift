@@ -10,12 +10,22 @@ import Foundation
 
 class __ {
 
-    class func each<ItemType>(list: ItemType[], iterator: ItemType -> Any)  {
+    class func each <ItemType>(list: ItemType[], iterator: ItemType -> Any)  {
         list.map { iterator($0) }
+    }
+    
+    // alias for each
+    class func forEach <ItemType>(list: ItemType[], iterator: ItemType -> Any) {
+        self.each(list, iterator: iterator)
     }
     
     class func map <ItemType, resultType>(list: ItemType[], iterator: ItemType -> resultType) -> resultType[] {
         return list.map { iterator($0) }
+    }
+    
+    // alias for map
+    class func collect <ItemType, resultType>(list: ItemType[], iterator: ItemType -> resultType) -> resultType[] {
+        return self.map(list, iterator: iterator)
     }
     
     class func reduce <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
@@ -29,6 +39,16 @@ class __ {
         return result
     }
     
+    // alias for reduce
+    class func inject <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
+        return self.reduce(list, memo: memo, iterator: iterator)
+    }
+    
+    // alias for reduce
+    class func foldl <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
+        return self.reduce(list, memo: memo, iterator: iterator)
+    }
+    
     class func find <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType? {
         for item in list {
             if filter(item) {
@@ -37,6 +57,12 @@ class __ {
         }
         return nil
     }
+    
+    // alias for find
+    class func detect <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType? {
+        return self.find(list, filter: filter)
+    }
+    
     
     class func filter <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
         var result = ItemType[]()
@@ -48,6 +74,11 @@ class __ {
         return result
     }
 
+    // alias for filter
+    class func select <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
+        return self.filter(list, filter: filter)
+    }
+    
     class func reject<ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
         
         // I tried to compose ! and filter directly
@@ -74,6 +105,11 @@ class __ {
         return true
     }
     
+    // alias for every
+    class func all(list: Bool[]) -> Bool {
+        return self.every(list)
+    }
+
     class func some(list: Bool[]) -> Bool {
         for item in list {
             if item {
@@ -83,14 +119,24 @@ class __ {
         return false
     }
     
+    // alias for any
+    class func any(list: Bool[]) -> Bool {
+        return self.some(list)
+    }
+    
     // Simple linear search
-    class func contains<ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
+    class func contains <ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
         for item in list {
             if item == value {
                 return true
             }
         }
         return false
+    }
+    
+    // alias for contains
+    class func include <ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
+        return self.contains(list, value: value);
     }
     
     class func pluck<KeyType: Equatable, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> ValueType[] {
@@ -196,5 +242,26 @@ class __ {
         }
         return self.map(random, iterator: {index in list[index]})
     }
-
+    
+    class func sample<ItemType>(list: ItemType[]) -> ItemType {
+        let index = Int(arc4random() % UInt32(list.count))
+        return list[index]
+    }
+    
+    class func sample<ItemType>(list: ItemType[], n:Int) -> ItemType[] {
+        var result = ItemType[]()
+        let random = self.shuffle(Array(0..list.count))
+        for i in 0..n {
+            result += list[random[i]]
+        }
+        return result
+    }
+    
+    class func size<ItemType>(list: ItemType[]) -> Int {
+        return list.count
+    }
+    
+    class func size<KeyType, ValueType>(dict: Dictionary<KeyType,ValueType>) -> Int {
+        return Array(dict.keys).count
+    }
 }

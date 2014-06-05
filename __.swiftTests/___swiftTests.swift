@@ -191,4 +191,30 @@ class ___swiftTests: XCTestCase {
                 
         XCTAssert(result.count == 8)
     }
+    
+    func testSample(){
+        
+        let result0 = __.sample([1,2,3,4])
+        XCTAssert(__.contains([1,2,3,4], value: result0))
+        
+        let result1 = __.sample([1,2,3,4], n: 3)
+        XCTAssert(result1.count == 3)
+    }
+    
+    func testSize(){
+        
+        let result0 = __.size([1,2,3,4,5])
+        XCTAssert(result0 == 5)
+        
+        let dict = [
+            "a":1,
+            "b":2,
+            "c":3,
+            "d":4,
+            "e":5,
+            "f":6
+        ]
+        let result1 = __.size(dict)
+        XCTAssert(result1 == 6)
+    }
 }
