@@ -49,8 +49,8 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
 |`_.where(list, properties)`|Incomplete|
 |`_.findWhere(list, properties)`|Incomplete|
 |`_.reject(list, predicate, [context])`|`__.reject<T>(list: T[], filter: T -> Bool) -> T[]`|
-|`_.every(list, [predicate], [context])`|`__.every(list: Bool[]) -> Bool`|
-|`_.some(list, [predicate], [context])`|`__.some(list: Bool[]) -> Bool`|
+|`_.every(list, [predicate], [context])`|`__.every<L: LogicValue>(list: L[]) -> Bool`|
+|`_.some(list, [predicate], [context])`|`__.some<L: LogicValue>(list: L[]) -> Bool`|
 |`_.contains(list, value)`|`__.contains<E: Equatable>(list: E[], value: E) -> Bool`|
 |`_.invoke(list, methodName, *arguments)`|I have not decided whether implement.|
 |`_.pluck(list, propertyName)`|`__.pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[]`|
@@ -71,4 +71,3 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
 ###Objects
 ###Utility
 ###Chaining
-
