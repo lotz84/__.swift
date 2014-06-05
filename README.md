@@ -14,7 +14,7 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
     __.map([11,22,33], { x in x * x })
     // [121, 484, 1089]
 
-    __.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], iterator: +,  memo: "")
+    __.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], memo: "", iterator: + )
     // Hello Swift !!
 
     func isPrime(n: Int) -> Bool {
