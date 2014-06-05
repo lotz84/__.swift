@@ -81,6 +81,14 @@ class ___swiftTests: XCTestCase {
         var result1 = __.every([true, true, false])
         
         XCTAssert(!result1)
+        
+        let item0: Int? = 1
+        let item1: Int? = 2
+        let item2: Int? = nil
+        
+        var result2 = __.every([item0, item1, item2])
+        
+        XCTAssert(!result2)
     
     }
     
@@ -93,6 +101,14 @@ class ___swiftTests: XCTestCase {
         var result1 = __.some([false, true, false])
         
         XCTAssert(result1)
+        
+        let item0: Int? = 1
+        let item1: Int? = 2
+        let item2: Int? = nil
+        
+        var result2 = __.some([item0, item1, item2])
+        
+        XCTAssert(result2)
         
     }
     

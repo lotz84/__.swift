@@ -96,7 +96,7 @@ class __ {
         But I think it is faster to use short-circuit evaluation by for-in loop
     */
     
-    class func every(list: Bool[]) -> Bool {
+    class func every<L: LogicValue>(list: L[]) -> Bool {
         for item in list {
             if !item {
                 return false
@@ -106,11 +106,11 @@ class __ {
     }
     
     // alias for every
-    class func all(list: Bool[]) -> Bool {
+    class func all<L: LogicValue>(list: L[]) -> Bool {
         return self.every(list)
     }
 
-    class func some(list: Bool[]) -> Bool {
+    class func some<L: LogicValue>(list: L[]) -> Bool {
         for item in list {
             if item {
                 return true
@@ -120,7 +120,7 @@ class __ {
     }
     
     // alias for any
-    class func any(list: Bool[]) -> Bool {
+    class func any<L: LogicValue>(list: L[]) -> Bool {
         return self.some(list)
     }
     
