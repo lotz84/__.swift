@@ -6,11 +6,6 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
 
 ##Example
 
-    __.each(["Hello", "Swift", "!!"], { x in println(x) })
-    // Hello
-    // Swift
-    // !!
-
     __.map([11,22,33], { x in x * x })
     // [121, 484, 1089]
 
@@ -31,9 +26,6 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
     __.filter(Array(2..100) , filter: isPrime)
     // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
-    __.reject(Array(2..30) , filter: isPrime)
-    // [4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 26, 27, 28]
-
     let data = [
       ["plan": "walking", "time": "8 a.m."],
       ["plan": "work",    "time": "10 a.m."],
@@ -41,3 +33,42 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
     ]
     __.pluck(data, key: "plan")
     // [walking, work, lunch]
+
+
+##Progress
+###Collections
+
+|Underscore.js|__.swift|
+|:---|:---|
+|`_.each(list, iterator, [context])`|`__.each<T>(list: T[], iterator: T -> Any)`|
+|`_.map(list, iterator, [context])`|`__.map<T, U>(list: T[], iterator: T -> U) -> U[]`|
+|`_.reduce(list, iterator, memo, [context])`|`__.reduce<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U`|
+|`_.reduceRight(list, iterator, memo, [context])`|Incomplete|
+|`_.find(list, predicate, [context])`|`__.find<T>(list: T[], filter: T -> Bool) -> T?`|
+|`_.filter(list, predicate, [context])`|`__.filter<T>(list: T[], filter: T -> Bool) -> T[]`|
+|`_.where(list, properties)`|Incomplete|
+|`_.findWhere(list, properties)`|Incomplete|
+|`_.reject(list, predicate, [context])`|`__.reject<T>(list: T[], filter: T -> Bool) -> T[]`|
+|`_.every(list, [predicate], [context])`|`__.every(list: Bool[]) -> Bool`|
+|`_.some(list, [predicate], [context])`|`__.some(list: Bool[]) -> Bool`|
+|`_.contains(list, value)`|`__.contains<E: Equatable>(list: E[], value: E) -> Bool`|
+|`_.invoke(list, methodName, *arguments)`|I have not decided whether implement.|
+|`_.pluck(list, propertyName)`|`__.pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[]`|
+|`_.max(list, [iterator], [context])`|`__.max<C: Comparable>(list: C[]) -> C!`|
+|`_.min(list, [iterator], [context])`|`__.min<C: Comparable>(list: C[]) -> C!`|
+|`_.sortBy(list, iterator, [context])`|`__.sortBy<T, C: Comparable>(list: T[], iterator: T -> C) -> T[]`|
+|`_.groupBy(list, iterator, [context])`|`__.groupBy<K, V>(list: V[], iterator: V -> K) -> Dictionary<K, V[]>`|
+|`_.indexBy(list, iterator, [context])`|`__.indexBy<K, V>(list: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V> >`|
+|`_.countBy(list, iterator, [context])`|`__.countBy<T, U>(list: T[], iterator: T -> U) -> Dictionary<U, Int>`|
+|`_.shuffle(list)`|`__.shuffle<T>(list: T[]) -> T[]`|
+|`_.sample(list, [n])`|`__.sample<T>(list: T[]) -> T`<br>`__.sample<T>(list: T[], n:Int) -> T[]`|
+|`_.size(list)`|`__.size<T>(list: T[]) -> Int`<br>`__.size<K, V>(dict: Dictionary<K, V>) -> Int`|
+
+
+
+###Arrays
+###Functions
+###Objects
+###Utility
+###Chaining
+
