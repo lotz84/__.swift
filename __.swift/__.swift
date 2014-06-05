@@ -9,6 +9,10 @@
 import Foundation
 
 class __ {
+    
+    /**
+     * Collection Functions (Arrays or Objects)
+     */
 
     class func each<T>(list: T[], iterator: T -> Any)  {
         list.map { iterator($0) }
@@ -262,6 +266,45 @@ class __ {
     
     class func size<K, V>(dict: Dictionary<K, V>) -> Int {
         return Array(dict.keys).count
+    }
+    
+    
+    /**
+    * Array Functions
+    */
+    
+    class func first<T>(list:T[]) -> T! {
+        if list.isEmpty { return nil }
+        return list[0]
+    }
+    
+    // alias for first
+    class func head<T>(list:T[]) -> T! {
+        return self.first(list)
+    }
+    
+    // alias for first
+    class func take<T>(list:T[]) -> T! {
+        return self.first(list)
+    }
+    
+    class func first<T>(list:T[], n:Int) -> T[]! {
+        if list.isEmpty { return nil }
+        var result = T[]()
+        for i in 0..n {
+            result += list[i]
+        }
+        return result
+    }
+    
+    // alias for first
+    class func head<T>(list:T[], n:Int) -> T[]! {
+        return self.first(list, n: n)
+    }
+    
+    // alias for first
+    class func take<T>(list:T[], n:Int) -> T[]! {
+        return self.first(list, n: n)
     }
     
 }

@@ -233,4 +233,19 @@ class ___swiftTests: XCTestCase {
         let result1 = __.size(dict)
         XCTAssert(result1 == 6)
     }
+    
+    func testFirst(){
+        
+        let result0 = __.first([1,2,3])
+        
+        XCTAssert(result0 == 1)
+        
+        let result1 = __.first(["a","b","c"])
+        
+        XCTAssert(result1 == "a")
+        
+        let result2 = __.first([1,2,3], n:2)
+        
+        XCTAssert(result2 == [1,2])
+    }
 }

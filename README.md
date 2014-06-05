@@ -64,9 +64,12 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
 |`_.sample(list, [n])`|`__.sample<T>(list: T[]) -> T`<br>`__.sample<T>(list: T[], n:Int) -> T[]`|
 |`_.size(list)`|`__.size<T>(list: T[]) -> Int`<br>`__.size<K, V>(dict: Dictionary<K, V>) -> Int`|
 
-
-
 ###Arrays
+
+|Underscore.js|__.swift|
+|:---|:---|
+|`_.first(array, [n])`|`__.first<T>(list:T[]) -> T!`<br>`__.first<T>(list:T[], n:Int) -> T[]!`|
+
 ###Functions
 ###Objects
 ###Utility
