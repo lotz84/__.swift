@@ -14,45 +14,39 @@ class ___swiftTests: XCTestCase {
         
         var sum = 0
         
-        __.each([1,2,3],{
-            item in
-            sum += item
-            })
+        __.each([1,2,3]) {
+            sum += $0
+        }
         
         XCTAssert(sum == 6)
     }
     
     func testMap() {
         
-        let result = __.map([1,2,3], {
+        let result = __.map([1,2,3]) {
             item in
             item * 2
-            })
+        }
         
         XCTAssert(result == [2,4,6])
     }
     
     func testReduce(){
-        var result = __.reduce([1,2,3,4], iterator: {
-                x, y in
-                x + y
-            }, memo: 0)
+        
+        // Actually I want to write this as ` __.reduce([1,2,3,4], memo: 0, iterator: + ) `
+        // But some error occur and I can't understand.
+        var result = __.reduce([1,2,3,4], memo: 0 ) { $0 + $1 }
         
         XCTAssert(result==10)
     }
     
     func testFind() {
         
-        let result0 = __.find([1,2,3], {
-                item in
-                item == 2
-            })
+        let result0 = __.find([1,2,3]) { $0 == 2 }
+        
         XCTAssert(result0!==2)
         
-        let result1 = __.find([1,2,3], {
-            item in
-            item == 4
-            })
+        let result1 = __.find([1,2,3]) { $0 == 4 }
         
         var flag = false;
         if result1 {
@@ -66,20 +60,14 @@ class ___swiftTests: XCTestCase {
 
     func testFilter(){
 
-        var result = __.filter([1,2,3,4], {
-            x in
-            x % 2 == 0
-            })
+        var result = __.filter([1,2,3,4]) { $0 % 2 == 0 }
         
         XCTAssert(result==[2,4])
     }
     
     func testReject(){
         
-        var result = __.reject([1,2,3,4], {
-            x in
-            x % 2 == 0
-            })
+        var result = __.reject([1,2,3,4]) { $0 % 2 == 0 }
         
         XCTAssert(result==[1,3])
     }
@@ -134,24 +122,28 @@ class ___swiftTests: XCTestCase {
     }
     
     func testMax(){
+        
         let max = __.max([5,3,7,5,1,9,3])
+        
         XCTAssert(max==9)
     }
     
     func testMin(){
+        
         let min = __.min(["f","e","b","d","a","c","g"])
-        XCTAssert(min == "a")
+        
+        XCTAssert( min == "a" )
     }
     
     func testSortBy(){
         
-        let result0 = __.sortBy([4,3,7,5,8,2,6,1], iterator: {x in x})
+        let result0 = __.sortBy([4,3,7,5,8,2,6,1]) { $0 }
         
         XCTAssert(result0 == [1,2,3,4,5,6,7,8])
         
         func size(text: String) -> Int {
             var length = 0
-            for c in text {
+            for _ in text {
                 length++
             }
             return length
@@ -188,15 +180,13 @@ class ___swiftTests: XCTestCase {
     
     func testCountBy(){
         
-        let result = __.countBy([1, 2, 3, 4, 5], iterator: {
-            x in
-            x % 2 == 0 ? "even": "odd"
-        })
+        let result = __.countBy([1, 2, 3, 4, 5]) { $0 % 2 == 0 ? "even": "odd" }
         
         XCTAssert(result["odd"]! == 3)
     }
     
     func testShuffle(){
+        
         let result = __.shuffle(["a", "b", "c", "d", "e", "f", "g", "h"])
                 
         XCTAssert(result.count == 8)

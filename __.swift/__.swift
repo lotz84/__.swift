@@ -11,29 +11,22 @@ import Foundation
 class __ {
 
     class func each<ItemType>(list: ItemType[], iterator: ItemType -> Any)  {
-        list.map {
-            item in
-            iterator(item)
-        }
+        list.map { iterator($0) }
     }
     
     class func map <ItemType, resultType>(list: ItemType[], iterator: ItemType -> resultType) -> resultType[] {
-        return list.map({
-                item in
-                iterator(item)
-            })
+        return list.map { iterator($0) }
     }
     
-    class func reduce <ItemType, resultType>(list: ItemType[], iterator: (first:resultType, second:ItemType) -> resultType, memo:resultType) -> resultType{
-    
-        var result = memo;
+    class func reduce <ItemType, ResultType>(list: ItemType[], memo: ResultType, iterator: (first:ResultType, second:ItemType) -> ResultType) -> ResultType {
         
-        self.each(list, {
-            item in
-            result = iterator(first: result, second: item)
-        })
+        var result = memo
         
-        return result;
+        self.each(list) {
+            result = iterator(first: result, second: $0)
+        }
+        
+        return result
     }
     
     class func find <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType? {
@@ -42,28 +35,35 @@ class __ {
                 return item
             }
         }
-        return nil;
+        return nil
     }
     
     class func filter <ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
         var result = ItemType[]()
         for item in list {
             if filter(item) {
-                result.append(item)
+                result += item
             }
         }
-        return result;
+        return result
     }
 
     class func reject<ItemType>(list: ItemType[], filter: ItemType -> Bool) -> ItemType[] {
-        var result = ItemType[]()
-        for item in list {
-            if !filter(item) {
-                result.append(item)
-            }
+        
+        // I tried to compose ! and filter directly
+        // but I have no idea do it exactly
+
+        func notFilter(item: ItemType) -> Bool {
+            return !filter(item)
         }
-        return result;
+        
+        return self.filter(list, notFilter)
     }
+    
+    /*
+        Maybe every and some can be written by already existing function.
+        But I think it is faster to use short-circuit evaluation by for-in loop
+    */
     
     class func every(list: Bool[]) -> Bool {
         for item in list {
@@ -83,12 +83,14 @@ class __ {
         return false
     }
     
+    // Simple linear search
     class func contains<ItemType: Equatable>(list: ItemType[], value: ItemType) -> Bool {
-        var flag: Bool = false;
         for item in list {
-            flag = flag || (item == value)
+            if item == value {
+                return true
+            }
         }
-        return flag
+        return false
     }
     
     class func pluck<KeyType: Equatable, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> ValueType[] {
@@ -101,34 +103,29 @@ class __ {
         return result
     }
     
-    class func max<ItemType: Comparable>(list: ItemType[]) -> ItemType {
-        var max: ItemType?
+    class func max<ItemType: Comparable>(list: ItemType[]) -> ItemType! {
+        if list.isEmpty { return nil }
+        var max = list[0]
         for item in list {
-            if max {
-                if max < item {
-                    max = item
-                }
-            } else {
+            if max < item {
                 max = item
             }
         }
-        return max!
+        return max
     }
     
-    class func min<ItemType: Comparable>(list: ItemType[]) -> ItemType {
-        var min: ItemType?
+    class func min<ItemType: Comparable>(list: ItemType[]) -> ItemType! {
+        if list.isEmpty { return nil }
+        var min = list[0]
         for item in list {
-            if min {
-                if min > item {
-                    min = item
-                }
-            } else {
+            if min > item {
                 min = item
             }
         }
-        return min!
+        return min
     }
     
+    // quick sort
     class func sortBy<ItemType, CompareType: Comparable>(list: ItemType[], iterator: ItemType -> CompareType) -> ItemType[] {
         if list.isEmpty { return [] }
         
@@ -136,9 +133,9 @@ class __ {
         var bigger = ItemType[]()
         
         let first = list[0]
-        let count = list.count
+        let length = list.count
         
-        for i in 1..count {
+        for i in 1..length {
             if iterator(first) < iterator(list[i]) {
                 bigger += list[i]
             } else {
@@ -148,9 +145,9 @@ class __ {
         
         var result = sortBy(smaller, iterator: iterator)
         result += first
-        result += sortBy(bigger, iterator: iterator);
+        result += sortBy(bigger, iterator: iterator)
         
-        return result;
+        return result
     }
     
     class func groupBy<ItemType, EquitableType: Equatable>(list: ItemType[], iterator: ItemType -> EquitableType) -> Dictionary<EquitableType, ItemType[]> {
@@ -168,7 +165,7 @@ class __ {
         return result
     }
     
-    class func indexBy<KeyType, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> Dictionary<ValueType, (Dictionary<KeyType,ValueType>)>{
+    class func indexBy<KeyType, ValueType>(list: Array<Dictionary<KeyType, ValueType>>, key: KeyType) -> Dictionary<ValueType,(Dictionary<KeyType,ValueType>)> {
         var result = Dictionary<ValueType, (Dictionary<KeyType,ValueType>)>()
         for item in list {
             result[item[key]!] = item
@@ -193,11 +190,11 @@ class __ {
         var random = Int[]()
         while random.count < length {
             let index: Int = Int(arc4random() % UInt32(length))
-            if !contains(random, value: index) {
+            if !self.contains(random, value: index) {
                 random += index
             }
         }
-        return map(random, iterator: {index in list[index]})
+        return self.map(random, iterator: {index in list[index]})
     }
 
 }
