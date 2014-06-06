@@ -248,4 +248,27 @@ class ___swiftTests: XCTestCase {
         
         XCTAssert(result2 == [1,2])
     }
+    
+    func testInitial(){
+        
+        let result0 = __.initial([1,2,3,4,5])
+        
+        XCTAssert(result0==[1,2,3,4])
+    
+        
+        let result1 = __.initial([1,2,3,4,5], n: 3)
+        
+        XCTAssert(result1==[1,2])
+    }
+    
+    func testLast(){
+        
+        let result0 = __.last([1,2,3,4,5])
+        
+        XCTAssert(result0==5)
+        
+        let result1 = __.last([1,2,3,4,5], n: 3)
+        
+        XCTAssert(result1==[3,4,5])
+    }
 }
