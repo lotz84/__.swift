@@ -1,8 +1,9 @@
 __.swift
 ========
 
-__.swift aim to be an utility belt for [Swift Language](https://developer.apple.com/swift/).
-So we first make it be a clone of [Underscore.js](http://underscorejs.org/), which is utility belt for JavaScript.
+__.swift aim to be an utility belt for [Swift Language](https://developer.apple.com/swift/).So we first make it be a clone of [Underscore.js](http://underscorejs.org/), which is utility belt for JavaScript.
+
+Although this library is **under developping** (this has not been v0.1.0 yet), We make it public. That is because Swift Language is new language and We think it is useful to everyone to show how to develop by trial and error.
 
 ##Example
 
