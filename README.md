@@ -1,7 +1,7 @@
 __.swift
 ========
 
-__.swift aim to be a useful utility belt for [Swift Language](https://developer.apple.com/swift/).
+__.swift aim to be an utility belt for [Swift Language](https://developer.apple.com/swift/).
 So we first make it be a clone of [Underscore.js](http://underscorejs.org/), which is utility belt for JavaScript.
 
 ##Example
@@ -33,7 +33,6 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
     ]
     __.pluck(data, key: "plan")
     // [walking, work, lunch]
-
 
 ##Progress
 ###Collections
@@ -69,7 +68,8 @@ So we first make it be a clone of [Underscore.js](http://underscorejs.org/), whi
 |Underscore.js|__.swift|
 |:---|:---|
 |`_.first(array, [n])`|`__.first<T>(list:T[]) -> T!`<br>`__.first<T>(list:T[], n:Int) -> T[]!`|
-
+|`_.initial(array, [n])`|`__.initial<T>(list:T[], n: Int = 1) -> T[]`|
+|`_.last(array, [n])`|`__.last<T>(list: T[]) -> T`<br>`__.last<T>(list: T[], n: Int) -> T[]`|
 ###Functions
 ###Objects
 ###Utility
