@@ -11,7 +11,7 @@ import Foundation
 extension __ {
     
     /**
-    * Collection Functions (Arrays or Objects)
+    * Collection Functions (Arrays or Dictionaries)
     */
     
     class func each<T>(list: T[], iterator: T -> Any)  {
@@ -25,6 +25,14 @@ extension __ {
     
     class func map<T, U>(list: T[], iterator: T -> U) -> U[] {
         return list.map { iterator($0) }
+    }
+    
+    class func map<K, V, T>(dict: Dictionary<K, V>, iterator: (K, V) -> T) -> T[] {
+        var result = T[]()
+        for (key, value) in dict {
+            result += iterator(key, value)
+        }
+        return result
     }
     
     // alias for map
@@ -81,6 +89,37 @@ extension __ {
     // alias for filter
     class func select<T>(list: T[], filter: T -> Bool) -> T[] {
         return self.filter(list, filter: filter)
+    }
+    
+    // Whether dict has subDictionary
+    class func hasSubDictionary<K, V: Equatable>(dict:Dictionary<K,V>, subDictionary: Dictionary<K,V>) -> Bool {
+        let eqList: Bool[] = __.map(subDictionary) { key, value in
+            if let v = dict[key] {
+                return v == value
+            } else {
+                return false
+            }
+        }
+        return __.every(eqList)
+    }
+    
+    class func `where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
+        var result = Array<Dictionary<K,V>>()
+        for dict in list {
+            if __.hasSubDictionary(dict, subDictionary: properties) {
+                result += dict
+            }
+        }
+        return result
+    }
+    
+    class func findWhere<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Dictionary<K,V>? {
+        for dict in list {
+            if __.hasSubDictionary(dict, subDictionary: properties) {
+                return dict
+            }
+        }
+        return nil
     }
     
     class func reject<T>(list: T[], filter: T -> Bool) -> T[] {
