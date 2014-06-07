@@ -46,8 +46,8 @@ Although this library is **under developping** (this has not been v0.1.0 yet), W
 |`_.reduceRight(list, iterator, memo, [context])`|Incomplete|
 |`_.find(list, predicate, [context])`|`__.find<T>(list: T[], filter: T -> Bool) -> T?`|
 |`_.filter(list, predicate, [context])`|`__.filter<T>(list: T[], filter: T -> Bool) -> T[]`|
-|`_.where(list, properties)`|Incomplete|
-|`_.findWhere(list, properties)`|Incomplete|
+|`_.where(list, properties)`|__.`where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Array<Dictionary<K,V>>|
+|`_.findWhere(list, properties)`|`__.findWhere<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Dictionary<K,V>?`|
 |`_.reject(list, predicate, [context])`|`__.reject<T>(list: T[], filter: T -> Bool) -> T[]`|
 |`_.every(list, [predicate], [context])`|`__.every<L: LogicValue>(list: L[]) -> Bool`|
 |`_.some(list, [predicate], [context])`|`__.some<L: LogicValue>(list: L[]) -> Bool`|
