@@ -34,9 +34,7 @@ class ___CollectionsTests: XCTestCase {
 
     func testReduce(){
         
-        // Actually I want to write this as ` __.reduce([1,2,3,4], memo: 0, iterator: + ) `
-        // But some error occur and I can't understand.
-        var result = __.reduce([1,2,3,4], memo: 0 ) { $0 + $1 }
+        var result = __.reduce([1,2,3,4], 0, + )
         
         XCTAssert(result==10)
     }
@@ -75,17 +73,17 @@ class ___CollectionsTests: XCTestCase {
             ["plan": "meet friend",   "time": "12 a.m."]
         ]
         
-        let result = __.`where`(data, properties: ["time": "12 a.m."])
+        let result = __.`where`(data, ["time": "12 a.m."])
         
         XCTAssert(result.count == 2)
         
-        if let result = __.findWhere(data, properties: ["time": "12 a.m."]) {
+        if let result = __.findWhere(data, ["time": "12 a.m."]) {
             XCTAssert(result["plan"]=="lunch")
         } else {
             XCTAssert(false)
         }
         
-        if __.findWhere(data, properties: ["time": "3 a.m."]) {
+        if __.findWhere(data, ["time": "3 a.m."]) {
             XCTAssert(false)
         } else {
             XCTAssert(true)
@@ -192,14 +190,14 @@ class ___CollectionsTests: XCTestCase {
             return length
         }
         
-        let result1 = __.sortBy(["Hello", " Swift", "!!"], iterator: size)
+        let result1 = __.sortBy(["Hello", " Swift", "!!"], size)
         
         XCTAssert(result1 == ["!!", "Hello", " Swift"])
     }
 
     func testGroupBy(){
         
-        let result = __.groupBy([1.3, 2.1, 2.4], iterator: floor)
+        let result = __.groupBy([1.3, 2.1, 2.4], floor)
         
         let list0 = result[1.0]!
         let list1 = result[2.0]!
@@ -216,7 +214,7 @@ class ___CollectionsTests: XCTestCase {
             ["plan": "meet friend",   "time": "12 a.m."]
         ]
         
-        let result = __.indexBy(data, key: "time")
+        let result = __.indexBy(data, "time")
         
         XCTAssert( result["8 a.m."]!["plan"]! == "walking" )
     }
@@ -240,7 +238,7 @@ class ___CollectionsTests: XCTestCase {
         let result0 = __.sample([1,2,3,4])
         XCTAssert(__.contains([1,2,3,4], value: result0))
         
-        let result1 = __.sample([1,2,3,4], n: 3)
+        let result1 = __.sample([1,2,3,4], 3)
         XCTAssert(result1.count == 3)
     }
 

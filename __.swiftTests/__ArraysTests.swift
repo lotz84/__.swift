@@ -20,7 +20,7 @@ class ___ArraysTests: XCTestCase {
         
         XCTAssert(result1 == "a")
         
-        let result2 = __.first([1,2,3], n:2)
+        let result2 = __.first([1,2,3], 2)
         
         XCTAssert(result2 == [1,2])
     }
@@ -32,7 +32,7 @@ class ___ArraysTests: XCTestCase {
         XCTAssert(result0==[1,2,3,4])
         
         
-        let result1 = __.initial([1,2,3,4,5], n: 3)
+        let result1 = __.initial([1,2,3,4,5], 3)
         
         XCTAssert(result1==[1,2])
     }
@@ -43,7 +43,7 @@ class ___ArraysTests: XCTestCase {
         
         XCTAssert(result0==5)
         
-        let result1 = __.last([1,2,3,4,5], n: 3)
+        let result1 = __.last([1,2,3,4,5], 3)
         
         XCTAssert(result1==[3,4,5])
     }

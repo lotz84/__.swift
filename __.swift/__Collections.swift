@@ -14,20 +14,20 @@ extension __ {
     * Collection Functions (Arrays or Dictionaries)
     */
     
-    class func each<T>(list: T[], iterator: T -> Any)  {
+    class func each<T>(list: T[], _ iterator: T -> Any)  {
         list.map { iterator($0) }
     }
     
     // alias for each
-    class func forEach<T>(list: T[], iterator: T -> Any) {
-        self.each(list, iterator: iterator)
+    class func forEach<T>(list: T[], _ iterator: T -> Any) {
+        self.each(list, iterator)
     }
     
-    class func map<T, U>(list: T[], iterator: T -> U) -> U[] {
+    class func map<T, U>(list: T[], _ iterator: T -> U) -> U[] {
         return list.map { iterator($0) }
     }
     
-    class func map<K, V, T>(dict: Dictionary<K, V>, iterator: (K, V) -> T) -> T[] {
+    class func map<K, V, T>(dict: Dictionary<K, V>, _ iterator: (K, V) -> T) -> T[] {
         var result = T[]()
         for (key, value) in dict {
             result += iterator(key, value)
@@ -36,11 +36,11 @@ extension __ {
     }
     
     // alias for map
-    class func collect<T, U>(list: T[], iterator: T -> U) -> U[] {
-        return self.map(list, iterator: iterator)
+    class func collect<T, U>(list: T[], _ iterator: T -> U) -> U[] {
+        return self.map(list, iterator)
     }
     
-    class func reduce<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
+    class func reduce<T, U>(list: T[], _ memo: U, _ iterator: (first:U, second:T) -> U) -> U {
         
         var result = memo
         
@@ -52,16 +52,16 @@ extension __ {
     }
     
     // alias for reduce
-    class func inject<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
-        return self.reduce(list, memo: memo, iterator: iterator)
+    class func inject<T, U>(list: T[], _ memo: U, _ iterator: (first:U, second:T) -> U) -> U {
+        return self.reduce(list, memo, iterator)
     }
     
     // alias for reduce
-    class func foldl<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U {
-        return self.reduce(list, memo: memo, iterator: iterator)
+    class func foldl<T, U>(list: T[], _ memo: U, _ iterator: (first:U, second:T) -> U) -> U {
+        return self.reduce(list, memo, iterator)
     }
     
-    class func find<T>(list: T[], filter: T -> Bool) -> T? {
+    class func find<T>(list: T[], _ filter: T -> Bool) -> T? {
         for item in list {
             if filter(item) {
                 return item
@@ -71,12 +71,12 @@ extension __ {
     }
     
     // alias for find
-    class func detect<T>(list: T[], filter: T -> Bool) -> T? {
-        return self.find(list, filter: filter)
+    class func detect<T>(list: T[], _ filter: T -> Bool) -> T? {
+        return self.find(list, filter)
     }
     
     
-    class func filter<T>(list: T[], filter: T -> Bool) -> T[] {
+    class func filter<T>(list: T[], _ filter: T -> Bool) -> T[] {
         var result = T[]()
         for item in list {
             if filter(item) {
@@ -87,8 +87,8 @@ extension __ {
     }
     
     // alias for filter
-    class func select<T>(list: T[], filter: T -> Bool) -> T[] {
-        return self.filter(list, filter: filter)
+    class func select<T>(list: T[], _ filter: T -> Bool) -> T[] {
+        return self.filter(list, filter)
     }
     
     // Whether dict has subDictionary
@@ -103,7 +103,7 @@ extension __ {
         return __.every(eqList)
     }
     
-    class func `where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
+    class func `where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
         var result = Array<Dictionary<K,V>>()
         for dict in list {
             if __.hasSubDictionary(dict, subDictionary: properties) {
@@ -113,7 +113,7 @@ extension __ {
         return result
     }
     
-    class func findWhere<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Dictionary<K,V>? {
+    class func findWhere<K,V: Equatable>(list: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Dictionary<K,V>? {
         for dict in list {
             if __.hasSubDictionary(dict, subDictionary: properties) {
                 return dict
@@ -122,7 +122,7 @@ extension __ {
         return nil
     }
     
-    class func reject<T>(list: T[], filter: T -> Bool) -> T[] {
+    class func reject<T>(list: T[], _ filter: T -> Bool) -> T[] {
         
         // I tried to compose ! and filter directly
         // but I have no idea do it exactly
@@ -214,7 +214,7 @@ extension __ {
     }
     
     // quick sort
-    class func sortBy<T, C: Comparable>(list: T[], iterator: T -> C) -> T[] {
+    class func sortBy<T, C: Comparable>(list: T[], _ iterator: T -> C) -> T[] {
         if list.isEmpty { return [] }
         
         var smaller = T[]()
@@ -231,14 +231,14 @@ extension __ {
             }
         }
         
-        var result = sortBy(smaller, iterator: iterator)
+        var result = sortBy(smaller, iterator)
         result += first
-        result += sortBy(bigger, iterator: iterator)
+        result += sortBy(bigger, iterator)
         
         return result
     }
     
-    class func groupBy<K, V>(list: V[], iterator: V -> K) -> Dictionary<K, V[]> {
+    class func groupBy<K, V>(list: V[], _ iterator: V -> K) -> Dictionary<K, V[]> {
         var result = Dictionary<K, V[]>()
         
         for item in list {
@@ -253,7 +253,7 @@ extension __ {
         return result
     }
     
-    class func indexBy<K, V>(list: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V> > {
+    class func indexBy<K, V>(list: Array< Dictionary<K, V> >, _ key: K) -> Dictionary<V, Dictionary<K,V> > {
         var result = Dictionary<V, Dictionary<K,V> >()
         for item in list {
             result[item[key]!] = item
@@ -261,7 +261,7 @@ extension __ {
         return result
     }
     
-    class func countBy<T, U>(list: T[], iterator: T -> U) -> Dictionary<U, Int> {
+    class func countBy<T, U>(list: T[], _ iterator: T -> U) -> Dictionary<U, Int> {
         var result = Dictionary<U, Int>()
         for item in list {
             if let count = result[iterator(item)] {
@@ -282,7 +282,7 @@ extension __ {
                 random += index
             }
         }
-        return self.map(random, iterator: {index in list[index]})
+        return self.map(random) { list[$0] }
     }
     
     class func sample<T>(list: T[]) -> T {
@@ -290,7 +290,7 @@ extension __ {
         return list[index]
     }
     
-    class func sample<T>(list: T[], n:Int) -> T[] {
+    class func sample<T>(list: T[], _ n:Int) -> T[] {
         var result = T[]()
         let random = self.shuffle(Array(0..list.count))
         for i in 0..n {
