@@ -36,42 +36,4 @@ Although this library is **under developping** (this has not been v0.1.0 yet), W
     // [walking, work, lunch]
 
 ##Progress
-###Collections
-
-|Underscore.js|__.swift|
-|:---|:---|
-|`_.each(list, iterator, [context])`|`__.each<T>(list: T[], iterator: T -> Any)`|
-|`_.map(list, iterator, [context])`|`__.map<T, U>(list: T[], iterator: T -> U) -> U[]`|
-|`_.reduce(list, iterator, memo, [context])`|`__.reduce<T, U>(list: T[], memo: U, iterator: (first:U, second:T) -> U) -> U`|
-|`_.reduceRight(list, iterator, memo, [context])`|Incomplete|
-|`_.find(list, predicate, [context])`|`__.find<T>(list: T[], filter: T -> Bool) -> T?`|
-|`_.filter(list, predicate, [context])`|`__.filter<T>(list: T[], filter: T -> Bool) -> T[]`|
-|`_.where(list, properties)`|__.`where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Array<Dictionary<K,V>>|
-|`_.findWhere(list, properties)`|`__.findWhere<K,V: Equatable>(list: Array<Dictionary<K,V>>, properties: Dictionary<K,V>) -> Dictionary<K,V>?`|
-|`_.reject(list, predicate, [context])`|`__.reject<T>(list: T[], filter: T -> Bool) -> T[]`|
-|`_.every(list, [predicate], [context])`|`__.every<L: LogicValue>(list: L[]) -> Bool`|
-|`_.some(list, [predicate], [context])`|`__.some<L: LogicValue>(list: L[]) -> Bool`|
-|`_.contains(list, value)`|`__.contains<E: Equatable>(list: E[], value: E) -> Bool`|
-|`_.invoke(list, methodName, *arguments)`|I have not decided whether implement.|
-|`_.pluck(list, propertyName)`|`__.pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[]`|
-|`_.max(list, [iterator], [context])`|`__.max<C: Comparable>(list: C[]) -> C!`|
-|`_.min(list, [iterator], [context])`|`__.min<C: Comparable>(list: C[]) -> C!`|
-|`_.sortBy(list, iterator, [context])`|`__.sortBy<T, C: Comparable>(list: T[], iterator: T -> C) -> T[]`|
-|`_.groupBy(list, iterator, [context])`|`__.groupBy<K, V>(list: V[], iterator: V -> K) -> Dictionary<K, V[]>`|
-|`_.indexBy(list, iterator, [context])`|`__.indexBy<K, V>(list: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V> >`|
-|`_.countBy(list, iterator, [context])`|`__.countBy<T, U>(list: T[], iterator: T -> U) -> Dictionary<U, Int>`|
-|`_.shuffle(list)`|`__.shuffle<T>(list: T[]) -> T[]`|
-|`_.sample(list, [n])`|`__.sample<T>(list: T[]) -> T`<br>`__.sample<T>(list: T[], n:Int) -> T[]`|
-|`_.size(list)`|`__.size<T>(list: T[]) -> Int`<br>`__.size<K, V>(dict: Dictionary<K, V>) -> Int`|
-
-###Arrays
-
-|Underscore.js|__.swift|
-|:---|:---|
-|`_.first(array, [n])`|`__.first<T>(list:T[]) -> T!`<br>`__.first<T>(list:T[], n:Int) -> T[]!`|
-|`_.initial(array, [n])`|`__.initial<T>(list:T[], n: Int = 1) -> T[]`|
-|`_.last(array, [n])`|`__.last<T>(list: T[]) -> T`<br>`__.last<T>(list: T[], n: Int) -> T[]`|
-###Functions
-###Objects
-###Utility
-###Chaining
+Progression table has moved to [wiki](https://github.com/lotz84/__.swift/wiki).
