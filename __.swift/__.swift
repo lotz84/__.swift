@@ -311,11 +311,7 @@ class __ {
     // when n > 1
     // list == __.initial(list, n) + __.last(list, n)
 
-    class func initial<T>(list:T[]) -> T[] {
-        return __.initial(list, n: 1)
-    }
-
-    class func initial<T>(list:T[], n: Int) -> T[] {
+    class func initial<T>(list:T[], n: Int = 1) -> T[] {
         let (initial, last) = __.separate(list, n: n)
         return initial
     }
