@@ -7,10 +7,10 @@ Although this library is **under developping** (this has not been v0.1.0 yet), W
 
 ##Example
 
-    __.map([11,22,33], { x in x * x })
+    __.map([11,22,33]) { x in x * x }
     // [121, 484, 1089]
 
-    __.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], memo: "", iterator: + )
+    __.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], "", + )
     // Hello Swift !!
 
     func isPrime(n: Int) -> Bool {
@@ -21,10 +21,10 @@ Although this library is **under developping** (this has not been v0.1.0 yet), W
       }
       return true
     }
-    __.find([1,33,173,46], filter: isPrime)
+    __.find([1,33,173,46], isPrime)
     // 173
 
-    __.filter(Array(2..100) , filter: isPrime)
+    __.filter(Array(2..100) , isPrime)
     // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
     let data = [
@@ -32,7 +32,7 @@ Although this library is **under developping** (this has not been v0.1.0 yet), W
       ["plan": "work",    "time": "10 a.m."],
       ["plan": "lunch",   "time": "12 a.m."]
     ]
-    __.pluck(data, key: "plan")
+    __.pluck(data, "plan")
     // [walking, work, lunch]
 
 ##Progress
