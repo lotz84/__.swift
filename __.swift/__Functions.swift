@@ -41,4 +41,7 @@ extension __ {
         return { f(arg, $0, $1, $2, $3, $4, $5) }
     }
     
+    class func now() -> Double {
+        return NSDate().timeIntervalSince1970
+    }
 }
