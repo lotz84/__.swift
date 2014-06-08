@@ -48,4 +48,11 @@ class ___ArraysTests: XCTestCase {
         XCTAssert(result1==[3,4,5])
     }
     
+    func testZip(){
+        
+        let zip = __.zip([1,2,3,4], ["a", "b", "c"])
+        
+        XCTAssert(zip.count == 3)
+    
+    }
 }

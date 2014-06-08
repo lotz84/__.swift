@@ -85,4 +85,16 @@ extension __ {
         return (initial, last)
     }
     
+    class func zip<T, U>(list0: T[], _ list1: U[]) -> (T, U)[] {
+        let length: Int = __.min(list0.count, list1.count)
+        
+        var result = Array<(T, U)>()
+
+        for i in 0..length {
+            result += (list0[i], list1[i])
+        }
+        
+        return result
+    }
+    
 }

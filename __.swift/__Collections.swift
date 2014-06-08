@@ -192,12 +192,21 @@ extension __ {
         return result
     }
     
+    // I want to write below 4 function as "comparator: < " instead of "comparator: { $0 < $1 }"
     class func max<C: Comparable>(list: C[]) -> C! {
-        return self.tournament(list, comparator: {$0 < $1 } )
+        return self.tournament(list, comparator: { $0 < $1 })
+    }
+    
+    class func max<C: Comparable>(list: C...) -> C! {
+        return self.tournament(list, comparator: { $0 < $1 })
     }
     
     class func min<C: Comparable>(list: C[]) -> C! {
-        return self.tournament(list, comparator: {$0 > $1 } )
+        return self.tournament(list, comparator: { $0 > $1 } )
+    }
+
+    class func min<C: Comparable>(list: C...) -> C! {
+        return self.tournament(list, comparator: { $0 > $1 } )
     }
     
     // This function is used in max and min function

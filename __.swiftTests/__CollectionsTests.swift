@@ -34,7 +34,8 @@ class ___CollectionsTests: XCTestCase {
 
     func testReduce(){
         
-        var result = __.reduce([1,2,3,4], 0, + )
+        // I want to write below 4 function as simply " + " instead of "{ $0 + $1 }"
+        var result = __.reduce([1,2,3,4], 0, { $0 + $1 } )
         
         XCTAssert(result==10)
     }
@@ -164,16 +165,24 @@ class ___CollectionsTests: XCTestCase {
 
     func testMax(){
         
-        let max = __.max([5,3,7,5,1,9,3])
+        let max0 = __.max([5,3,7,5,1,9,3])
         
-        XCTAssert(max==9)
+        XCTAssert(max0==9)
+        
+        let max1 = __.max(5,3,7,5,1,9,3)
+        
+        XCTAssert(max1==9)
     }
 
     func testMin(){
         
-        let min = __.min(["f","e","b","d","a","c","g"])
+        let min0 = __.min(["f","e","b","d","a","c","g"])
         
-        XCTAssert( min == "a" )
+        XCTAssert( min0 == "a" )
+        
+        let min1 = __.min("f","e","b","d","a","c","g")
+        
+        XCTAssert( min1 == "a" )
     }
 
     func testSortBy(){
