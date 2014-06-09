@@ -286,7 +286,7 @@ extension __ {
         let length = list.count
         var random = Int[]()
         while random.count < length {
-            let index: Int = Int(arc4random() % UInt32(length))
+            let index = __.random(length-1)
             if !self.contains(random, value: index) {
                 random += index
             }
@@ -295,7 +295,7 @@ extension __ {
     }
     
     class func sample<T>(list: T[]) -> T {
-        let index = Int(arc4random() % UInt32(list.count))
+        let index = __.random(list.count-1)
         return list[index]
     }
     
