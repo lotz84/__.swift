@@ -41,6 +41,13 @@
 			remoteGlobalIDString = 36029B06193D7EA000FA0239;
 			remoteInfo = __.swift;
 		};
+		3626D7271944A10700382EDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36029AFF193D7EA000FA0239 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 36029B06193D7EA000FA0239;
+			remoteInfo = __.swift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -183,6 +190,7 @@
 			dependencies = (
 				36029B16193D7EA000FA0239 /* PBXTargetDependency */,
 				3626D7261944A10700382EDC /* PBXTargetDependency */,
+				3626D7281944A10700382EDC /* PBXTargetDependency */,
 			);
 			name = __.swiftTests;
 			productName = __.swiftTests;
@@ -286,6 +294,11 @@
 			isa = PBXTargetDependency;
 			target = 36029B06193D7EA000FA0239 /* __.swift */;
 			targetProxy = 3626D7251944A10700382EDC /* PBXContainerItemProxy */;
+		};
+		3626D7281944A10700382EDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 36029B06193D7EA000FA0239 /* __.swift */;
+			targetProxy = 3626D7271944A10700382EDC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
