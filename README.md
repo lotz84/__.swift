@@ -1,9 +1,8 @@
 __.swift
 ========
+__.swift aims to be an utility belt for a new programming language by Apple Inc., [Swift](https://developer.apple.com/swift/). And we decided  __.swift to be a clone of [Underscore.js](http://underscorejs.org/), which is an utility belt for JavaScript.
 
-__.swift aim to be an utility belt for [Swift Language](https://developer.apple.com/swift/).So we first make it be a clone of [Underscore.js](http://underscorejs.org/), which is utility belt for JavaScript.
-
-Although this library is **under developping** (this has not been v0.1.0 yet), We make it public. That is because Swift Language is new language and We think it is useful to everyone to show how to develop by trial and error.
+Although __.swift library is still **under development** (This has not been even v0.1.0 yet), We made it public. This is because Swift is totally new language for everyone around the world, and we thought it is useful for everyone to learn how to code Swift by trial and error.
 
 ##Example
 
@@ -36,4 +35,4 @@ Although this library is **under developping** (this has not been v0.1.0 yet), W
     // [walking, work, lunch]
 
 ##Progress
-Progression table has moved to [wiki](https://github.com/lotz84/__.swift/wiki).
+Progression table is available at [wiki](https://github.com/lotz84/__.swift/wiki).
