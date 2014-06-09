@@ -8,6 +8,6 @@
 
 import XCTest
 
-class ___swiftTests: XCTestCase {
+class __swiftTests: XCTestCase {
 
 }

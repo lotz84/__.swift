@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ___DictionariesTests: XCTestCase {
+class __DictionariesTests: XCTestCase {
 
     func testKeys(){
         

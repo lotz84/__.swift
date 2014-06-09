@@ -10,6 +10,8 @@
 		36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36029B0C193D7EA000FA0239 /* AppDelegate.swift */; };
 		36029B0F193D7EA000FA0239 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36029B0E193D7EA000FA0239 /* Images.xcassets */; };
 		36029B1B193D7EA000FA0239 /* ___swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36029B1A193D7EA000FA0239 /* ___swiftTests.swift */; };
+		360EFE1119460724008C33D3 /* __Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360EFE1019460724008C33D3 /* __Utility.swift */; };
+		360EFE1319460736008C33D3 /* __UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360EFE1219460736008C33D3 /* __UtilityTests.swift */; };
 		3626D7241944A00200382EDC /* __Dictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B2F8F01944974E007FF832 /* __Dictionaries.swift */; };
 		3628077A1942ED9900B562B9 /* __ArraysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362807791942ED9900B562B9 /* __ArraysTests.swift */; };
 		3628077C1942EDD700B562B9 /* __CollectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628077B1942EDD700B562B9 /* __CollectionsTests.swift */; };
@@ -58,6 +60,8 @@
 		36029B14193D7EA000FA0239 /* __.swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = __.swiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36029B19193D7EA000FA0239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36029B1A193D7EA000FA0239 /* ___swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___swiftTests.swift"; sourceTree = "<group>"; };
+		360EFE1019460724008C33D3 /* __Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Utility.swift; sourceTree = "<group>"; };
+		360EFE1219460736008C33D3 /* __UtilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __UtilityTests.swift; sourceTree = "<group>"; };
 		362807791942ED9900B562B9 /* __ArraysTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __ArraysTests.swift; sourceTree = "<group>"; };
 		3628077B1942EDD700B562B9 /* __CollectionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __CollectionsTests.swift; sourceTree = "<group>"; };
 		3628077D1942F4FC00B562B9 /* __Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Functions.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				3628077B1942EDD700B562B9 /* __CollectionsTests.swift */,
 				36B2F8F219449763007FF832 /* __DictionariesTests.swift */,
 				3628077F1942F59800B562B9 /* __FunctionsTests.swift */,
+				360EFE1219460736008C33D3 /* __UtilityTests.swift */,
 				36029B18193D7EA000FA0239 /* Supporting Files */,
 			);
 			path = __.swiftTests;
@@ -153,6 +158,7 @@
 				3640B0361942A50F00375332 /* __Collections.swift */,
 				36B2F8F01944974E007FF832 /* __Dictionaries.swift */,
 				3628077D1942F4FC00B562B9 /* __Functions.swift */,
+				360EFE1019460724008C33D3 /* __Utility.swift */,
 			);
 			name = __;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */,
+				360EFE1119460724008C33D3 /* __Utility.swift in Sources */,
 				365B6A05193DDD2F00FF5D8A /* __.swift in Sources */,
 				3640B0341942A48B00375332 /* __Arrays.swift in Sources */,
 				36B2F8F11944974E007FF832 /* __Dictionaries.swift in Sources */,
@@ -275,6 +282,7 @@
 				3640B0351942A4EB00375332 /* __Arrays.swift in Sources */,
 				365B6A0D193DE30700FF5D8A /* __.swift in Sources */,
 				36B2F8F319449763007FF832 /* __DictionariesTests.swift in Sources */,
+				360EFE1319460736008C33D3 /* __UtilityTests.swift in Sources */,
 				3628077C1942EDD700B562B9 /* __CollectionsTests.swift in Sources */,
 				362807801942F59800B562B9 /* __FunctionsTests.swift in Sources */,
 				3628077A1942ED9900B562B9 /* __ArraysTests.swift in Sources */,

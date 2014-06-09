@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ___FunctionsTests: XCTestCase {
+class __FunctionsTests: XCTestCase {
 
     func testPartial(){
         let add = { (x: Int, y :Int) in (x+y, x, y) }

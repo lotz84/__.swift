@@ -9,7 +9,7 @@
 import XCTest
 
 
-class ___CollectionsTests: XCTestCase {
+class __CollectionsTests: XCTestCase {
 
     func testEach() {
         

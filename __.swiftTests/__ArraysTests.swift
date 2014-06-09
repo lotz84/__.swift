@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ___ArraysTests: XCTestCase {
+class __ArraysTests: XCTestCase {
     
     func testFirst(){
         
