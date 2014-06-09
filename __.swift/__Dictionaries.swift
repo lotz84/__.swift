@@ -58,4 +58,26 @@ extension __ {
         return dict
     }
     
+    class func defaults<K, V>(var dict: Dictionary<K, V>, defaults: Dictionary<K, V>...) -> Dictionary<K, V> {
+        for option in defaults {
+            for key in option.keys {
+                if !dict[key] {
+                    dict[key] = option[key]
+                }
+            }
+        }
+        return dict
+    }
+    
+    class func has<K, V>(dict: Dictionary<K, V>, key: K) -> Bool {
+        return !(!dict[key])
+    }
+    
+    class func property<K, V>(key: K) -> Dictionary<K, V> -> V? {
+        return { $0[key] }
+    }
+    
+    class func matches<K, V: Equatable>(attrs: Dictionary<K, V>) -> Dictionary<K, V> -> Bool {
+        return { __.hasSubDictionary($0, subDictionary: attrs) }
+    }
 }

@@ -67,4 +67,33 @@ class ___DictionariesTests: XCTestCase {
         XCTAssert(__.keys(omitted).count == 1)
     }
     
+    func testDefaults() {
+        
+        let dict = __.defaults(["a":1], defaults: ["b":2, "c":3], ["b":4, "d": 5])
+        
+        XCTAssert(__.keys(dict).count==4)
+        XCTAssert(dict["b"]! == 2)
+    }
+    
+    func testHas() {
+    
+        let result = __.has(["a":1, "b":2, "c":3, "d":4], key: "b")
+        
+        XCTAssert(result)
+    }
+    
+    func testProperty() {
+        
+        let value = __.property("a")(["a":1, "b":2, "c":3, "d":4])
+        
+        XCTAssert(value == 1)
+    }
+    
+    func testMatches(){
+        
+        let result = __.matches(["a":1, "b":2])(["a":1, "b":2, "c":3, "d":4])
+        
+        XCTAssert(result)
+    }
+    
 }
