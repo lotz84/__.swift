@@ -34,8 +34,7 @@ class __CollectionsTests: XCTestCase {
 
     func testReduce(){
         
-        // I want to write below 4 function as simply " + " instead of "{ $0 + $1 }"
-        var result = __.reduce([1,2,3,4], 0, { $0 + $1 } )
+        var result = __.reduce([1,2,3,4], initial: 0, combine: + )
         
         XCTAssert(result==10)
     }

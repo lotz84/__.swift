@@ -15,7 +15,7 @@ extension __ {
     */
     
     class func each<T>(list: T[], _ iterator: T -> Any)  {
-        list.map { iterator($0) }
+        list.map(iterator)
     }
     
     // alias for each
@@ -23,42 +23,39 @@ extension __ {
         self.each(list, iterator)
     }
     
-    class func map<T, U>(list: T[], _ iterator: T -> U) -> U[] {
-        return list.map { iterator($0) }
+    // Swift has map method in Array by default
+    // __'s map method is bridge to the default function
+    class func map<T, U>(list: T[], transform: T -> U) -> U[] {
+        return list.map(transform)
     }
     
-    class func map<K, V, T>(dict: Dictionary<K, V>, _ iterator: (K, V) -> T) -> T[] {
+    class func map<K, V, T>(dict: Dictionary<K, V>, transform: (K, V) -> T) -> T[] {
         var result = T[]()
         for (key, value) in dict {
-            result += iterator(key, value)
+            result += transform(key, value)
         }
         return result
     }
     
     // alias for map
-    class func collect<T, U>(list: T[], _ iterator: T -> U) -> U[] {
-        return self.map(list, iterator)
+    class func collect<T, U>(list: T[], transform: T -> U) -> U[] {
+        return list.map(transform)
     }
     
-    class func reduce<T, U>(list: T[], _ memo: U, _ iterator: (first:U, second:T) -> U) -> U {
-        
-        var result = memo
-        
-        self.each(list) {
-            result = iterator(first: result, second: $0)
-        }
-        
-        return result
+    // Swift has reduce method in Array by default
+    // __'s map method is bridge to the default function
+    class func reduce<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
+        return list.reduce(initial, combine: combine)
     }
     
     // alias for reduce
-    class func inject<T, U>(list: T[], _ memo: U, _ iterator: (first:U, second:T) -> U) -> U {
-        return self.reduce(list, memo, iterator)
+    class func inject<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
+        return list.reduce(initial, combine: combine)
     }
     
     // alias for reduce
-    class func foldl<T, U>(list: T[], _ memo: U, _ iterator: (first:U, second:T) -> U) -> U {
-        return self.reduce(list, memo, iterator)
+    class func foldl<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
+        return list.reduce(initial, combine: combine)
     }
     
     class func find<T>(list: T[], _ filter: T -> Bool) -> T? {
