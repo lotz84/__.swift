@@ -70,7 +70,7 @@ extension __ {
     }
     
     class func has<K, V>(dict: Dictionary<K, V>, key: K) -> Bool {
-        return !(!dict[key])
+        return dict[key].getLogicValue()
     }
     
     class func property<K, V>(key: K) -> Dictionary<K, V> -> V? {
