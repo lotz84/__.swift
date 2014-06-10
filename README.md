@@ -37,5 +37,12 @@ Although __.swift library is still **under development** (This has not been even
 ##Progress
 Progression table is available at [wiki](https://github.com/lotz84/__.swift/wiki).
 
+##Altanatives
+###[Dollar.swift](https://github.com/ankurp/Dollar.swift)
+Awesome functional tool-belt for Swift Language. This is user-friendly with lots of `AnyObject`.
+
+###[Swiftz](https://github.com/maxpow4h/swiftz)
+Swiftz is a library for functional programming with purely functional data structures and functions.
+
 ##License
 MIT
