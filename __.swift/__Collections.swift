@@ -20,7 +20,7 @@ extension __ {
     
     // alias for each
     class func forEach<T>(list: T[], _ iterator: T -> Any) {
-        self.each(list, iterator)
+        __.each(list, iterator)
     }
     
     // Swift has map method in Array by default
@@ -69,7 +69,7 @@ extension __ {
     
     // alias for find
     class func detect<T>(list: T[], _ filter: T -> Bool) -> T? {
-        return self.find(list, filter)
+        return __.find(list, filter)
     }
     
     
@@ -85,7 +85,7 @@ extension __ {
     
     // alias for filter
     class func select<T>(list: T[], _ filter: T -> Bool) -> T[] {
-        return self.filter(list, filter)
+        return __.filter(list, filter)
     }
     
     // Whether dict has subDictionary
@@ -128,7 +128,7 @@ extension __ {
             return !filter(item)
         }
         
-        return self.filter(list, notFilter)
+        return __.filter(list, notFilter)
     }
     
     /*
@@ -147,7 +147,7 @@ extension __ {
     
     // alias for every
     class func all<L: LogicValue>(list: L[]) -> Bool {
-        return self.every(list)
+        return __.every(list)
     }
     
     class func some<L: LogicValue>(list: L[]) -> Bool {
@@ -161,7 +161,7 @@ extension __ {
     
     // alias for any
     class func any<L: LogicValue>(list: L[]) -> Bool {
-        return self.some(list)
+        return __.some(list)
     }
     
     // Simple linear search
@@ -176,7 +176,7 @@ extension __ {
     
     // alias for contains
     class func include<E: Equatable>(list: E[], value: E) -> Bool {
-        return self.contains(list, value: value);
+        return __.contains(list, value: value);
     }
     
     class func pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[] {
@@ -191,19 +191,19 @@ extension __ {
     
     // I want to write below 4 function as "comparator: < " instead of "comparator: { $0 < $1 }"
     class func max<C: Comparable>(list: C[]) -> C! {
-        return self.tournament(list, comparator: { $0 < $1 })
+        return __.tournament(list, comparator: { $0 < $1 })
     }
     
     class func max<C: Comparable>(list: C...) -> C! {
-        return self.tournament(list, comparator: { $0 < $1 })
+        return __.tournament(list, comparator: { $0 < $1 })
     }
     
     class func min<C: Comparable>(list: C[]) -> C! {
-        return self.tournament(list, comparator: { $0 > $1 } )
+        return __.tournament(list, comparator: { $0 > $1 } )
     }
 
     class func min<C: Comparable>(list: C...) -> C! {
-        return self.tournament(list, comparator: { $0 > $1 } )
+        return __.tournament(list, comparator: { $0 > $1 } )
     }
     
     // This function is used in max and min function
@@ -284,11 +284,11 @@ extension __ {
         var random = Int[]()
         while random.count < length {
             let index = __.random(length-1)
-            if !self.contains(random, value: index) {
+            if !__.contains(random, value: index) {
                 random += index
             }
         }
-        return self.map(random) { list[$0] }
+        return __.map(random) { list[$0] }
     }
     
     class func sample<T>(list: T[]) -> T {
@@ -298,7 +298,7 @@ extension __ {
     
     class func sample<T>(list: T[], _ n:Int) -> T[] {
         var result = T[]()
-        let random = self.shuffle(Array(0..list.count))
+        let random = __.shuffle(Array(0..list.count))
         for i in 0..n {
             result += list[random[i]]
         }

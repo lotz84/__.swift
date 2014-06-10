@@ -21,31 +21,27 @@ extension __ {
     
     // alias for first
     class func head<T>(list:T[]) -> T! {
-        return self.first(list)
+        return __.first(list)
     }
     
     // alias for first
     class func take<T>(list:T[]) -> T! {
-        return self.first(list)
+        return __.first(list)
     }
     
     class func first<T>(list:T[], _ n:Int) -> T[]! {
-        if list.isEmpty { return nil }
-        var result = T[]()
-        for i in 0..n {
-            result += list[i]
-        }
-        return result
+        let (first, _) = __.separate(list, list.count - n)
+        return first
     }
     
     // alias for first
     class func head<T>(list:T[], _ n:Int) -> T[]! {
-        return self.first(list, n)
+        return __.first(list, n)
     }
     
     // alias for first
     class func take<T>(list:T[], _ n:Int) -> T[]! {
-        return self.first(list, n)
+        return __.first(list, n)
     }
     
     // Abount initial and last functions
@@ -53,7 +49,7 @@ extension __ {
     // list == __.initial(list, n) + __.last(list, n)
     
     class func initial<T>(list:T[], _ n: Int = 1) -> T[] {
-        let (initial, last) = __.separate(list, n)
+        let (initial, _) = __.separate(list, n)
         return initial
     }
     
@@ -62,12 +58,12 @@ extension __ {
     }
     
     class func last<T>(list: T[], _ n: Int) -> T[] {
-        let (initial, last) = __.separate(list, n)
+        let (_, last) = __.separate(list, n)
         return last
     }
     
     class func rest<T>(list: T[], _ n: Int = 1) -> T[] {
-        let (initial, rest) = __.separate(list, list.count - n)
+        let (_, rest) = __.separate(list, list.count - n)
         return rest
     }
     

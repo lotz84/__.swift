@@ -34,7 +34,7 @@ class __CollectionsTests: XCTestCase {
 
     func testReduce(){
         
-        var result = __.reduce([1,2,3,4], initial: 0, combine: + )
+        var result = __.reduce([1,2,3,4], initial: 0, combine: { $0 + $1 } )
         
         XCTAssert(result==10)
     }

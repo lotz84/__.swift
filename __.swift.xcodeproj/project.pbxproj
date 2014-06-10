@@ -19,6 +19,9 @@
 		3628077E1942F4FC00B562B9 /* __Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628077D1942F4FC00B562B9 /* __Functions.swift */; };
 		362807801942F59800B562B9 /* __FunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628077F1942F59800B562B9 /* __FunctionsTests.swift */; };
 		362807811942F63400B562B9 /* __Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628077D1942F4FC00B562B9 /* __Functions.swift */; };
+		36408AFA19472AC900061529 /* __Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36408AF919472AC900061529 /* __Chain.swift */; };
+		36408AFC1947306C00061529 /* __ChainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36408AFB1947306C00061529 /* __ChainTests.swift */; };
+		36408AFD1947309A00061529 /* __Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36408AF919472AC900061529 /* __Chain.swift */; };
 		3640B0341942A48B00375332 /* __Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640B0331942A48B00375332 /* __Arrays.swift */; };
 		3640B0351942A4EB00375332 /* __Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640B0331942A48B00375332 /* __Arrays.swift */; };
 		3640B0371942A50F00375332 /* __Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640B0361942A50F00375332 /* __Collections.swift */; };
@@ -67,6 +70,8 @@
 		3628077B1942EDD700B562B9 /* __CollectionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __CollectionsTests.swift; sourceTree = "<group>"; };
 		3628077D1942F4FC00B562B9 /* __Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Functions.swift; sourceTree = "<group>"; };
 		3628077F1942F59800B562B9 /* __FunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __FunctionsTests.swift; sourceTree = "<group>"; };
+		36408AF919472AC900061529 /* __Chain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Chain.swift; sourceTree = "<group>"; };
+		36408AFB1947306C00061529 /* __ChainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __ChainTests.swift; sourceTree = "<group>"; };
 		3640B0331942A48B00375332 /* __Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Arrays.swift; sourceTree = "<group>"; };
 		3640B0361942A50F00375332 /* __Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Collections.swift; sourceTree = "<group>"; };
 		365B6A04193DDD2F00FF5D8A /* __.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __.swift; sourceTree = "<group>"; };
@@ -134,6 +139,7 @@
 			children = (
 				36029B1A193D7EA000FA0239 /* ___swiftTests.swift */,
 				362807791942ED9900B562B9 /* __ArraysTests.swift */,
+				36408AFB1947306C00061529 /* __ChainTests.swift */,
 				3628077B1942EDD700B562B9 /* __CollectionsTests.swift */,
 				36B2F8F219449763007FF832 /* __DictionariesTests.swift */,
 				3628077F1942F59800B562B9 /* __FunctionsTests.swift */,
@@ -156,6 +162,7 @@
 			children = (
 				365B6A04193DDD2F00FF5D8A /* __.swift */,
 				3640B0331942A48B00375332 /* __Arrays.swift */,
+				36408AF919472AC900061529 /* __Chain.swift */,
 				3640B0361942A50F00375332 /* __Collections.swift */,
 				36B2F8F01944974E007FF832 /* __Dictionaries.swift */,
 				3628077D1942F4FC00B562B9 /* __Functions.swift */,
@@ -264,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */,
+				36408AFA19472AC900061529 /* __Chain.swift in Sources */,
 				360EFE1119460724008C33D3 /* __Utility.swift in Sources */,
 				365B6A05193DDD2F00FF5D8A /* __.swift in Sources */,
 				3640B0341942A48B00375332 /* __Arrays.swift in Sources */,
@@ -277,9 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36408AFD1947309A00061529 /* __Chain.swift in Sources */,
 				360EFE1419460A16008C33D3 /* __Utility.swift in Sources */,
 				3626D7241944A00200382EDC /* __Dictionaries.swift in Sources */,
 				362807811942F63400B562B9 /* __Functions.swift in Sources */,
+				36408AFC1947306C00061529 /* __ChainTests.swift in Sources */,
 				3640B0381942A53500375332 /* __Collections.swift in Sources */,
 				3640B0351942A4EB00375332 /* __Arrays.swift in Sources */,
 				365B6A0D193DE30700FF5D8A /* __.swift in Sources */,
