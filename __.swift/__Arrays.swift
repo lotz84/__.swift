@@ -123,6 +123,18 @@ extension __ {
         }
     }
     
+    class func partition<T>(list: Array<T>, condition: T -> Bool ) -> (Array<T>, Array<T>) {
+        var result = (filtered: Array<T>(), rejected: Array<T>())
+        for item in list {
+            if condition(item) {
+                result.filtered += item
+            } else {
+                result.rejected += item
+            }
+        }
+        return result
+    }
+    
     class func zip<T, U>(list0: T[], _ list1: U[]) -> (T, U)[] {
         let length: Int = __.min(list0.count, list1.count)
         
@@ -135,4 +147,92 @@ extension __ {
         return result
     }
     
+    class func object<K : Hashable, V>(#keys: Array<K>, values:Array<V> ) -> Dictionary<K, V> {
+        var result = Dictionary<K,V>()
+        let length: Int = __.min(keys.count, values.count)
+        for i in 0..length {
+            result[keys[i]] = values[i]
+        }
+        return result
+    }
+    
+    class func object<K : Hashable, V>(keyAndValues: Array<(K, V)>) -> Dictionary<K, V> {
+        var result = Dictionary<K,V>()
+        for item in keyAndValues {
+            result[item.0] = item.1
+        }
+        return result
+    }
+    
+    class func indexOf<T: Equatable>(array: Array<T>, value:T) -> Int? {
+        for (index, item) in enumerate(array) {
+            if item == value { return index }
+        }
+        return nil
+    }
+    
+    class func indexOf<T: Comparable>(array: Array<T>, value:T, isSorted: Bool) -> Int? {
+        if isSorted {
+            return __.sortedIndex(array, value: value, transform: __.identity)
+        } else {
+            for (index, item) in enumerate(array) {
+                if item == value { return index }
+            }
+        }
+        return nil
+    }
+    
+    class func lastIndexOf<T : Equatable>(array : Array<T>, value: T) -> Int? {
+        let length = array.count - 1
+        return __.lastIndexOf(array, value: value, from: length)
+    }
+    
+    class func lastIndexOf<T : Equatable>(array : Array<T>, value: T, from: Int) -> Int? {
+        for index in __.range(start:from, stop: 0, step: -1) {
+            if array[index] == value {
+                return index
+            }
+        }
+        return nil
+    }
+    
+    class func sortedIndex<T, U : Comparable>(array : Array<T>, value : T, transform: T -> U ) -> Int? {
+        let target = transform(value)
+        var low  = 0
+        var high = array.count-1
+        while low < high {
+            let mid = (low + high) / 2
+            if target > transform(array[mid]) {
+                low = mid + 1
+            } else {
+                high = mid
+            }
+        }
+        if target == transform(array[low]) {
+            return low
+        }
+        return nil
+    }
+    
+    class func range(stop: Int) -> Array<Int> {
+        return Array(0..stop)
+    }
+    
+    class func range(#start: Int, stop: Int) -> Array<Int> {
+        if start > stop {
+            return __.range(start: start, stop: stop, step: -1)
+        }
+        return Array(start..stop)
+    }
+    
+    class func range(#start: Int, stop: Int, step: Int) -> Array<Int> {
+        if step > 0 ? start > stop : start < stop { return [] }
+        var result = Array<Int>()
+        var temp = start
+        while step < 0 ? temp > stop : temp < stop {
+            result += temp
+            temp += step
+        }
+        return result
+    }
 }
