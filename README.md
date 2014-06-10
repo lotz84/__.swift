@@ -36,3 +36,6 @@ Although __.swift library is still **under development** (This has not been even
 
 ##Progress
 Progression table is available at [wiki](https://github.com/lotz84/__.swift/wiki).
+
+##License
+MIT

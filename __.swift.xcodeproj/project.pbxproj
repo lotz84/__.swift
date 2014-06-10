@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36029B0C193D7EA000FA0239 /* AppDelegate.swift */; };
-		36029B0F193D7EA000FA0239 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36029B0E193D7EA000FA0239 /* Images.xcassets */; };
 		36029B1B193D7EA000FA0239 /* ___swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36029B1A193D7EA000FA0239 /* ___swiftTests.swift */; };
 		360EFE1119460724008C33D3 /* __Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360EFE1019460724008C33D3 /* __Utility.swift */; };
 		360EFE1319460736008C33D3 /* __UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360EFE1219460736008C33D3 /* __UtilityTests.swift */; };
@@ -54,13 +52,18 @@
 			remoteGlobalIDString = 36029B06193D7EA000FA0239;
 			remoteInfo = __.swift;
 		};
+		36D0F62719476CC900570034 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36029AFF193D7EA000FA0239 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 36029B06193D7EA000FA0239;
+			remoteInfo = __.swift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		36029B07193D7EA000FA0239 /* __.swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = __.swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36029B0B193D7EA000FA0239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		36029B0C193D7EA000FA0239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		36029B0E193D7EA000FA0239 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		36029B14193D7EA000FA0239 /* __.swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = __.swiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36029B19193D7EA000FA0239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36029B1A193D7EA000FA0239 /* ___swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___swiftTests.swift"; sourceTree = "<group>"; };
@@ -119,8 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				3640B0321942A46100375332 /* __ */,
-				36029B0C193D7EA000FA0239 /* AppDelegate.swift */,
-				36029B0E193D7EA000FA0239 /* Images.xcassets */,
 				36029B0A193D7EA000FA0239 /* Supporting Files */,
 			);
 			path = __.swift;
@@ -205,6 +206,7 @@
 				36029B16193D7EA000FA0239 /* PBXTargetDependency */,
 				3626D7261944A10700382EDC /* PBXTargetDependency */,
 				3626D7281944A10700382EDC /* PBXTargetDependency */,
+				36D0F62819476CC900570034 /* PBXTargetDependency */,
 			);
 			name = __.swiftTests;
 			productName = __.swiftTests;
@@ -252,7 +254,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36029B0F193D7EA000FA0239 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +271,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36029B0D193D7EA000FA0239 /* AppDelegate.swift in Sources */,
 				36408AFA19472AC900061529 /* __Chain.swift in Sources */,
 				360EFE1119460724008C33D3 /* __Utility.swift in Sources */,
 				365B6A05193DDD2F00FF5D8A /* __.swift in Sources */,
@@ -319,6 +319,11 @@
 			isa = PBXTargetDependency;
 			target = 36029B06193D7EA000FA0239 /* __.swift */;
 			targetProxy = 3626D7271944A10700382EDC /* PBXContainerItemProxy */;
+		};
+		36D0F62819476CC900570034 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 36029B06193D7EA000FA0239 /* __.swift */;
+			targetProxy = 36D0F62719476CC900570034 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
