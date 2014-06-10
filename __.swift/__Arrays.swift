@@ -66,6 +66,12 @@ extension __ {
         return last
     }
     
+    class func rest<T>(list: T[], _ n: Int = 1) -> T[] {
+        let length = list.count
+        let (initial, rest) = __.separate(list, length-n)
+        return rest
+    }
+    
     class func separate<T>(list: T[], _ n: Int) -> (T[], T[]) {
         if n < 1 { return (list, []) }
         
@@ -83,6 +89,33 @@ extension __ {
             }
         }
         return (initial, last)
+    }
+    
+    class func compact<T : LogicValue>(list: Array<T>) -> Array<T> {
+        let validator = __.map(list){
+            $0.getLogicValue()
+        }
+        var result = Array<T>()
+        for (index, item) in enumerate(list) {
+            if validator[index] {
+                result += item
+            }
+        }
+        return result
+    }
+    
+    class func flatten<T>(list: Array<Array<T>>) -> Array<T> {
+        var result = Array<T>()
+        for item in list {
+            result += item
+        }
+        return result
+    }
+    
+    class func without<T: Equatable>(list: Array<T>, values: T...) -> Array<T> {
+        return list.filter {
+            !__.contains(values, value: $0)
+        }
     }
     
     class func zip<T, U>(list0: T[], _ list1: U[]) -> (T, U)[] {
