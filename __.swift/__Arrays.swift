@@ -67,9 +67,18 @@ extension __ {
     }
     
     class func rest<T>(list: T[], _ n: Int = 1) -> T[] {
-        let length = list.count
-        let (initial, rest) = __.separate(list, length-n)
+        let (initial, rest) = __.separate(list, list.count - n)
         return rest
+    }
+    
+    // alias for rest method
+    class func tail<T>(list: T[], _ n: Int = 1) -> T[] {
+        return __.rest(list, n)
+    }
+    
+    // alias for rest method
+    class func drop<T>(list: T[], _ n: Int = 1) -> T[] {
+        return __.rest(list, n)
     }
     
     class func separate<T>(list: T[], _ n: Int) -> (T[], T[]) {
