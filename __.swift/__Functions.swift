@@ -104,7 +104,7 @@ extension __ {
         return executor
     }
     
-    class func compose<T, U, V>(f: T -> U, _ g: U -> V) -> T -> V {
+    class func compose<T, U, V>(g: U -> V, _ f: T -> U) -> T -> V {
         func h(arg: T) -> V {
             return g(f(arg))
         }

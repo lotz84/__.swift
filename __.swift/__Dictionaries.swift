@@ -97,4 +97,16 @@ extension __ {
     class func matches<K, V: Equatable>(attrs: Dictionary<K, V>) -> Dictionary<K, V> -> Bool {
         return { __.hasSubDictionary($0, subDictionary: attrs) }
     }
+    
+    // Whether dict has subDictionary
+    class func hasSubDictionary<K, V: Equatable>(dict:Dictionary<K,V>, subDictionary: Dictionary<K,V>) -> Bool {
+        let eqList: Bool[] = __.map(subDictionary) { key, value in
+            if let v = dict[key] {
+                return v == value
+            } else {
+                return false
+            }
+        }
+        return __.every(eqList)
+    }
 }

@@ -88,7 +88,7 @@ class __FunctionsTests: XCTestCase {
             return str0 + " " + str1
         }
         
-        let h = __.compose(f, g)
+        let h = __.compose(g, f)
         
         XCTAssert(h("hey") == "HEY hey")
     }

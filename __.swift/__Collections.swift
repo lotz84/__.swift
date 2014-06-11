@@ -31,23 +31,16 @@ extension __ {
     * Collection Functions (Arrays or Dictionaries)
     */
     
-    class func each<T>(list: T[], _ iterator: T -> Any)  {
-        list.map(iterator)
-    }
-    
-    class func each<K, V>(dict: Dictionary<K, V>, _ iterator: (K, V) -> Any) {
-        for (key, value) in dict {
-            iterator(key, value)
+    class func each<T : Sequence>(seq: T, _ iterator: T.GeneratorType.Element -> Any){
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            iterator(elem)
         }
     }
     
     // alias for each
-    class func forEach<T>(list: T[], _ iterator: T -> Any) {
-        __.each(list, iterator)
-    }
-    
-    class func forEach<K, V>(dict: Dictionary<K, V>, _ iterator: (K, V) -> Any) {
-        __.each(dict, iterator)
+    class func forEach<T : Sequence>(seq: T, _ iterator: T.GeneratorType.Element -> Any){
+        __.each(seq, iterator)
     }
     
     // Swift has map method in Array by default
@@ -56,10 +49,11 @@ extension __ {
         return list.map(transform)
     }
     
-    class func map<K, V, T>(dict: Dictionary<K, V>, transform: (K, V) -> T) -> T[] {
-        var result = T[]()
-        for (key, value) in dict {
-            result += transform(key, value)
+    class func map<T : Sequence, U>(seq: T, transform: T.GeneratorType.Element -> U) -> U[] {
+        var result = U[]()
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            result += transform(elem)
         }
         return result
     }
@@ -69,8 +63,8 @@ extension __ {
         return list.map(transform)
     }
     
-    class func collect<K, V, T>(dict: Dictionary<K, V>, transform: (K, V) -> T) -> T[] {
-        return __.map(dict, transform: transform)
+    class func collect<T: Sequence, U>(seq: T, transform: T.GeneratorType.Element -> U) -> U[] {
+        return __.map(seq, transform: transform)
     }
     
     // Swift has reduce method in Array by default
@@ -79,9 +73,22 @@ extension __ {
         return list.reduce(initial, combine: combine)
     }
     
+    class func reduce<T : Sequence, U>(seq: T, initial: U, combine: (U, T.GeneratorType.Element) -> U) -> U {
+        var accum = initial
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            accum = combine(accum, elem)
+        }
+        return accum
+    }
+    
     // alias for reduce
     class func inject<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
         return list.reduce(initial, combine: combine)
+    }
+    
+    class func inject<T : Sequence, U>(seq: T, initial: U, combine: (U, T.GeneratorType.Element) -> U) -> U {
+        return __.reduce(seq, initial: initial, combine: combine);
     }
     
     // alias for reduce
@@ -89,48 +96,42 @@ extension __ {
         return list.reduce(initial, combine: combine)
     }
     
-    class func find<T>(list: T[], _ filter: T -> Bool) -> T? {
-        for item in list {
-            if filter(item) {
-                return item
+    class func foldl<T : Sequence, U>(seq: T, initial: U, combine: (U, T.GeneratorType.Element) -> U) -> U {
+        return __.reduce(seq, initial: initial, combine: combine);
+    }
+    
+    class func find<T : Sequence>(seq: T, condition: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            if condition(elem) {
+                return elem
             }
         }
         return nil
     }
     
     // alias for find
-    class func detect<T>(list: T[], _ filter: T -> Bool) -> T? {
-        return __.find(list, filter)
+    class func detect<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
+        return __.find(seq, filter)
     }
     
     
-    class func filter<T>(list: T[], _ filter: T -> Bool) -> T[] {
-        var result = T[]()
-        for item in list {
-            if filter(item) {
-                result += item
+    class func filter<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
+        var result = Array<T.GeneratorType.Element>()
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            if filter(elem) {
+                result += elem
             }
         }
         return result
     }
     
     // alias for filter
-    class func select<T>(list: T[], _ filter: T -> Bool) -> T[] {
-        return __.filter(list, filter)
+    class func select<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
+        return __.filter(seq, filter)
     }
-    
-    // Whether dict has subDictionary
-    class func hasSubDictionary<K, V: Equatable>(dict:Dictionary<K,V>, subDictionary: Dictionary<K,V>) -> Bool {
-        let eqList: Bool[] = __.map(subDictionary) { key, value in
-            if let v = dict[key] {
-                return v == value
-            } else {
-                return false
-            }
-        }
-        return __.every(eqList)
-    }
-    
+ 
     class func `where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
         var result = Array<Dictionary<K,V>>()
         for dict in list {
@@ -150,30 +151,16 @@ extension __ {
         return nil
     }
     
-    class func reject<T>(list: T[], _ filter: T -> Bool) -> T[] {
-        
-        // I tried to compose ! and filter directly
-        // but I have no idea do it exactly
-        
-        func notFilter(item: T) -> Bool {
-            return !filter(item)
-        }
-        
-        return __.filter(list, notFilter)
+    class func reject<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
+        return __.filter(seq, { !filter($0) })
     }
     
-    /*
-    Maybe every and some can be written by already existing function.
-    But I think it is faster to use short-circuit evaluation by for-in loop
-    */
-    
     class func every<L: LogicValue>(list: L[]) -> Bool {
-        for item in list {
-            if !item {
-                return false
-            }
-        }
-        return true
+        return __.find(list, { !$0 }) ? false : true
+    }
+    
+    class func every<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool ) -> Bool {
+        return __.find(seq, { !predicate($0) }) ? false : true
     }
     
     // alias for every
@@ -181,13 +168,16 @@ extension __ {
         return __.every(list)
     }
     
+    class func all<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
+        return __.every(seq, predicate: predicate)
+    }
+    
     class func some<L: LogicValue>(list: L[]) -> Bool {
-        for item in list {
-            if item {
-                return true
-            }
-        }
-        return false
+        return __.find(list, { $0.getLogicValue() }) ? true : false
+    }
+    
+    class func some<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
+        return __.find(seq, predicate ) ? true : false
     }
     
     // alias for any
@@ -195,19 +185,18 @@ extension __ {
         return __.some(list)
     }
     
+    class func any<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
+        return __.some(seq, predicate: predicate)
+    }
+    
     // Simple linear search
-    class func contains<E: Equatable>(list: E[], value: E) -> Bool {
-        for item in list {
-            if item == value {
-                return true
-            }
-        }
-        return false
+    class func contains<T : Sequence where T.GeneratorType.Element : Equatable>(seq: T, value: T.GeneratorType.Element) -> Bool {
+        return __.find(seq, {value==$0}) ? true : false
     }
     
     // alias for contains
-    class func include<E: Equatable>(list: E[], value: E) -> Bool {
-        return __.contains(list, value: value);
+    class func include<T : Sequence where T.GeneratorType.Element : Equatable>(seq: T, value: T.GeneratorType.Element) -> Bool {
+        return __.contains(seq, value: value);
     }
     
     class func pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[] {
@@ -220,34 +209,22 @@ extension __ {
         return result
     }
     
-    // I want to write below 4 function as "comparator: < " instead of "comparator: { $0 < $1 }"
-    class func max<C: Comparable>(list: C[]) -> C! {
-        return __.tournament(list, comparator: { $0 < $1 })
+    class func max<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
+        var gen = seq.generate()
+        return __.reduce(seq, initial:gen.next()!, combine: { $1 > $0 ? $1 : $0 })
     }
     
-    class func max<C: Comparable>(list: C...) -> C! {
-        return __.tournament(list, comparator: { $0 < $1 })
+    class func max<C: Comparable>(list: C...) -> C {
+        return __.max(list)
     }
     
-    class func min<C: Comparable>(list: C[]) -> C! {
-        return __.tournament(list, comparator: { $0 > $1 } )
+    class func min<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
+        var gen = seq.generate()
+        return __.reduce(seq, initial:gen.next()!, combine: { $0 < $1 ? $0 : $1 })
     }
 
-    class func min<C: Comparable>(list: C...) -> C! {
-        return __.tournament(list, comparator: { $0 > $1 } )
-    }
-    
-    // This function is used in max and min function
-    // Since max and min function pass the test, we decide tournament function is work correctly
-    class func tournament<C: Comparable>(list: C[], comparator: (C, C) -> Bool) -> C! {
-        if list.isEmpty { return nil }
-        var candidate = list[0]
-        for item in list {
-            if comparator(candidate,item) {
-                candidate = item
-            }
-        }
-        return candidate
+    class func min<C: Comparable>(list: C...) -> C {
+        return __.min(list)
     }
     
     // quick sort
