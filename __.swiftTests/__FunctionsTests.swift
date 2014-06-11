@@ -38,4 +38,12 @@ class __FunctionsTests: XCTestCase {
         XCTAssert(add6and7(10)==23)
     }
     
+    func testMemoize(){
+        var fibonacci: ((Int) -> Int)?; fibonacci = __.memoize({ (n: Int) -> Int in
+            return n < 2 ? n: fibonacci!(n - 1) + fibonacci!(n - 2);
+        })
+        
+        XCTAssert(fibonacci!(5) == 5)
+    }
+    
 }

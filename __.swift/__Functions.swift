@@ -57,6 +57,20 @@ extension __ {
         return { f(arg, $0, $1, $2, $3, $4, $5) }
     }
     
+    class func memoize<T: Hashable, V>(f: T -> V) -> T -> V {
+        var cache = Dictionary<T, V>()
+        func memoized(arg: T) -> V {
+            if let value = cache[arg] {
+                return value
+            } else {
+                let value = f(arg)
+                cache[arg] = value
+                return value
+            }
+        }
+        return memoized
+    }
+    
     class func now() -> Double {
         return NSDate().timeIntervalSince1970
     }
