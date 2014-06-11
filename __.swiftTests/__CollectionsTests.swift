@@ -37,6 +37,13 @@ class __CollectionsTests: XCTestCase {
         }
         
         XCTAssert(sum == 6)
+        
+        __.each(["a":0, "b":1]) {
+            sum += $1
+        }
+        
+        
+        XCTAssert(sum == 7)
     }
 
     func testMap() {

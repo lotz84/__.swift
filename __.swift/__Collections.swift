@@ -35,9 +35,19 @@ extension __ {
         list.map(iterator)
     }
     
+    class func each<K, V>(dict: Dictionary<K, V>, _ iterator: (K, V) -> Any) {
+        for (key, value) in dict {
+            iterator(key, value)
+        }
+    }
+    
     // alias for each
     class func forEach<T>(list: T[], _ iterator: T -> Any) {
         __.each(list, iterator)
+    }
+    
+    class func forEach<K, V>(dict: Dictionary<K, V>, _ iterator: (K, V) -> Any) {
+        __.each(dict, iterator)
     }
     
     // Swift has map method in Array by default
@@ -57,6 +67,10 @@ extension __ {
     // alias for map
     class func collect<T, U>(list: T[], transform: T -> U) -> U[] {
         return list.map(transform)
+    }
+    
+    class func collect<K, V, T>(dict: Dictionary<K, V>, transform: (K, V) -> T) -> T[] {
+        return __.map(dict, transform: transform)
     }
     
     // Swift has reduce method in Array by default

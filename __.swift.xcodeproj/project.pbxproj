@@ -59,6 +59,13 @@
 			remoteGlobalIDString = 36029B06193D7EA000FA0239;
 			remoteInfo = __.swift;
 		};
+		36D0F62919476CC900570034 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36029AFF193D7EA000FA0239 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 36029B06193D7EA000FA0239;
+			remoteInfo = __.swift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +214,7 @@
 				3626D7261944A10700382EDC /* PBXTargetDependency */,
 				3626D7281944A10700382EDC /* PBXTargetDependency */,
 				36D0F62819476CC900570034 /* PBXTargetDependency */,
+				36D0F62A19476CC900570034 /* PBXTargetDependency */,
 			);
 			name = __.swiftTests;
 			productName = __.swiftTests;
@@ -227,7 +235,6 @@
 					};
 					36029B13193D7EA000FA0239 = {
 						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 36029B06193D7EA000FA0239;
 					};
 				};
 			};
@@ -325,6 +332,11 @@
 			target = 36029B06193D7EA000FA0239 /* __.swift */;
 			targetProxy = 36D0F62719476CC900570034 /* PBXContainerItemProxy */;
 		};
+		36D0F62A19476CC900570034 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 36029B06193D7EA000FA0239 /* __.swift */;
+			targetProxy = 36D0F62919476CC900570034 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -367,6 +379,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SYMROOT = "";
 			};
 			name = Debug;
 		};
@@ -401,6 +414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SYMROOT = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -412,7 +426,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = __.swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = /Users/tatyusa/Documents/workspace/__.swift;
 			};
 			name = Debug;
 		};
@@ -423,14 +439,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = __.swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = /Users/tatyusa/Documents/workspace/__.swift;
 			};
 			name = Release;
 		};
 		36029B22193D7EA000FA0239 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/__.swift.app/__.swift";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -443,14 +460,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				SYMROOT = /Users/tatyusa/Documents/workspace/__.swift;
 			};
 			name = Debug;
 		};
 		36029B23193D7EA000FA0239 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/__.swift.app/__.swift";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -459,7 +475,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				SYMROOT = /Users/tatyusa/Documents/workspace/__.swift;
 			};
 			name = Release;
 		};
