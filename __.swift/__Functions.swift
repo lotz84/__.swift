@@ -71,7 +71,43 @@ extension __ {
         return memoized
     }
     
+    class func once<T, U>(f: (T)-> U) -> T -> U? {
+        var isExecuted = false
+        func executor(arg: (T)) -> U? {
+            if isExecuted {
+                return nil
+            } else {
+                isExecuted = true
+                return f(arg)
+            }
+        }
+        return executor
+    }
+    
+    class func after<T, U>(count: Int, function: T -> U ) -> T -> U? {
+        var now = 0
+        func executor(arg:T) -> U? {
+            now += 1
+            return now < count ? nil : function(arg)
+        }
+        return executor
+    }
+    
     class func now() -> Double {
         return NSDate().timeIntervalSince1970
+    }
+    
+    class func wrap<T, U, V, W>(f: T -> U, withWrapper wrapper:(T -> U , V) -> W) -> V -> W {
+        func executor(arg: V) -> W {
+            return wrapper(f, arg)
+        }
+        return executor
+    }
+    
+    class func compose<T, U, V>(f: T -> U, _ g: U -> V) -> T -> V {
+        func h(arg: T) -> V {
+            return g(f(arg))
+        }
+        return h
     }
 }

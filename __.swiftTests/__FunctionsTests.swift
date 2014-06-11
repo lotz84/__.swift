@@ -46,4 +46,50 @@ class __FunctionsTests: XCTestCase {
         XCTAssert(fibonacci!(5) == 5)
     }
     
+    func testOnce(){
+        func addTwoString(s0: String, s1: String) -> String {
+            return s0 + s1
+        }
+        let onceAddTwoString = __.once(addTwoString)
+        
+        let result0 = onceAddTwoString(("swi", "ft"))
+        
+        XCTAssert(result0 == "swift")
+        
+        let result1 = onceAddTwoString(("swi", "ft"))
+        
+        XCTAssert(result1 == nil)
+    }
+    
+    func testAfter(){
+    
+        let after = __.after(3) { "!!" }
+        
+        XCTAssert(after()==nil)
+        
+        XCTAssert(after()==nil)
+        
+        XCTAssert(after()=="!!")
+    }
+    
+    func testWrap(){
+        let wrapped = __.wrap({ (str: String) in str + "!!" }, withWrapper: {(f: String -> String, str: (str0: String, str1:String)) -> String in
+            return str.str0 + " " + f("Hey") + " " + str.str1
+        })
+        
+        XCTAssert(wrapped(("This", "What")) == "This Hey!! What")
+    }
+    
+    func testCompose(){
+        func f(str: String) -> (String, String) {
+            return (str.uppercaseString, str.lowercaseString)
+        }
+        func g(str0: String, str1: String) -> String {
+            return str0 + " " + str1
+        }
+        
+        let h = __.compose(f, g)
+        
+        XCTAssert(h("hey") == "HEY hey")
+    }
 }
