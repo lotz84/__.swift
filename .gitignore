@@ -2,3 +2,6 @@
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
 .DS_Store
+
+Debug-iphonesimulator/
+__.swift.build/

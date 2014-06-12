@@ -109,6 +109,15 @@ extension __ {
         return __.reduce(seq, initial: initial, combine: combine);
     }
     
+    class func reduceRight<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
+        var array = Array<T.GeneratorType.Element>()
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            array += elem
+        }
+        return array.reverse().reduce(initial, combine: { combine($1,$0) } )
+    }
+    
     class func find<T : Sequence>(seq: T, condition: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
         var gen = seq.generate()
         while let elem = gen.next() {

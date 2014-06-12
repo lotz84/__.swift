@@ -63,6 +63,13 @@ class __CollectionsTests: XCTestCase {
         XCTAssert(result==10)
     }
 
+    func testReduceRight(){
+        
+        var result = __.reduce(["a","b","c","d"], initial: "", combine: { $0 + $1 } )
+        
+        XCTAssert(result=="abcd")
+    }
+    
     func testFind() {
         
         let result0 = __.find([1,2,3]) { $0 == 2 }
