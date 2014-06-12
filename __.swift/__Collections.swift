@@ -235,28 +235,31 @@ extension __ {
     }
     
     // quick sort
-    class func sortBy<T, C: Comparable>(list: T[], _ iterator: T -> C) -> T[] {
-        if list.isEmpty { return [] }
+    class func sortBy<T : Sequence, C: Comparable>(seq: T, transform: T.GeneratorType.Element -> C) -> T.GeneratorType.Element[] {
         
-        var smaller = T[]()
-        var bigger = T[]()
+        var gen = seq.generate()
         
-        let first = list[0]
-        let length = list.count
-        
-        for i in 1..length {
-            if iterator(first) < iterator(list[i]) {
-                bigger += list[i]
-            } else {
-                smaller += list[i]
+        if let first = gen.next() {
+            
+            var smaller = Array<T.GeneratorType.Element>()
+            var bigger = Array<T.GeneratorType.Element>()
+            
+            while let elem = gen.next() {
+                if transform(first) < transform(elem) {
+                    bigger += elem
+                } else {
+                    smaller += elem
+                }
             }
+            
+            var result = sortBy(smaller, transform: transform)
+            result += first
+            result += sortBy(bigger, transform: transform)
+            
+            return result
+        } else {
+            return []
         }
-        
-        var result = sortBy(smaller, iterator)
-        result += first
-        result += sortBy(bigger, iterator)
-        
-        return result
     }
     
     class func groupBy<K, V>(list: V[], _ iterator: V -> K) -> Dictionary<K, V[]> {
