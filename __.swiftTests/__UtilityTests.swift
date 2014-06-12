@@ -53,4 +53,12 @@ class __UtilityTests: XCTestCase {
         XCTAssert(result > 9)
         XCTAssert(result < 31)
     }
+    
+    func testEscape(){
+        XCTAssert(__.escape("Larry & Moe")=="Larry &amp; Moe")
+    }
+    
+    func testUnescape(){
+        XCTAssert(__.unescape("Larry &amp; Moe")=="Larry & Moe")
+    }
 }

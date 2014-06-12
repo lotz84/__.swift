@@ -50,4 +50,32 @@ extension __ {
     class func random(#min: Int, max: Int) -> Int {
         return min + Int(arc4random() % UInt32(max-min+1))
     }
+    
+    class func escape(var str: String) -> String {
+        let reference = [
+            ("&",  "&amp;"),
+            ("<",  "&lt;"),
+            (">",  "&gt;"),
+            ("\"", "&quot;"),
+            ("'",  "&#x27;")
+        ]
+        for (key, value) in reference {
+            str = str.stringByReplacingOccurrencesOfString(key, withString: value, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        }
+        return str
+    }
+    
+    class func unescape(var str: String) -> String {
+        let reference = [
+            "&amp;"  : "&",
+            "&lt;"   : "<",
+            "&gt;"   : ">",
+            "&quot;" : "\"",
+            "&#x27;" : "'"
+        ]
+        for (key, value) in reference {
+            str = str.stringByReplacingOccurrencesOfString(key, withString: value, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        }
+        return str
+    }
 }
