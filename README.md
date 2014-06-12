@@ -44,5 +44,8 @@ Awesome functional tool-belt for Swift Language. This is user-friendly with lots
 ###[Swiftz](https://github.com/maxpow4h/swiftz)
 Swiftz is a library for functional programming with purely functional data structures and functions.
 
+##Contributing
+Feel free to send a PR or create a new [issue](https://github.com/lotz84/__.swift/issues).
+
 ##License
 MIT
