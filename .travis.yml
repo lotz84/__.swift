@@ -1,2 +1,2 @@
 language: objective-c
-script: xcodebuild -project __.swift.xcodeproj -target __.swiftTests -sdk iphonesimulator -configuration Debug TEST_AFTER_BUILD=YES TEST_HOST=
+script: "xcodebuild -project __.swift.xcodeproj -target __.swiftTests -sdk iphonesimulator -configuration Debug TEST_AFTER_BUILD=YES TEST_HOST="
