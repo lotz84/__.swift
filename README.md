@@ -2,7 +2,7 @@ __.swift
 ========
 __.swift aims to be an utility belt for a new programming language by Apple Inc., [Swift](https://developer.apple.com/swift/). And we decided  __.swift to be a clone of [Underscore.js](http://underscorejs.org/), which is an utility belt for JavaScript.
 
-Although __.swift library is still **under development** (This has not been even v0.1.0 yet), We made it public. This is because Swift is totally new language for everyone around the world, and we thought it is useful for everyone to learn how to code Swift by trial and error.
+__.swift is a type-safe library because it uses type inference and generics. Therefore, you can write a program without most of the downcasting such as "as" or "as?".
 
 ##Example
 
