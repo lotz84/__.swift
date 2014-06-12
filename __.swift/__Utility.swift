@@ -52,30 +52,26 @@ extension __ {
     }
     
     class func escape(var str: String) -> String {
-        let reference = [
+        return [
             ("&",  "&amp;"),
             ("<",  "&lt;"),
             (">",  "&gt;"),
             ("\"", "&quot;"),
             ("'",  "&#x27;")
-        ]
-        for (key, value) in reference {
-            str = str.stringByReplacingOccurrencesOfString(key, withString: value, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        ].reduce(str) {
+            $0.stringByReplacingOccurrencesOfString($1.0, withString: $1.1, options: NSStringCompareOptions.LiteralSearch, range: nil)
         }
-        return str
     }
     
     class func unescape(var str: String) -> String {
-        let reference = [
+        return __.reduce([
             "&amp;"  : "&",
             "&lt;"   : "<",
             "&gt;"   : ">",
             "&quot;" : "\"",
             "&#x27;" : "'"
-        ]
-        for (key, value) in reference {
-            str = str.stringByReplacingOccurrencesOfString(key, withString: value, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        ] , initial: str) {
+            $0.stringByReplacingOccurrencesOfString($1.0, withString: $1.1, options: NSStringCompareOptions.LiteralSearch, range: nil)
         }
-        return str
     }
 }
