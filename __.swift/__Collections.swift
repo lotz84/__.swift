@@ -81,6 +81,15 @@ extension __ {
         }
         return accum
     }
+
+    class func foldl1<T : Sequence>(seq: T, combine: (T.GeneratorType.Element, T.GeneratorType.Element) -> T.GeneratorType.Element) -> T.GeneratorType.Element {
+        var accum : T.GeneratorType.Element?
+        var gen = seq.generate()
+        while let elem = gen.next() {
+            accum = accum ? combine(accum!, elem) : elem
+        }
+        return accum!
+    }
     
     // alias for reduce
     class func inject<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
@@ -210,8 +219,7 @@ extension __ {
     }
     
     class func max<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
-        var gen = seq.generate()
-        return __.reduce(seq, initial:gen.next()!, combine: { $1 > $0 ? $1 : $0 })
+        return __.foldl1(seq, combine: { $1 > $0 ? $1 : $0 })
     }
     
     class func max<C: Comparable>(list: C...) -> C {
@@ -219,8 +227,7 @@ extension __ {
     }
     
     class func min<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
-        var gen = seq.generate()
-        return __.reduce(seq, initial:gen.next()!, combine: { $0 < $1 ? $0 : $1 })
+        return __.foldl1(seq, combine: { $0 < $1 ? $0 : $1 })
     }
 
     class func min<C: Comparable>(list: C...) -> C {
