@@ -64,13 +64,13 @@ extension __ {
     }
     
     class func unescape(var str: String) -> String {
-        return __.reduce([
+        return reduce([
             "&amp;"  : "&",
             "&lt;"   : "<",
             "&gt;"   : ">",
             "&quot;" : "\"",
             "&#x27;" : "'"
-        ] , initial: str) {
+        ] , str) {
             $0.stringByReplacingOccurrencesOfString($1.0, withString: $1.1, options: NSStringCompareOptions.LiteralSearch, range: nil)
         }
     }

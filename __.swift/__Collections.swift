@@ -43,45 +43,6 @@ extension __ {
         __.each(seq, iterator)
     }
     
-    // Swift has map method in Array by default
-    // __'s map method is bridge to the default function
-    class func map<T, U>(list: T[], transform: T -> U) -> U[] {
-        return list.map(transform)
-    }
-    
-    class func map<T : Sequence, U>(seq: T, transform: T.GeneratorType.Element -> U) -> U[] {
-        var result = U[]()
-        var gen = seq.generate()
-        while let elem = gen.next() {
-            result += transform(elem)
-        }
-        return result
-    }
-    
-    // alias for map
-    class func collect<T, U>(list: T[], transform: T -> U) -> U[] {
-        return list.map(transform)
-    }
-    
-    class func collect<T: Sequence, U>(seq: T, transform: T.GeneratorType.Element -> U) -> U[] {
-        return __.map(seq, transform: transform)
-    }
-    
-    // Swift has reduce method in Array by default
-    // __'s map method is bridge to the default function
-    class func reduce<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
-        return list.reduce(initial, combine: combine)
-    }
-    
-    class func reduce<T : Sequence, U>(seq: T, initial: U, combine: (U, T.GeneratorType.Element) -> U) -> U {
-        var accum = initial
-        var gen = seq.generate()
-        while let elem = gen.next() {
-            accum = combine(accum, elem)
-        }
-        return accum
-    }
-
     class func foldl1<T : Sequence>(seq: T, combine: (T.GeneratorType.Element, T.GeneratorType.Element) -> T.GeneratorType.Element) -> T.GeneratorType.Element {
         var accum : T.GeneratorType.Element?
         var gen = seq.generate()
@@ -89,24 +50,6 @@ extension __ {
             accum = accum ? combine(accum!, elem) : elem
         }
         return accum!
-    }
-    
-    // alias for reduce
-    class func inject<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
-        return list.reduce(initial, combine: combine)
-    }
-    
-    class func inject<T : Sequence, U>(seq: T, initial: U, combine: (U, T.GeneratorType.Element) -> U) -> U {
-        return __.reduce(seq, initial: initial, combine: combine);
-    }
-    
-    // alias for reduce
-    class func foldl<T, U>(list: T[], initial: U, combine: (U, T) -> U) -> U {
-        return list.reduce(initial, combine: combine)
-    }
-    
-    class func foldl<T : Sequence, U>(seq: T, initial: U, combine: (U, T.GeneratorType.Element) -> U) -> U {
-        return __.reduce(seq, initial: initial, combine: combine);
     }
     
     class func reduceRight<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
@@ -315,7 +258,7 @@ extension __ {
                 random += index
             }
         }
-        return __.map(random) { list[$0] }
+        return random.map { list[$0] }
     }
     
     class func sample<T>(list: T[]) -> T {

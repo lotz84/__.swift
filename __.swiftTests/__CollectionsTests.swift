@@ -46,23 +46,6 @@ class __CollectionsTests: XCTestCase {
         XCTAssert(sum == 7)
     }
 
-    func testMap() {
-        
-        let result = __.map([1,2,3]) {
-            item in
-            item * 2
-        }
-        
-        XCTAssert(result == [2,4,6])
-    }
-
-    func testReduce(){
-        
-        var result = __.reduce([1,2,3,4], initial: 0, combine: { $0 + $1 } )
-        
-        XCTAssert(result==10)
-    }
-
     func testReduceRight(){
         
         var result = __.reduce(["a","b","c","d"], initial: "", combine: { $0 + $1 } )

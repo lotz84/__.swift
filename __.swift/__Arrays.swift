@@ -114,7 +114,7 @@ extension __ {
     }
     
     class func compact<T : LogicValue>(list: Array<T>) -> Array<T> {
-        let validator = __.map(list){
+        let validator = list.map {
             $0.getLogicValue()
         }
         var result = Array<T>()

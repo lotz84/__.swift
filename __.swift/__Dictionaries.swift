@@ -100,13 +100,14 @@ extension __ {
     
     // Whether dict has subDictionary
     class func hasSubDictionary<K, V: Equatable>(dict:Dictionary<K,V>, subDictionary: Dictionary<K,V>) -> Bool {
-        let eqList: Bool[] = __.map(subDictionary) { key, value in
+        let eqList = map(subDictionary) { (key: K, value: V) -> Bool in
             if let v = dict[key] {
                 return v == value
             } else {
                 return false
             }
         }
-        return __.every(eqList)
+        
+        return __.every(Array(eqList))
     }
 }
