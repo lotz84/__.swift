@@ -31,9 +31,9 @@ class __DictionariesTests: XCTestCase {
         
         let keys = __.keys(["a":"A", "b":"B", "c":"C"])
         
-        let has_a = __.contains(keys, value: "a")
-        let has_b = __.contains(keys, value: "b")
-        let has_c = __.contains(keys, value: "c")
+        let has_a = contains(keys, "a")
+        let has_b = contains(keys, "b")
+        let has_c = contains(keys, "c")
         
         XCTAssert(has_a && has_b && has_c)
     }
@@ -42,9 +42,9 @@ class __DictionariesTests: XCTestCase {
         
         let values = __.values(["a":"A", "b":"B", "c":"C"])
         
-        let has_A = __.contains(values, value: "A")
-        let has_B = __.contains(values, value: "B")
-        let has_C = __.contains(values, value: "C")
+        let has_A = contains(values, "A")
+        let has_B = contains(values, "B")
+        let has_C = contains(values, "C")
         
         XCTAssert(has_A && has_B && has_C)
     }

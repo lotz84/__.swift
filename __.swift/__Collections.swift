@@ -75,23 +75,6 @@ extension __ {
     class func detect<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
         return __.find(seq, filter)
     }
-    
-    
-    class func filter<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
-        var result = Array<T.GeneratorType.Element>()
-        var gen = seq.generate()
-        while let elem = gen.next() {
-            if filter(elem) {
-                result += elem
-            }
-        }
-        return result
-    }
-    
-    // alias for filter
-    class func select<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
-        return __.filter(seq, filter)
-    }
  
     class func `where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
         var result = Array<Dictionary<K,V>>()
@@ -112,8 +95,8 @@ extension __ {
         return nil
     }
     
-    class func reject<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
-        return __.filter(seq, { !filter($0) })
+    class func reject<T : Sequence>(seq: T, _ condition: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
+        return Array(filter(seq, { !condition($0) }))
     }
     
     class func every<L: LogicValue>(list: L[]) -> Bool {
@@ -148,16 +131,6 @@ extension __ {
     
     class func any<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
         return __.some(seq, predicate: predicate)
-    }
-    
-    // Simple linear search
-    class func contains<T : Sequence where T.GeneratorType.Element : Equatable>(seq: T, value: T.GeneratorType.Element) -> Bool {
-        return __.find(seq, {value==$0}) ? true : false
-    }
-    
-    // alias for contains
-    class func include<T : Sequence where T.GeneratorType.Element : Equatable>(seq: T, value: T.GeneratorType.Element) -> Bool {
-        return __.contains(seq, value: value);
     }
     
     class func pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[] {
@@ -254,7 +227,7 @@ extension __ {
         var random = Int[]()
         while random.count < length {
             let index = __.random(length-1)
-            if !__.contains(random, value: index) {
+            if !contains(random, index) {
                 random += index
             }
         }

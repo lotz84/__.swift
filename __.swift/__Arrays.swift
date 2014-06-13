@@ -136,7 +136,7 @@ extension __ {
     
     class func without<T: Equatable>(list: Array<T>, values: T...) -> Array<T> {
         return list.filter {
-            !__.contains(values, value: $0)
+            !contains(values, $0)
         }
     }
     

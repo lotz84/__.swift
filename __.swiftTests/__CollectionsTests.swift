@@ -48,7 +48,7 @@ class __CollectionsTests: XCTestCase {
 
     func testReduceRight(){
         
-        var result = __.reduce(["a","b","c","d"], initial: "", combine: { $0 + $1 } )
+        var result = __.reduceRight(["a","b","c","d"], initial: "", combine: { $0 + $1 } )
         
         XCTAssert(result=="abcd")
     }
@@ -71,13 +71,6 @@ class __CollectionsTests: XCTestCase {
         XCTAssert(flag)
     }
 
-    func testFilter(){
-        
-        var result = __.filter([1,2,3,4]) { $0 % 2 == 0 }
-        
-        XCTAssert(result==[2,4])
-    }
-    
     func testWhereAndFindWhere(){
         
         let data = [
@@ -149,18 +142,6 @@ class __CollectionsTests: XCTestCase {
         
         XCTAssert(result2)
         
-    }
-
-
-    func testContains(){
-        
-        let result0 = __.contains([1,2,3,4], value: 1)
-        
-        XCTAssert(result0)
-        
-        let result1 = __.contains([1,2,3,4], value: 5)
-        
-        XCTAssert(!result1)
     }
 
     func testPluck(){
@@ -258,7 +239,7 @@ class __CollectionsTests: XCTestCase {
     func testSample(){
         
         let result0 = __.sample([1,2,3,4])
-        XCTAssert(__.contains([1,2,3,4], value: result0))
+        XCTAssert(contains([1,2,3,4], result0))
         
         let result1 = __.sample([1,2,3,4], 3)
         XCTAssert(result1.count == 3)
