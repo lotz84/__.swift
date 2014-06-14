@@ -26,5 +26,7 @@
 import Foundation
 
 class __ {
-    
+    class func version() -> String {
+        return "v0.1.0"
+    }
 }
