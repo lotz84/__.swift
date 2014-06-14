@@ -1,5 +1,8 @@
 __.swift
 ========
+
+Document: <http://lotz84.github.io/__.swift/v0.1/>
+
 __.swift aims to be an utility belt for a new programming language by Apple Inc., [Swift](https://developer.apple.com/swift/). And we decided  __.swift to be a clone of [Underscore.js](http://underscorejs.org/), which is an utility belt for JavaScript.
 
 __.swift is a type-safe library because it uses type inference and generics. Therefore, you can write a program without most of the downcasting such as "as" or "as?".
@@ -34,15 +37,11 @@ __.swift is a type-safe library because it uses type inference and generics. The
     __.pluck(data, "plan")
     // [walking, work, lunch]
 
-##Progress
-Progression table is available at [wiki](https://github.com/lotz84/__.swift/wiki).
-
 ##Altanatives
-###[Dollar.swift](https://github.com/ankurp/Dollar.swift)
-Awesome functional tool-belt for Swift Language. This is user-friendly with lots of `AnyObject`.
-
-###[Swiftz](https://github.com/maxpow4h/swiftz)
-Swiftz is a library for functional programming with purely functional data structures and functions.
+* [pNre/ExSwift](https://github.com/pNre/ExSwift) - JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
+* [RuiAAPeres/Swift-Sugar](https://github.com/RuiAAPeres/Swift-Sugar) - Swift's Sugar. Heavily inspired on Objc Sugar
+* [ankurp/Dollar.swift](https://github.com/ankurp/Dollar.swift) - A functional tool-belt for Swift Language similar to Lo-Dash or Underscore in Javascript
+* [maxpow4h/swiftz](https://github.com/maxpow4h/swiftz) - Functional programming in Swift
 
 ##Contributing
 Feel free to send a PR or create a new [issue](https://github.com/lotz84/__.swift/issues).
