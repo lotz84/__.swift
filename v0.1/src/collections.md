@@ -30,4 +30,4 @@
 * [`sample<T>(list: T[], _ n:Int) -> T[]`]()
 * [`size<T : Sequence>(seq: T) -> Int `]()
 
-<small>This index has same order as [Underscore.js](http://underscorejs.org/#collections)</small>
+<small>This index has the same order as [Underscore.js](http://underscorejs.org/#collections)</small>

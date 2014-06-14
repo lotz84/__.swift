@@ -31,4 +31,4 @@
 * `isNull` - <strong><small>Unnecessary</small></strong>
 * `isUndefined` - <strong><small>Unnecessary</small></strong>
 
-<small>This index has same order as [Underscore.js](http://underscorejs.org/#objects)</small>
+<small>This index has the same order as [Underscore.js](http://underscorejs.org/#objects)</small>

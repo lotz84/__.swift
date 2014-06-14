@@ -20,4 +20,4 @@
 * [`wrap<T, U, V, W>(f: T -> U, withWrapper wrapper:(T -> U , V) -> W) -> V -> W`]()
 * [`compose<T, U, V>(g: U -> V, _ f: T -> U) -> T -> V`]()
 
-<small>This index has same order as [Underscore.js](http://underscorejs.org/#functions)</small>
+<small>This index has the same order as [Underscore.js](http://underscorejs.org/#functions)</small>

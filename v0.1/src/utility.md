@@ -14,4 +14,4 @@
 * `result` - <strong><small>Not sure if it's implementable.</small></strong>
 * `template` - <strong><small>Unnecessary</small></strong>
 
-<small>This index has same order as [Underscore.js](http://underscorejs.org/#utility)</small>
+<small>This index has the same order as [Underscore.js](http://underscorejs.org/#utility)</small>

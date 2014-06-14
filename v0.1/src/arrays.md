@@ -27,4 +27,4 @@
 * [`range(#start: Int, stop: Int) -> Int[]`]()
 * [`range(#start: Int, stop: Int, step: Int) -> Int[]`]()
 
-<small>This index has same order as [Underscore.js](http://underscorejs.org/#arrays)</small>
+<small>This index has the same order as [Underscore.js](http://underscorejs.org/#arrays)</small>
