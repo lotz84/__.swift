@@ -1,7 +1,7 @@
 __.swift
 ========
 
-Document: <http://lotz84.github.io/__.swift/v0.1/>
+**Document**: <http://lotz84.github.io/__.swift/v0.1/>
 
 __.swift aims to be an utility belt for a new programming language by Apple Inc., [Swift](https://developer.apple.com/swift/). And we decided  __.swift to be a clone of [Underscore.js](http://underscorejs.org/), which is an utility belt for JavaScript.
 
@@ -47,4 +47,4 @@ __.swift is a type-safe library because it uses type inference and generics. The
 Feel free to send a PR or create a new [issue](https://github.com/lotz84/__.swift/issues).
 
 ##License
-MIT
+MIT Licence
