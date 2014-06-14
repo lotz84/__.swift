@@ -54,6 +54,14 @@ class __UtilityTests: XCTestCase {
         XCTAssert(result < 31)
     }
     
+    func testUniqueId() {
+        
+        let id0 = __.uniqueId("swift")
+        let id1 = __.uniqueId("swift")
+        
+        XCTAssert(id0 != id1)
+    }
+    
     func testEscape(){
         XCTAssert(__.escape("Larry & Moe")=="Larry &amp; Moe")
     }

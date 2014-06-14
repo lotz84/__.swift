@@ -25,6 +25,8 @@
 
 import Foundation
 
+var __uniqueIdCache = Dictionary<String, Int>()
+
 extension __ {
 
     class func identity<T>(x:T) -> T {
@@ -49,6 +51,16 @@ extension __ {
     
     class func random(#min: Int, max: Int) -> Int {
         return min + Int(arc4random() % UInt32(max-min+1))
+    }
+    
+    class func uniqueId(id: String) -> String {
+        if let count = __uniqueIdCache[id] {
+            __uniqueIdCache[id] = count + 1
+            return id + String(count + 1)
+        } else {
+            __uniqueIdCache[id] = 0
+            return id + String(0)
+        }
     }
     
     class func escape(var str: String) -> String {
