@@ -1,0 +1,48 @@
+<!DOCTYPE html><html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link rel="stylesheet" href="/main.css"><script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script></head><body><a href="https://github.com/lotz84/__.swift"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a><div id="sidebar"><h1>__.swift</h1><div id="github"><iframe src="http://ghbtns.com/github-btn.html?user=lotz84&repo=__.swift&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+<iframe src="http://ghbtns.com/github-btn.html?user=lotz84&repo=__.swift&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></div><ul><li><a href="index.html">Home</a></li><li><strong>__.swift</strong><ul><li><a href="collections.html">Collections</a></li><li><a href="arrays.html">Arrays</a></li><li><a href="dictionaries.html">Dictionaries</a></li><li><a href="functions.html">Functions</a></li><li><a href="utility.html">Utility</a></li><li><a href="chaining.html">Chaining</a></li></ul></li><li><a href="changelog.html">Change Log</a></li></ul></div><div id="contents"><h1>__.swift v0.1.0 Document</h1><h2>__.swift</h2>
+<h3>Index</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><strong>__.swift</strong><ul>
+<li><a href="collections.html">Collections</a></li>
+<li><a href="arrays.html">Arrays</a></li>
+<li><a href="dictionaries.html">Dictionaries</a></li>
+<li><a href="functions.html">Functions</a></li>
+<li><a href="utility.html">Utility</a></li>
+<li><a href="chaining.html">Chaining</a></li>
+</ul>
+</li>
+<li><a href="changelog.html">Change Log</a></li>
+</ul>
+<h3>Tutorial</h3>
+<h4>Example</h4>
+<pre class="prettyprint">
+__.map([11,22,33]) { x in x * x }
+// [121, 484, 1089]
+
+__.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], "", + )
+// Hello Swift !!
+
+func isPrime(n: Int) -> Bool {
+  if n < 2 { return false }
+  let max = Int(sqrt(Double(n)))
+  for i in 2...max {
+    if n % i == 0 { return false }
+  }
+  return true
+}
+__.find([1,33,173,46], isPrime)
+// 173
+
+__.filter(Array(2..100) , isPrime)
+// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
+let data = [
+  ["plan": "walking", "time": "8 a.m."],
+  ["plan": "work",    "time": "10 a.m."],
+  ["plan": "lunch",   "time": "12 a.m."]
+]
+__.pluck(data, "plan")
+// [walking, work, lunch]
+</pre>
+</div></body></html>

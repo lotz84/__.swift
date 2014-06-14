@@ -1,0 +1,6 @@
+#clean
+ls . | grep -v -E '.gitignore|build|src|README.md' | xargs rm -rf
+
+#generate pages
+harp compile
+mv www/src/* ./

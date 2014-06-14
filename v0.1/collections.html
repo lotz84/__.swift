@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"><link rel="stylesheet" href="/main.css"><script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script></head><body><a href="https://github.com/lotz84/__.swift"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a><div id="sidebar"><h1>__.swift</h1><div id="github"><iframe src="http://ghbtns.com/github-btn.html?user=lotz84&repo=__.swift&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+<iframe src="http://ghbtns.com/github-btn.html?user=lotz84&repo=__.swift&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></div><ul><li><a href="index.html">Home</a></li><li><strong>__.swift</strong><ul><li><a href="collections.html">Collections</a></li><li><a href="arrays.html">Arrays</a></li><li><a href="dictionaries.html">Dictionaries</a></li><li><a href="functions.html">Functions</a></li><li><a href="utility.html">Utility</a></li><li><a href="chaining.html">Chaining</a></li></ul></li><li><a href="changelog.html">Change Log</a></li></ul></div><div id="contents"><h1>__.swift v0.1.0 Document</h1><h2>Collections</h2>
+<h3>Table of Contents</h3>
+<ul>
+<li><a href=""><code>each&lt;T : Sequence&gt;(seq: T, _ iterator: T.GeneratorType.Elemaent -&gt; Any)</code></a></li>
+<li><code>map</code> - <strong><small>Native Support</small></strong></li>
+<li><code>reduce</code> - <strong><small>Native Support</small></strong></li>
+<li><a href=""><code>reduceRight&lt;T : Sequence, U&gt;(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -&gt; U) -&gt; U</code></a></li>
+<li><a href=""><code>find&lt;T : Sequence&gt;(seq: T, condition: T.GeneratorType.Element -&gt; Bool) -&gt; T.GeneratorType.Element?</code></a></li>
+<li><code>filter</code> - <strong><small>Native Support</small></strong></li>
+<li><a href=""><code>where&lt;K,V: Equatable&gt;(list: Array&lt;Dictionary&lt;K,V&gt;&gt;, _ properties: Dictionary&lt;K,V&gt;) -&gt; Array&lt;Dictionary&lt;K,V&gt;&gt;</code></a></li>
+<li><a href=""><code>findWhere&lt;K,V: Equatable&gt;(list: Array&lt;Dictionary&lt;K,V&gt;&gt;, _ properties: Dictionary&lt;K,V&gt;) -&gt; Dictionary&lt;K,V&gt;?</code></a></li>
+<li><a href=""><code>reject&lt;T : Sequence&gt;(seq: T, _ condition: T.GeneratorType.Element -&gt; Bool) -&gt; T.GeneratorType.Element[]</code></a></li>
+<li><a href=""><code>every&lt;L: LogicValue&gt;(list: L[]) -&gt; Bool</code></a></li>
+<li><a href=""><code>every&lt;T : Sequence&gt;(seq: T, predicate: T.GeneratorType.Element -&gt; Bool ) -&gt; Bool</code></a></li>
+<li><a href=""><code>some&lt;L: LogicValue&gt;(list: L[]) -&gt; Bool</code></a></li>
+<li><a href=""><code>some&lt;T : Sequence&gt;(seq: T, predicate: T.GeneratorType.Element -&gt; Bool) -&gt; Bool</code></a></li>
+<li><code>contains</code> - <strong><small>Native Support</small></strong></li>
+<li><code>invoke</code> - <strong><small>Not sure if it&#39;s implementable.</small></strong></li>
+<li><a href=""><code>pluck&lt;K, V&gt;(list: Array&lt;Dictionary&lt;K, V&gt;&gt;, key: K) -&gt; V[]</code></a></li>
+<li><a href=""><code>max&lt;T : Sequence where T.GeneratorType.Element : Comparable&gt;(seq: T) -&gt; T.GeneratorType.Element</code></a></li>
+<li><a href=""><code>max&lt;C: Comparable&gt;(list: C...) -&gt; C</code></a></li>
+<li><a href=""><code>min&lt;T : Sequence where T.GeneratorType.Element : Comparable&gt;(seq: T) -&gt; T.GeneratorType.Element</code></a></li>
+<li><a href=""><code>min&lt;C: Comparable&gt;(list: C...) -&gt; C</code></a></li>
+<li><a href=""><code>sortBy&lt;T : Sequence, C: Comparable&gt;(seq: T, transform: T.GeneratorType.Element -&gt; C) -&gt; T.GeneratorType.Element[]</code></a></li>
+<li><a href=""><code>groupBy&lt;K, V&gt;(list: V[], transform: V -&gt; K) -&gt; Dictionary&lt;K, V[]&gt;</code></a></li>
+<li><a href=""><code>indexBy&lt;K, V&gt;(list: Array&lt; Dictionary&lt;K, V&gt; &gt;, key: K) -&gt; Dictionary&lt;V, Dictionary&lt;K,V&gt;&gt;</code></a></li>
+<li><a href=""><code>countBy&lt;T, U&gt;(list: T[], transform: T -&gt; U) -&gt; Dictionary&lt;U, Int&gt;</code></a></li>
+<li><a href=""><code>shuffle&lt;T&gt;(list: T[]) -&gt; T[]</code></a></li>
+<li><a href=""><code>sample&lt;T&gt;(list: T[]) -&gt; T</code></a></li>
+<li><a href=""><code>sample&lt;T&gt;(list: T[], _ n:Int) -&gt; T[]</code></a></li>
+<li><a href=""><code>size&lt;T : Sequence&gt;(seq: T) -&gt; Int</code></a></li>
+</ul>
+<p><small>This index has same order as <a href="http://underscorejs.org/#collections">Underscore.js</a></small></p>
+</div></body></html>
