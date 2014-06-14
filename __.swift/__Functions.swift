@@ -71,6 +71,20 @@ extension __ {
         return memoized
     }
     
+    class func throttle<T, U>(f: (T)-> U, wait: Double) -> T -> U? {
+        var lastFiredTime: Double?
+        func executor(arg: T) -> U? {
+            let now = __.now()
+            if !lastFiredTime || (now - lastFiredTime! > wait) {
+                lastFiredTime = now
+                return f(arg)
+            } else {
+                return nil
+            }
+        }
+        return executor
+    }
+    
     class func once<T, U>(f: (T)-> U) -> T -> U? {
         var isExecuted = false
         func executor(arg: (T)) -> U? {

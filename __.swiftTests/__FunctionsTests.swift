@@ -46,6 +46,14 @@ class __FunctionsTests: XCTestCase {
         XCTAssert(fibonacci!(5) == 5)
     }
     
+    func testThrottle(){
+    
+        let throttle:Int -> Int? = __.throttle(__.identity, wait: 99999)
+        
+        XCTAssert(throttle(1) != nil)
+        XCTAssert(throttle(1) == nil)
+    }
+    
     func testOnce(){
         func addTwoString(s0: String, s1: String) -> String {
             return s0 + s1
