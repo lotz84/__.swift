@@ -31,16 +31,8 @@ extension __ {
     * Dictionaries Functions
     */
     
-    class func keys<K, V>(dict: Dictionary<K,V>) -> K[]{
-        return Array(dict.keys)
-    }
-    
-    class func values<K, V>(dict: Dictionary<K,V>) -> V[]{
-        return Array(dict.values)
-    }
-    
     class func pairs<K, V>(dict: Dictionary<K, V>) -> (K, V)[] {
-        return __.zip(__.keys(dict), __.values(dict))
+        return __.zip(Array(dict.keys), Array(dict.values))
     }
     
     class func invert<K, V>(dict: Dictionary<K, V>) -> Dictionary<V, K> {

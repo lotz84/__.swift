@@ -217,7 +217,7 @@ class __CollectionsTests: XCTestCase {
             ["plan": "meet friend",   "time": "12 a.m."]
         ]
         
-        let result = __.indexBy(data, "time")
+        let result = __.indexBy(data, key: "time")
         
         XCTAssert( result["8 a.m."]!["plan"]! == "walking" )
     }

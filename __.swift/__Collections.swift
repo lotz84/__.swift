@@ -76,9 +76,9 @@ extension __ {
         return __.find(seq, filter)
     }
  
-    class func `where`<K,V: Equatable>(list: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
+    class func `where`<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
         var result = Array<Dictionary<K,V>>()
-        for dict in list {
+        for dict in array {
             if __.hasSubDictionary(dict, subDictionary: properties) {
                 result += dict
             }
@@ -86,8 +86,8 @@ extension __ {
         return result
     }
     
-    class func findWhere<K,V: Equatable>(list: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Dictionary<K,V>? {
-        for dict in list {
+    class func findWhere<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Dictionary<K,V>? {
+        for dict in array {
             if __.hasSubDictionary(dict, subDictionary: properties) {
                 return dict
             }
@@ -99,8 +99,8 @@ extension __ {
         return Array(filter(seq, { !condition($0) }))
     }
     
-    class func every<L: LogicValue>(list: L[]) -> Bool {
-        return __.find(list, { !$0 }) ? false : true
+    class func every<L: LogicValue>(array: L[]) -> Bool {
+        return __.find(array, { !$0 }) ? false : true
     }
     
     class func every<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool ) -> Bool {
@@ -108,16 +108,16 @@ extension __ {
     }
     
     // alias for every
-    class func all<L: LogicValue>(list: L[]) -> Bool {
-        return __.every(list)
+    class func all<L: LogicValue>(array: L[]) -> Bool {
+        return __.every(array)
     }
     
     class func all<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
         return __.every(seq, predicate: predicate)
     }
     
-    class func some<L: LogicValue>(list: L[]) -> Bool {
-        return __.find(list, { $0.getLogicValue() }) ? true : false
+    class func some<L: LogicValue>(array: L[]) -> Bool {
+        return __.find(array, { $0.getLogicValue() }) ? true : false
     }
     
     class func some<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
@@ -125,17 +125,17 @@ extension __ {
     }
     
     // alias for any
-    class func any<L: LogicValue>(list: L[]) -> Bool {
-        return __.some(list)
+    class func any<L: LogicValue>(array: L[]) -> Bool {
+        return __.some(array)
     }
     
     class func any<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
         return __.some(seq, predicate: predicate)
     }
     
-    class func pluck<K, V>(list: Array<Dictionary<K, V>>, key: K) -> V[] {
+    class func pluck<K, V>(array: Array<Dictionary<K, V>>, key: K) -> V[] {
         var result = V[]()
-        for item in list {
+        for item in array {
             if let value = item[key] {
                 result += value
             }
@@ -147,16 +147,16 @@ extension __ {
         return __.foldl1(seq, combine: { $1 > $0 ? $1 : $0 })
     }
     
-    class func max<C: Comparable>(list: C...) -> C {
-        return __.max(list)
+    class func max<C: Comparable>(array: C...) -> C {
+        return __.max(array)
     }
     
     class func min<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
         return __.foldl1(seq, combine: { $0 < $1 ? $0 : $1 })
     }
 
-    class func min<C: Comparable>(list: C...) -> C {
-        return __.min(list)
+    class func min<C: Comparable>(array: C...) -> C {
+        return __.min(array)
     }
     
     // quick sort
@@ -187,11 +187,11 @@ extension __ {
         }
     }
     
-    class func groupBy<K, V>(list: V[], _ iterator: V -> K) -> Dictionary<K, V[]> {
+    class func groupBy<K, V>(array: V[], transform: V -> K) -> Dictionary<K, V[]> {
         var result = Dictionary<K, V[]>()
         
-        for item in list {
-            let key = iterator(item)
+        for item in array {
+            let key = transform(item)
             if let array = result[key] {
                 result[key] = array + [item]
             } else {
@@ -202,28 +202,28 @@ extension __ {
         return result
     }
     
-    class func indexBy<K, V>(list: Array< Dictionary<K, V> >, _ key: K) -> Dictionary<V, Dictionary<K,V> > {
+    class func indexBy<K, V>(array: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V>> {
         var result = Dictionary<V, Dictionary<K,V> >()
-        for item in list {
+        for item in array {
             result[item[key]!] = item
         }
         return result
     }
     
-    class func countBy<T, U>(list: T[], _ iterator: T -> U) -> Dictionary<U, Int> {
+    class func countBy<T, U>(array: T[], transform: T -> U) -> Dictionary<U, Int> {
         var result = Dictionary<U, Int>()
-        for item in list {
-            if let count = result[iterator(item)] {
-                result[iterator(item)] = count + 1
+        for item in array {
+            if let count = result[transform(item)] {
+                result[transform(item)] = count + 1
             } else {
-                result[iterator(item)] = 1
+                result[transform(item)] = 1
             }
         }
         return result
     }
     
-    class func shuffle<T>(list: T[]) -> T[] {
-        let length = list.count
+    class func shuffle<T>(array: T[]) -> T[] {
+        let length = array.count
         var random = Int[]()
         while random.count < length {
             let index = __.random(length-1)
@@ -231,29 +231,30 @@ extension __ {
                 random += index
             }
         }
-        return random.map { list[$0] }
+        return random.map { array[$0] }
     }
     
-    class func sample<T>(list: T[]) -> T {
-        let index = __.random(list.count-1)
-        return list[index]
+    class func sample<T>(array: T[]) -> T {
+        let index = __.random(array.count-1)
+        return array[index]
     }
     
-    class func sample<T>(list: T[], _ n:Int) -> T[] {
+    class func sample<T>(array: T[], _ n:Int) -> T[] {
         var result = T[]()
-        let random = __.shuffle(Array(0..list.count))
+        let random = __.shuffle(Array(0..array.count))
         for i in 0..n {
-            result += list[random[i]]
+            result += array[random[i]]
         }
         return result
     }
     
-    class func size<T>(list: T[]) -> Int {
-        return list.count
-    }
-    
-    class func size<K, V>(dict: Dictionary<K, V>) -> Int {
-        return Array(dict.keys).count
+    class func size<T : Sequence>(seq: T) -> Int {
+        var count = 0
+        var gen = seq.generate()
+        while gen.next() {
+            count += 1
+        }
+        return count
     }
     
 }

@@ -35,8 +35,8 @@ extension __ {
         return { x }
     }
     
-    class func times<T>(n: Int, _ iterator: Int -> T ) -> Array<T> {
-        var result = Array<T>()
+    class func times<T>(n: Int, _ iterator: Int -> T ) -> T[] {
+        var result = T[]()
         for i in 0..n {
             result += iterator(i)
         }
