@@ -11,10 +11,11 @@
 * [`flatten<T>(array: T[][]) -> T[]`]()
 * [`without<T: Equatable>(array: T[], values: T...) -> T[]`]()
 * [`partition<T>(array: T[], condition: T -> Bool ) -> (T[], T[])`]()
-* `union` - <strong><small>Incomplete</small></strong>
-* `intersection` - <strong><small>Incomplete</small></strong>
-* `difference` - <strong><small>Incomplete</small></strong>
-* `uniq` - <strong><small>Incomplete</small></strong>
+* [`union<T : Equatable>(arrays: T[]...) -> T[]`]()
+* [`intersection<T : Equatable>(arrays: T[]...) -> T[]`]()
+* [`difference<T: Equatable>(array: T[], others: T[]...) -> T[]`]()
+* [`uniq<T : Equatable>(array: T[], isSorted: Bool = false) -> T[]`]()
+* [`uniq<T, U : Equatable>(array: T[], isSorted: Bool, transform: T -> U) -> T[]`]()
 * [`zip<T, U>(array0: T[], _ array1: U[]) -> (T, U)[]`]()
 * [`object<K : Hashable, V>(#keys: K[], values:V[] ) -> Dictionary<K, V>`]()
 * [`object<K : Hashable, V>(keyAndValues: Array<(K, V)>) -> Dictionary<K, V>`]()

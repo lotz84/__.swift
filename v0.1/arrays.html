@@ -12,10 +12,11 @@
 <li><a href=""><code>flatten&lt;T&gt;(array: T[][]) -&gt; T[]</code></a></li>
 <li><a href=""><code>without&lt;T: Equatable&gt;(array: T[], values: T...) -&gt; T[]</code></a></li>
 <li><a href=""><code>partition&lt;T&gt;(array: T[], condition: T -&gt; Bool ) -&gt; (T[], T[])</code></a></li>
-<li><code>union</code> - <strong><small>Incomplete</small></strong></li>
-<li><code>intersection</code> - <strong><small>Incomplete</small></strong></li>
-<li><code>difference</code> - <strong><small>Incomplete</small></strong></li>
-<li><code>uniq</code> - <strong><small>Incomplete</small></strong></li>
+<li><a href=""><code>union&lt;T : Equatable&gt;(arrays: T[]...) -&gt; T[]</code></a></li>
+<li><a href=""><code>intersection&lt;T : Equatable&gt;(arrays: T[]...) -&gt; T[]</code></a></li>
+<li><a href=""><code>difference&lt;T: Equatable&gt;(array: T[], others: T[]...) -&gt; T[]</code></a></li>
+<li><a href=""><code>uniq&lt;T : Equatable&gt;(array: T[], isSorted: Bool = false) -&gt; T[]</code></a></li>
+<li><a href=""><code>uniq&lt;T, U : Equatable&gt;(array: T[], isSorted: Bool, transform: T -&gt; U) -&gt; T[]</code></a></li>
 <li><a href=""><code>zip&lt;T, U&gt;(array0: T[], _ array1: U[]) -&gt; (T, U)[]</code></a></li>
 <li><a href=""><code>object&lt;K : Hashable, V&gt;(#keys: K[], values:V[] ) -&gt; Dictionary&lt;K, V&gt;</code></a></li>
 <li><a href=""><code>object&lt;K : Hashable, V&gt;(keyAndValues: Array&lt;(K, V)&gt;) -&gt; Dictionary&lt;K, V&gt;</code></a></li>
