@@ -7,6 +7,9 @@ __.swift aims to be an utility belt for a new programming language by Apple Inc.
 
 __.swift is a type-safe library because it uses type inference and generics. Therefore, you can write a program without most of the downcasting such as "as" or "as?".
 
+##Installation
+If you use `__` from swift file, copy `__.swift` folder into your project. That's all.
+
 ##Example
 
     __.map([11,22,33]) { x in x * x }
