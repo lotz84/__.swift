@@ -111,6 +111,37 @@ class __ArraysTests: XCTestCase {
         XCTAssert(result.1 == [1,3,5])
     }
     
+    func testUnion(){
+    
+        let r : Int[] = __.union([1, 2, 3], [101, 2, 1, 10], [2, 1])
+        
+        XCTAssert(r == [1, 2, 3, 101, 10])
+    }
+    
+    func testIntersection(){
+        
+        let r : Int[] = __.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])
+        
+        XCTAssert(r == [1,2])
+    }
+    
+    func testDifference(){
+        
+        let r : Int[] = __.difference([1, 2, 3, 4, 5], others: [5, 2, 10])
+        
+        XCTAssert(r == [1,3,4])
+    }
+    
+    func testUniq(){
+        
+        let r0: Int[] = __.uniq([1,1,2,2,3,3,2,2,1,1])
+        let r1: Int[] = __.uniq([1,1,2,2,3,3,4,4], isSorted: true)
+        let r2: Int[] = __.uniq([1,1,2,2,3,3,4,4,5,5,6,6,7,7], isSorted: false, transform: { $0 % 3})
+        
+        XCTAssert(r0 == [1,2,3])
+        XCTAssert(r1 == [1,2,3,4])
+        XCTAssert(r2 == [1,2,3])
+    }
     
     func testZip(){
         

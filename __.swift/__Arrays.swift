@@ -33,7 +33,7 @@ extension __ {
     
     class func first<T>(array:T[]) -> T! {
         if array.isEmpty { return nil }
-        return array[0]
+        return array[array.startIndex]
     }
     
     // alias for first
@@ -71,7 +71,7 @@ extension __ {
     }
     
     class func last<T>(array: T[]) -> T {
-        return __.last(array, 1)[0]
+        return array[array.endIndex-1]
     }
     
     class func last<T>(array: T[], _ n: Int) -> T[] {
@@ -147,6 +147,80 @@ extension __ {
                 result.filtered += item
             } else {
                 result.rejected += item
+            }
+        }
+        return result
+    }
+    
+    class func union<T : Equatable>(arrays: T[]...) -> T[] {
+        return __.uniq(__.flatten(arrays))
+    }
+    
+    class func intersection<T : Equatable>(arrays: T[]...) -> T[] {
+        if arrays.isEmpty { return [] }
+        
+        let sorted = __.sortBy(arrays, transform: { $0.count })
+        let length = sorted.count
+        
+        var result = arrays[0]
+        
+        for index in 1..length {
+            var removeList = Int[]()
+            for (index,item) in enumerate(result) {
+                if !contains(sorted[index], item){
+                    removeList += index
+                }
+            }
+            let reversedRemoveList = removeList.reverse()
+            for index in reversedRemoveList {
+                result.removeAtIndex(index)
+            }
+        }
+        return result
+    }
+    
+    class func difference<T: Equatable>(array: T[], others: T[]...) -> T[] {
+        var result = array.copy()
+        
+        for other in others {
+            var removeList = Int[]()
+            for (index,item) in enumerate(result) {
+                if contains(other, item) {
+                    removeList += index
+                }
+            }
+            let reversedRemoveList = removeList.reverse()
+            for index in reversedRemoveList {
+                result.removeAtIndex(index)
+            }
+        }
+        
+        return result
+    }
+    
+    class func uniq<T : Equatable>(array: T[], isSorted: Bool = false) -> T[] {
+        return __.uniq(array, isSorted: isSorted, transform: __.identity)
+    }
+    
+    class func uniq<T, U : Equatable>(array: T[], isSorted: Bool, transform: T -> U) -> T[] {
+        if array.isEmpty { return [] }
+        
+        var result = T[]()
+        if isSorted {
+            result += __.first(array)
+            for item in array {
+                if transform(__.last(result)) != transform(item) {
+                    result += item
+                }
+            }
+        } else {
+            var seen = U[]()
+            for item in array {
+                let transformed = transform(item)
+                if !contains(seen, transformed) {
+                    result += item
+                    seen += transformed
+                }
             }
         }
         return result
