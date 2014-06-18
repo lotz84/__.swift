@@ -43,15 +43,6 @@ extension __ {
         __.each(seq, iterator)
     }
     
-    class func foldl1<T : Sequence>(seq: T, combine: (T.GeneratorType.Element, T.GeneratorType.Element) -> T.GeneratorType.Element) -> T.GeneratorType.Element {
-        var accum : T.GeneratorType.Element?
-        var gen = seq.generate()
-        while let elem = gen.next() {
-            accum = accum ? combine(accum!, elem) : elem
-        }
-        return accum!
-    }
-    
     class func reduceRight<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
         var array = Array<T.GeneratorType.Element>()
         var gen = seq.generate()
@@ -61,10 +52,14 @@ extension __ {
         return array.reverse().reduce(initial, combine: { combine($1,$0) } )
     }
     
-    class func find<T : Sequence>(seq: T, condition: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
+    class func foldr<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
+        return __.reduceRight(seq, initial: initial, combine: combine)
+    }
+    
+    class func find<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
         var gen = seq.generate()
         while let elem = gen.next() {
-            if condition(elem) {
+            if predicate(elem) {
                 return elem
             }
         }
@@ -72,8 +67,8 @@ extension __ {
     }
     
     // alias for find
-    class func detect<T : Sequence>(seq: T, _ filter: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
-        return __.find(seq, filter)
+    class func detect<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
+        return __.find(seq, predicate)
     }
  
     class func `where`<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
@@ -100,7 +95,7 @@ extension __ {
     }
     
     class func every<L: LogicValue>(array: L[]) -> Bool {
-        return __.find(array, { !$0 }) ? false : true
+        return __.every(array, predicate: { $0.getLogicValue() })
     }
     
     class func every<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool ) -> Bool {
@@ -112,23 +107,25 @@ extension __ {
         return __.every(array)
     }
     
+    // alias for every
     class func all<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
         return __.every(seq, predicate: predicate)
     }
     
     class func some<L: LogicValue>(array: L[]) -> Bool {
-        return __.find(array, { $0.getLogicValue() }) ? true : false
+        return __.some(array, predicate: { $0.getLogicValue() })
     }
     
     class func some<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
         return __.find(seq, predicate ) ? true : false
     }
     
-    // alias for any
+    // alias for some
     class func any<L: LogicValue>(array: L[]) -> Bool {
         return __.some(array)
     }
     
+    // alias for some
     class func any<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
         return __.some(seq, predicate: predicate)
     }
@@ -141,22 +138,6 @@ extension __ {
             }
         }
         return result
-    }
-    
-    class func max<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
-        return __.foldl1(seq, combine: { $1 > $0 ? $1 : $0 })
-    }
-    
-    class func max<C: Comparable>(array: C...) -> C {
-        return __.max(array)
-    }
-    
-    class func min<T : Sequence where T.GeneratorType.Element : Comparable>(seq: T) -> T.GeneratorType.Element {
-        return __.foldl1(seq, combine: { $0 < $1 ? $0 : $1 })
-    }
-
-    class func min<C: Comparable>(array: C...) -> C {
-        return __.min(array)
     }
     
     // quick sort

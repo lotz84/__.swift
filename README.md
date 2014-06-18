@@ -40,6 +40,17 @@ If you use `__` from swift file, copy `__.swift` folder into your project. That'
     __.pluck(data, "plan")
     // [walking, work, lunch]
 
+    let data2: Array<Dictionary<String, String>> = [
+      ["species": "spider", "legs": "8"],
+      ["species": "ant", "legs": "6"],
+      ["species": "cat", "legs": "4"]
+    ]
+
+    // Chain Example
+    
+    __.chain(data).pluck("legs")?.map({(s:String) -> Int in s.toInt()! })?.sortBy(__.identity)?.value()
+    // [4, 6, 8]
+
 ##Altanatives
 * [pNre/ExSwift](https://github.com/pNre/ExSwift) - JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
 * [RuiAAPeres/Swift-Sugar](https://github.com/RuiAAPeres/Swift-Sugar) - Swift's Sugar. Heavily inspired on Objc Sugar

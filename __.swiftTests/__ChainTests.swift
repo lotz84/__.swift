@@ -27,4 +27,23 @@ import XCTest
 
 class __ChainTests: XCTestCase {
     
+    func testChain(){
+    
+        let r0: Int[]! = __.chain([1,2,3]).map({ $0 * 2 })?.value()
+        let r1: Int[]! = __.chain([1,4,2,6,4,8,2]).sortBy(__.identity)?.value()
+        
+        let data: Array<Dictionary<String, String>> = [
+            ["species": "spider", "legs": "8"],
+            ["species": "ant", "legs": "6"],
+            ["species": "cat", "legs": "4"]
+        ]
+        
+        var chain: __.Chain<String[]> = __.chain(data).pluck("legs")!
+        let r2: Int[]! = chain.map({(s:String) -> Int in s.toInt()! })?.sortBy(__.identity)?.value()
+        
+        XCTAssert(r0 == [2,4,6])
+        XCTAssert(r1 == [1,2,2,4,4,6,8])
+        XCTAssert(r2 == [4,6,8])
+    }
+    
 }

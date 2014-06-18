@@ -227,7 +227,7 @@ extension __ {
     }
     
     class func zip<T, U>(array0: T[], _ array1: U[]) -> (T, U)[] {
-        let length: Int = __.min(array0.count, array1.count)
+        let length: Int = min(array0.count, array1.count)
         
         var result = Array<(T, U)>()
 
@@ -240,7 +240,7 @@ extension __ {
     
     class func object<K : Hashable, V>(#keys: K[], values:V[] ) -> Dictionary<K, V> {
         var result = Dictionary<K,V>()
-        let length: Int = __.min(keys.count, values.count)
+        let length: Int = min(keys.count, values.count)
         for i in 0..length {
             result[keys[i]] = values[i]
         }

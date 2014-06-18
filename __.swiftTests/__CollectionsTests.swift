@@ -157,28 +157,6 @@ class __CollectionsTests: XCTestCase {
         XCTAssert(result == ["walking", "work", "lunch"])
     }
 
-    func testMax(){
-        
-        let max0 = __.max([5,3,7,5,1,9,3])
-        
-        XCTAssert(max0==9)
-        
-        let max1 = __.max(5,3,7,5,1,9,3)
-        
-        XCTAssert(max1==9)
-    }
-
-    func testMin(){
-        
-        let min0 = __.min(["f","e","b","d","a","c","g"])
-        
-        XCTAssert( min0 == "a" )
-        
-        let min1 = __.min("f","e","b","d","a","c","g")
-        
-        XCTAssert( min1 == "a" )
-    }
-
     func testSortBy(){
         
         let result0 = __.sortBy([4,3,7,5,8,2,6,1]) { $0 }
