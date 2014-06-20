@@ -94,6 +94,7 @@ extension __ {
         return __.rest(array, n)
     }
     
+    // This method should be private
     class func separate<T>(array: T[], _ n: Int) -> (T[], T[]) {
         if n < 1 { return (array, []) }
         
@@ -140,10 +141,10 @@ extension __ {
         }
     }
     
-    class func partition<T>(array: T[], condition: T -> Bool ) -> (T[], T[]) {
+    class func partition<T>(array: T[], predicate: T -> Bool ) -> (T[], T[]) {
         var result = (filtered: T[](), rejected: T[]())
         for item in array {
-            if condition(item) {
+            if predicate(item) {
                 result.filtered += item
             } else {
                 result.rejected += item

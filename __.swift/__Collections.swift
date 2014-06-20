@@ -205,12 +205,10 @@ extension __ {
     
     class func shuffle<T>(array: T[]) -> T[] {
         let length = array.count
-        var random = Int[]()
-        while random.count < length {
-            let index = __.random(length-1)
-            if !contains(random, index) {
-                random += index
-            }
+        var random = __.range(length)
+        for i in 1..length {
+            let j = __.random(min: 0, max: i)
+            swap(&random[i], &random[j])
         }
         return random.map { array[$0] }
     }
