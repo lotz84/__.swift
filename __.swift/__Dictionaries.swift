@@ -31,10 +31,6 @@ extension __ {
     * Dictionaries Functions
     */
     
-    class func pairs<K, V>(dict: Dictionary<K, V>) -> (K, V)[] {
-        return __.zip(Array(dict.keys), Array(dict.values))
-    }
-    
     class func invert<K, V>(dict: Dictionary<K, V>) -> Dictionary<V, K> {
         var result = Dictionary<V, K>()
         for (key, value) in dict {
@@ -48,6 +44,15 @@ extension __ {
             dict0[key] = value
         }
         return dict0
+    }
+    
+    class func extend<K, V>(var dict: Dictionary<K, V>, to dictionaries: Dictionary<K, V>...) -> Dictionary<K, V> {
+        for item in dictionaries {
+            for (key, value) in item {
+                dict[key] = value
+            }
+        }
+        return dict
     }
     
     class func pick<K, V>(from dict: Dictionary<K, V>, keys: K...) -> Dictionary<K, V> {

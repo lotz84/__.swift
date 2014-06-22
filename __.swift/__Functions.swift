@@ -57,18 +57,17 @@ extension __ {
         return { f(arg, $0, $1, $2, $3, $4, $5) }
     }
     
-    class func memoize<T: Hashable, V>(f: T -> V) -> T -> V {
-        var cache = Dictionary<T, V>()
-        func memoized(arg: T) -> V {
-            if let value = cache[arg] {
-                return value
-            } else {
-                let value = f(arg)
-                cache[arg] = value
-                return value
-            }
+    // This is amazing memoize function in [Advanced Swift](https://developer.apple.com/videos/wwdc/2014/?id=404)
+    class func memoize<T: Hashable, U>(body: (T->U, T) -> U ) -> T -> U {
+        var memo = Dictionary<T, U>()
+        var result: (T -> U)!
+        result = { x in
+            if let q = memo[x] { return q }
+            let r = body(result, x)
+            memo[x] = r
+            return r
         }
-        return memoized
+        return result
     }
     
     class func throttle<T, U>(f: T -> U, wait: Double) -> T -> U? {

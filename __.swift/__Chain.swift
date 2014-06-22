@@ -606,6 +606,129 @@ extension __ {
             return nil
         }
         
-        // range functions is not implemented
+        // range function is not implemented
+        
+        /**
+        * Dictionary Functions
+        */
+        
+        func keys<K : Hashable, V>() -> Chain<(K[])>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( Array(wrapped.keys) )
+            }
+            return nil
+        }
+        
+        
+        func values<K : Hashable, V>() -> Chain<(V[])>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( Array(wrapped.values) )
+            }
+            return nil
+        }
+        
+        func pairs<K : Hashable, V>() -> Chain<(K, V)[]>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( Array(wrapped) )
+            }
+            return nil
+        }
+        
+        func invert<K : Hashable, V : Hashable>() -> Chain<Dictionary<V,K>>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.invert(wrapped) )
+            }
+            return nil
+        }
+        
+        // extend, pick, omit and defaults functions are hard to implement because I don't know how to convert U[] to U...
+        
+        func tap<U>(interceptor: T -> U) -> Chain<T> {
+            interceptor(self._wrapped)
+            return self
+        }
+        
+        func has<K : Hashable, V>(key: K) -> Chain<Bool>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.has(wrapped, key: key) )
+            }
+            return nil
+        }
+        
+        // property function is not implemented
+        
+        func matches<K, V: Equatable>() -> Chain<Dictionary<K, V> -> Bool>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.matches(wrapped) )
+            }
+            return nil
+        }
+        
+        func isEmpty<U>() -> Chain<Bool>? {
+            if let wrapped = self._wrapped as? U[] {
+                return __.chain( wrapped.isEmpty )
+            }
+            return nil
+        }
+        
+        func isEmpty<K : Hashable, V>() -> Chain<Bool>? {
+            if let wrapped = self._wrapped as? Dictionary<K, V> {
+                return __.chain( wrapped.count == 0 )
+            }
+            return nil
+        }
+        
+        func isArray<U>() -> Bool {
+            if let wrapped = self._wrapped as? U[] {
+                return true
+            }
+            return false
+        }
+        
+        func isDictionary<K : Hashable, V>() -> Bool {
+            if let wrapped = self._wrapped as? Dictionary<K, V>[] {
+                return true
+            }
+            return false
+        }
+        
+        func isString() -> Bool {
+            if let wrapped = self._wrapped as? String {
+                return true
+            }
+            return false
+        }
+        
+        func isInt() -> Bool {
+            if let wrapped = self._wrapped as? Int {
+                return true
+            }
+            return false
+        }
+        
+        func isFloat() -> Bool {
+            if let wrapped = self._wrapped as? Float {
+                return true
+            }
+            return false
+        }
+        
+        func isDouble() -> Bool {
+            if let wrapped = self._wrapped as? Double {
+                return true
+            }
+            return false
+        }
+        
+        func isBoolean() -> Bool {
+            if let wrapped = self._wrapped as? Bool {
+                return true
+            }
+            return false
+        }
+        
+        func isNil() -> Bool? {
+            return self._wrapped == nil
+        }
     }
 }

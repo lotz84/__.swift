@@ -39,11 +39,11 @@ class __FunctionsTests: XCTestCase {
     }
     
     func testMemoize(){
-        var fibonacci: ((Int) -> Int)?; fibonacci = __.memoize({ (n: Int) -> Int in
-            return n < 2 ? n: fibonacci!(n - 1) + fibonacci!(n - 2);
-        })
+        let fibonacci: Int -> Int = __.memoize { fibonacci, n in
+            return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2)
+        }
         
-        XCTAssert(fibonacci!(5) == 5)
+        XCTAssert(fibonacci(5) == 5)
     }
     
     func testThrottle(){
