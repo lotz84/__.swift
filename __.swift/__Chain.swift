@@ -530,13 +530,12 @@ extension __ {
             return nil
         }
 
-        // How should I convert U[] to U... ?
-//        func without<U: Equatable>( values: U...) -> Chain<U[]>? {
-//            if let wrapped = self._wrapped as? U[] {
-//                return __.chain( __.without(wrapped, values: values) )
-//            }
-//            return nil
-//        }
+        func without<U: Equatable>( values: U...) -> Chain<U[]>? {
+            if let wrapped = self._wrapped as? U[] {
+                return __.chain( __.without(wrapped, values: values) )
+            }
+            return nil
+        }
         
         func partition<U>( predicate: U -> Bool ) -> Chain<((U[], U[]))>? {
             if let wrapped = self._wrapped as? U[] {
@@ -547,13 +546,12 @@ extension __ {
         
         // union and intersection functions are not implemented
         
-        // How should I convert U[][] to U[]... ?
-//        func difference<U: Equatable>(array: U[], others: U[]...) -> Chain<U[]>? {
-//            if let wrapped = self._wrapped as? U[] {
-//                return __.chain( __.difference(wrapped, others: others) )
-//            }
-//            return nil
-//        }
+        func difference<U: Equatable>(array: U[], others: U[]...) -> Chain<U[]>? {
+            if let wrapped = self._wrapped as? U[] {
+                return __.chain( __.difference(wrapped, others: others) )
+            }
+            return nil
+        }
         
         func uniq<U : Equatable>(isSorted: Bool = false) -> Chain<U[]>? {
             if let wrapped = self._wrapped as? U[] {
@@ -641,7 +639,33 @@ extension __ {
             return nil
         }
         
-        // extend, pick, omit and defaults functions are hard to implement because I don't know how to convert U[] to U...
+        func extend<K : Hashable, V>(to dictionaries: Dictionary<K, V>...) -> Chain<Dictionary<K, V>>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.extend(wrapped, to: dictionaries) )
+            }
+            return nil
+        }
+        
+        func pick<K : Hashable, V>(keys: K...) -> Chain<Dictionary<K, V>>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.pick(from: wrapped, keys: keys) )
+            }
+            return nil
+        }
+        
+        func omit<K : Hashable, V>(keys: K...) -> Chain<Dictionary<K, V>>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.omit(from: wrapped, keys: keys) )
+            }
+            return nil
+        }
+        
+        func defaults<K : Hashable, V>(to dictionaries: Dictionary<K, V>...) -> Chain<Dictionary<K, V>>? {
+            if let wrapped = self._wrapped as? Dictionary<K,V> {
+                return __.chain( __.defaults(wrapped, defaults: dictionaries) )
+            }
+            return nil
+        }
         
         func tap<U>(interceptor: T -> U) -> Chain<T> {
             interceptor(self._wrapped)
