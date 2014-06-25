@@ -730,5 +730,30 @@ extension __ {
         func isNil() -> Bool? {
             return self._wrapped == nil
         }
+        
+        /**
+        * Utility Functions
+        */
+        
+        func uniqueId() -> Chain<String>? {
+            if let wrapped = self._wrapped as? String {
+                return __.chain( __.uniqueId(wrapped) )
+            }
+            return nil
+        }
+        
+        func escape() -> Chain<String>? {
+            if let wrapped = self._wrapped as? String {
+                return __.chain( __.escape(wrapped) )
+            }
+            return nil
+        }
+        
+        func unescape() -> Chain<String>? {
+            if let wrapped = self._wrapped as? String {
+                return __.chain( __.unescape(wrapped) )
+            }
+            return nil
+        }
     }
 }
