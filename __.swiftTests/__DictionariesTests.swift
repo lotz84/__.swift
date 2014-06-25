@@ -27,13 +27,6 @@ import XCTest
 
 class __DictionariesTests: XCTestCase {
     
-    func testPairs(){
-        
-        let pairs = __.pairs(["a":"A", "b":"B", "c":"C"])
-        
-        XCTAssert(pairs.count==3)
-    }
-    
     func testInvert() {
         
         let inverted = __.invert(["a":1, "b":2])
@@ -43,7 +36,7 @@ class __DictionariesTests: XCTestCase {
     
     func testExtend() {
         
-        let extended = __.extend(["a":1, "b":2], to: ["c":3, "d":4])
+        let extended = __.extend(["a":1, "b":2], to: ["c":3], ["d":4])
         
         XCTAssert(__.size(extended) == 4 )
     }

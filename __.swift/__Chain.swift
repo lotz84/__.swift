@@ -77,7 +77,7 @@ extension __ {
         
         // The native map function for Sequence doesn't work for now. This is only temporary.
         static func map<K : Hashable, V, T>(dict:Dictionary<K,V>, transform: (K, V) -> T) -> T[] {
-            var result = T[]()
+            var result : T[] = []
             var gen = dict.generate()
             while let elem = gen.next() {
                 result += transform(elem)
@@ -203,7 +203,7 @@ extension __ {
         
         // The native filter function for Sequence doesn't work for now. This is only temporary.
         static func filter<K : Hashable, V>(dict: Dictionary<K, V>, includeElement: (K, V) -> Bool) -> Array<(K, V)> {
-            var result = Array<(K, V)>()
+            var result : Array<(K, V)> = []
             for (key, value) in dict {
                 if includeElement(key, value) {
                     result += (key, value)

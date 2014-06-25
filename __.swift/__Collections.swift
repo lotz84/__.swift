@@ -44,7 +44,7 @@ extension __ {
     }
     
     class func reduceRight<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
-        var array = Array<T.GeneratorType.Element>()
+        var array : Array<T.GeneratorType.Element> = []
         var gen = seq.generate()
         while let elem = gen.next() {
             array += elem
@@ -72,7 +72,7 @@ extension __ {
     }
  
     class func `where`<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
-        var result = Array<Dictionary<K,V>>()
+        var result : Array<Dictionary<K,V>> = []
         for dict in array {
             if __.hasSubDictionary(dict, subDictionary: properties) {
                 result += dict
@@ -131,7 +131,7 @@ extension __ {
     }
     
     class func pluck<K, V>(array: Array<Dictionary<K, V>>, key: K) -> V[] {
-        var result = V[]()
+        var result : V[] = []
         for item in array {
             if let value = item[key] {
                 result += value
@@ -147,8 +147,8 @@ extension __ {
         
         if let first = gen.next() {
             
-            var smaller = Array<T.GeneratorType.Element>()
-            var bigger = Array<T.GeneratorType.Element>()
+            var smaller : Array<T.GeneratorType.Element> = []
+            var bigger  : Array<T.GeneratorType.Element> = []
             
             while let elem = gen.next() {
                 if transform(first) < transform(elem) {
@@ -169,7 +169,7 @@ extension __ {
     }
     
     class func groupBy<K, V>(array: V[], transform: V -> K) -> Dictionary<K, V[]> {
-        var result = Dictionary<K, V[]>()
+        var result : Dictionary<K, V[]> = [:]
         
         for item in array {
             let key = transform(item)
@@ -184,7 +184,7 @@ extension __ {
     }
     
     class func indexBy<K, V>(array: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V>> {
-        var result = Dictionary<V, Dictionary<K,V> >()
+        var result = Dictionary<V, Dictionary<K,V>>()
         for item in array {
             result[item[key]!] = item
         }
@@ -192,7 +192,7 @@ extension __ {
     }
     
     class func countBy<T, U>(array: T[], transform: T -> U) -> Dictionary<U, Int> {
-        var result = Dictionary<U, Int>()
+        var result : Dictionary<U, Int> = [:]
         for item in array {
             if let count = result[transform(item)] {
                 result[transform(item)] = count + 1
@@ -219,7 +219,7 @@ extension __ {
     }
     
     class func sample<T>(array: T[], _ n:Int) -> T[] {
-        var result = T[]()
+        var result : T[] = []
         let random = __.shuffle(Array(0..array.count))
         for i in 0..n {
             result += array[random[i]]

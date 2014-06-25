@@ -59,7 +59,7 @@ extension __ {
     
     // This is amazing memoize function in [Advanced Swift](https://developer.apple.com/videos/wwdc/2014/?id=404)
     class func memoize<T: Hashable, U>(body: (T->U, T) -> U ) -> T -> U {
-        var memo = Dictionary<T, U>()
+        var memo : Dictionary<T, U> = [:]
         var result: (T -> U)!
         result = { x in
             if let q = memo[x] { return q }

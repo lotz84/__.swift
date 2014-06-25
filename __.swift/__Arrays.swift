@@ -102,8 +102,8 @@ extension __ {
         if length < 2 { return (array, []) }
         if n >= length { return ([], array) }
         
-        var initial = T[]()
-        var last    = T[]()
+        var initial : T[] = []
+        var last    : T[] = []
         for i in 0..length {
             if i < length-n {
                 initial += array[i]
@@ -118,7 +118,7 @@ extension __ {
         let validator = array.map {
             $0.getLogicValue()
         }
-        var result = T[]()
+        var result : T[] = []
         for (index, item) in enumerate(array) {
             if validator[index] {
                 result += item
@@ -128,7 +128,7 @@ extension __ {
     }
     
     class func flatten<T>(array: T[][]) -> T[] {
-        var result = T[]()
+        var result : T[] = []
         for item in array {
             result += item
         }
@@ -166,7 +166,7 @@ extension __ {
         var result = arrays[0]
         
         for index in 1..length {
-            var removeList = Int[]()
+            var removeList : Int[] = []
             for (index,item) in enumerate(result) {
                 if !contains(sorted[index], item){
                     removeList += index
@@ -184,7 +184,7 @@ extension __ {
         var result = array.copy()
         
         for other in others {
-            var removeList = Int[]()
+            var removeList : Int[] = []
             for (index,item) in enumerate(result) {
                 if contains(other, item) {
                     removeList += index
@@ -206,7 +206,7 @@ extension __ {
     class func uniq<T, U : Equatable>(array: T[], isSorted: Bool, transform: T -> U) -> T[] {
         if array.isEmpty { return [] }
         
-        var result = T[]()
+        var result : T[] = []
         if isSorted {
             result += __.first(array)
             for item in array {
@@ -215,7 +215,7 @@ extension __ {
                 }
             }
         } else {
-            var seen = U[]()
+            var seen : U[] = []
             for item in array {
                 let transformed = transform(item)
                 if !contains(seen, transformed) {
@@ -230,7 +230,7 @@ extension __ {
     class func zip<T, U>(array0: T[], _ array1: U[]) -> (T, U)[] {
         let length: Int = min(array0.count, array1.count)
         
-        var result = Array<(T, U)>()
+        var result : Array<(T, U)> = []
 
         for i in 0..length {
             result += (array0[i], array1[i])
@@ -240,7 +240,7 @@ extension __ {
     }
     
     class func object<K : Hashable, V>(#keys: K[], values:V[] ) -> Dictionary<K, V> {
-        var result = Dictionary<K,V>()
+        var result : Dictionary<K,V> = [:]
         let length: Int = min(keys.count, values.count)
         for i in 0..length {
             result[keys[i]] = values[i]
@@ -249,7 +249,7 @@ extension __ {
     }
     
     class func object<K : Hashable, V>(keyAndValues: Array<(K, V)>) -> Dictionary<K, V> {
-        var result = Dictionary<K,V>()
+        var result : Dictionary<K,V> = [:]
         for item in keyAndValues {
             result[item.0] = item.1
         }
@@ -319,7 +319,7 @@ extension __ {
     
     class func range(#start: Int, stop: Int, step: Int) -> Int[] {
         if step > 0 ? start > stop : start < stop { return [] }
-        var result = Int[]()
+        var result : Int[] = []
         var temp = start
         while step < 0 ? temp > stop : temp < stop {
             result += temp

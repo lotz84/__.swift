@@ -32,7 +32,7 @@ extension __ {
     */
     
     class func invert<K, V>(dict: Dictionary<K, V>) -> Dictionary<V, K> {
-        var result = Dictionary<V, K>()
+        var result : Dictionary<V, K> = [:]
         for (key, value) in dict {
             result[value] = key
         }
@@ -56,7 +56,7 @@ extension __ {
     }
     
     class func pick<K, V>(from dict: Dictionary<K, V>, keys: K...) -> Dictionary<K, V> {
-        var result = Dictionary<K, V>()
+        var result : Dictionary<K, V> = [:]
         for key in keys {
             if let value = dict[key] {
                 result[key] = value
