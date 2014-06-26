@@ -205,7 +205,7 @@ extension __ {
     
     class func shuffle<T>(array: T[]) -> T[] {
         let length = array.count
-        var random = __.range(length)
+        var random = Array(0..length)
         for i in 1..length {
             let j = __.random(min: 0, max: i)
             swap(&random[i], &random[j])
