@@ -172,7 +172,9 @@ extension __ {
     class func intersection<T : Equatable>(arrays: T[][]) -> T[] {
         if arrays.isEmpty { return [] }
         
-        let sorted = __.sortBy(arrays, transform: { $0.count })
+        var sorted = arrays.copy()
+        sorted.sort { $0.count < $1.count }
+        
         let length = sorted.count
         
         var result = arrays[0]

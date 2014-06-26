@@ -121,6 +121,6 @@ extension __ {
             }
         }
         
-        return __.every(Array(eqList))
+        return Array(eqList).reduce(true) { $0 && $1 }
     }
 }
