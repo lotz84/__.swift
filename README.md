@@ -1,7 +1,9 @@
 __.swift
 ========
 
-**Document**: <http://lotz84.github.io/__.swift/v0.1/>
+Now, __.swift is version 0.2.0! With the chain methods, __.swift becomes more flexible and extensible.
+
+**Document**: <http://lotz84.github.io/__.swift/v0.1/> (Update soon)
 
 __.swift aims to be an utility belt for a new programming language by Apple Inc., [Swift](https://developer.apple.com/swift/). And we decided  __.swift to be a clone of [Underscore.js](http://underscorejs.org/), which is an utility belt for JavaScript.
 
@@ -9,6 +11,7 @@ __.swift is a type-safe library because it uses type inference and generics. The
 
 ##Philosophy
 * Type safe
+* Flexible and Extensible
 * Do not reinvent the wheel
 * A port of Underscore.js to Swift
 
