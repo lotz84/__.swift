@@ -28,7 +28,7 @@ import Foundation
 class __ {
     
     class func version() -> String {
-        return "v0.1.0"
+        return "v0.2.0"
     }
     
     class func chain<T>(wrapped: T) -> Chain<T> {
