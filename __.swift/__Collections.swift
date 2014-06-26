@@ -236,4 +236,16 @@ extension __ {
         return count
     }
     
+    // Whether dict has subDictionary
+    class func hasSubDictionary<K, V: Equatable>(dict:Dictionary<K,V>, subDictionary: Dictionary<K,V>) -> Bool {
+        let eqList = map(subDictionary) { (key: K, value: V) -> Bool in
+            if let v = dict[key] {
+                return v == value
+            } else {
+                return false
+            }
+        }
+        
+        return Array(eqList).reduce(true) { $0 && $1 }
+    }
 }
