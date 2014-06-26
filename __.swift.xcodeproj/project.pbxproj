@@ -80,21 +80,21 @@
 		36029B14193D7EA000FA0239 /* __.swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = __.swiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36029B19193D7EA000FA0239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36029B1A193D7EA000FA0239 /* ___swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___swiftTests.swift"; sourceTree = "<group>"; };
-		360EFE1019460724008C33D3 /* __Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Utility.swift; sourceTree = "<group>"; };
+		360EFE1019460724008C33D3 /* __Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __Utility.swift; path = Utility/__Utility.swift; sourceTree = "<group>"; };
 		360EFE1219460736008C33D3 /* __UtilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __UtilityTests.swift; sourceTree = "<group>"; };
 		362807791942ED9900B562B9 /* __ArraysTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __ArraysTests.swift; sourceTree = "<group>"; };
 		3628077B1942EDD700B562B9 /* __CollectionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __CollectionsTests.swift; sourceTree = "<group>"; };
-		3628077D1942F4FC00B562B9 /* __Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Functions.swift; sourceTree = "<group>"; };
+		3628077D1942F4FC00B562B9 /* __Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __Functions.swift; path = Functions/__Functions.swift; sourceTree = "<group>"; };
 		3628077F1942F59800B562B9 /* __FunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __FunctionsTests.swift; sourceTree = "<group>"; };
-		36408AF919472AC900061529 /* __ArraysChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __ArraysChain.swift; sourceTree = "<group>"; };
+		36408AF919472AC900061529 /* __ArraysChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __ArraysChain.swift; path = Arrays/__ArraysChain.swift; sourceTree = "<group>"; };
 		36408AFB1947306C00061529 /* __ChainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __ChainTests.swift; sourceTree = "<group>"; };
-		3640B0331942A48B00375332 /* __Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Arrays.swift; sourceTree = "<group>"; };
-		3640B0361942A50F00375332 /* __Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Collections.swift; sourceTree = "<group>"; };
-		3643C91E195C4E810023898E /* __CollectionsChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __CollectionsChain.swift; sourceTree = "<group>"; };
-		3643C920195C4F510023898E /* __DictionariesChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __DictionariesChain.swift; sourceTree = "<group>"; };
-		3643C922195C4FC50023898E /* __UtilityChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __UtilityChain.swift; sourceTree = "<group>"; };
+		3640B0331942A48B00375332 /* __Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __Arrays.swift; path = Arrays/__Arrays.swift; sourceTree = "<group>"; };
+		3640B0361942A50F00375332 /* __Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __Collections.swift; path = Collections/__Collections.swift; sourceTree = "<group>"; };
+		3643C91E195C4E810023898E /* __CollectionsChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __CollectionsChain.swift; path = Collections/__CollectionsChain.swift; sourceTree = "<group>"; };
+		3643C920195C4F510023898E /* __DictionariesChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DictionariesChain.swift; path = Dictionaries/__DictionariesChain.swift; sourceTree = "<group>"; };
+		3643C922195C4FC50023898E /* __UtilityChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __UtilityChain.swift; path = Utility/__UtilityChain.swift; sourceTree = "<group>"; };
 		365B6A04193DDD2F00FF5D8A /* __.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __.swift; sourceTree = "<group>"; };
-		36B2F8F01944974E007FF832 /* __Dictionaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __Dictionaries.swift; sourceTree = "<group>"; };
+		36B2F8F01944974E007FF832 /* __Dictionaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __Dictionaries.swift; path = Dictionaries/__Dictionaries.swift; sourceTree = "<group>"; };
 		36B2F8F219449763007FF832 /* __DictionariesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = __DictionariesTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
