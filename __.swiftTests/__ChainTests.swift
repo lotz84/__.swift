@@ -28,7 +28,6 @@ import XCTest
 class __ChainTests: XCTestCase {
     
     func testChain(){
-    
         let r0: Int[]! = __.chain([1,2,3]).map({ $0 * 2 })?.value()
         let r1: Int[]! = __.chain([1,4,2,6,4,8,2]).sortBy(__.identity)?.value()
         

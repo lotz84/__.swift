@@ -1,5 +1,5 @@
 //
-//  __.swift
+//  __UtilityChain.swift
 //  __.swift
 //
 //  Copyright (c) 2014 Tatsuya Hirose
@@ -25,28 +25,26 @@
 
 import Foundation
 
-class __ {
+extension __.Chain {
     
-    class func version() -> String {
-        return "v0.1.0"
-    }
-    
-    class func chain<T>(wrapped: T) -> Chain<T> {
-        return Chain(wrapped)
-    }
-    
-    struct Chain<T> {
-        
-        typealias Wrapped = T
-        
-        var _wrapped: Wrapped
-        
-        init(_ wrapped: Wrapped) {
-            self._wrapped = wrapped
+    func uniqueId() -> __.Chain<String>? {
+        if let wrapped = self._wrapped as? String {
+            return __.chain( __.uniqueId(wrapped) )
         }
-        
-        func value() -> Wrapped {
-            return self._wrapped
+        return nil
+    }
+
+    func escape() -> __.Chain<String>? {
+        if let wrapped = self._wrapped as? String {
+            return __.chain( __.escape(wrapped) )
         }
+        return nil
+    }
+
+    func unescape() -> __.Chain<String>? {
+        if let wrapped = self._wrapped as? String {
+            return __.chain( __.unescape(wrapped) )
+        }
+        return nil
     }
 }
