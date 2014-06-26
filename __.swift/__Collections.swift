@@ -207,14 +207,14 @@ extension __ {
         let length = array.count
         var random = Array(0..length)
         for i in 1..length {
-            let j = __.random(min: 0, max: i)
+            let j = Int(arc4random() % UInt32(i+1))
             swap(&random[i], &random[j])
         }
         return random.map { array[$0] }
     }
     
     class func sample<T>(array: T[]) -> T {
-        let index = __.random(array.count-1)
+        let index = Int(arc4random() % UInt32(array.count))
         return array[index]
     }
     

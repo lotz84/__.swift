@@ -218,7 +218,7 @@ extension __ {
     }
     
     class func uniq<T : Equatable>(array: T[], isSorted: Bool = false) -> T[] {
-        return __.uniq(array, isSorted: isSorted, transform: __.identity)
+        return __.uniq(array, isSorted: isSorted) { $0 }
     }
     
     class func uniq<T, U : Equatable>(array: T[], isSorted: Bool, transform: T -> U) -> T[] {
@@ -283,7 +283,7 @@ extension __ {
     
     class func indexOf<T: Comparable>(array: T[], value:T, isSorted: Bool) -> Int? {
         if isSorted {
-            return __.sortedIndex(array, value: value, transform: __.identity)
+            return __.sortedIndex(array, value: value) { $0 }
         } else {
             for (index, item) in enumerate(array) {
                 if item == value { return index }
