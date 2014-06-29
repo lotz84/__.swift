@@ -57,28 +57,28 @@ extension __.Chain {
 
     func extend<K : Hashable, V>(to dictionaries: Dictionary<K, V>...) -> __.Chain<Dictionary<K, V>>? {
         if let wrapped = self._wrapped as? Dictionary<K,V> {
-            return __.chain( __.extend(wrapped, to: dictionaries) )
+            return __.chain( __.extend(wrapped, to: reinterpretCast(dictionaries)) )
         }
         return nil
     }
 
     func pick<K : Hashable, V>(keys: K...) -> __.Chain<Dictionary<K, V>>? {
         if let wrapped = self._wrapped as? Dictionary<K,V> {
-            return __.chain( __.pick(from: wrapped, keys: keys) )
+            return __.chain( __.pick(from: wrapped, keys: reinterpretCast(keys)) )
         }
         return nil
     }
 
     func omit<K : Hashable, V>(keys: K...) -> __.Chain<Dictionary<K, V>>? {
         if let wrapped = self._wrapped as? Dictionary<K,V> {
-            return __.chain( __.omit(from: wrapped, keys: keys) )
+            return __.chain( __.omit(from: wrapped, keys: reinterpretCast(keys)) )
         }
         return nil
     }
 
     func defaults<K : Hashable, V>(to dictionaries: Dictionary<K, V>...) -> __.Chain<Dictionary<K, V>>? {
         if let wrapped = self._wrapped as? Dictionary<K,V> {
-            return __.chain( __.defaults(wrapped, defaults: dictionaries) )
+            return __.chain( __.defaults(wrapped, defaults: reinterpretCast(dictionaries)) )
         }
         return nil
     }

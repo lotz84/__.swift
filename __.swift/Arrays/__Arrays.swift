@@ -136,10 +136,6 @@ extension __ {
     }
     
     class func without<T: Equatable>(array: T[], values: T...) -> T[] {
-        return __.without(array, values: values)
-    }
-    
-    class func without<T: Equatable>(array: T[], values: T[]) -> T[] {
         return array.filter {
             !contains(values, $0)
         }
@@ -158,18 +154,10 @@ extension __ {
     }
     
     class func union<T : Equatable>(arrays: T[]...) -> T[] {
-        return __.union(arrays)
-    }
-    
-    class func union<T : Equatable>(arrays: T[][]) -> T[] {
         return __.uniq(__.flatten(arrays))
     }
     
     class func intersection<T : Equatable>(arrays: T[]...) -> T[] {
-        return __.intersection(arrays)
-    }
-    
-    class func intersection<T : Equatable>(arrays: T[][]) -> T[] {
         if arrays.isEmpty { return [] }
         
         var sorted = arrays.copy()
@@ -195,10 +183,6 @@ extension __ {
     }
     
     class func difference<T: Equatable>(array: T[], others: T[]...) -> T[] {
-        return __.difference(array, others: others)
-    }
-    
-    class func difference<T: Equatable>(array: T[], others: T[][]) -> T[] {
         var result = array.copy()
         
         for other in others {

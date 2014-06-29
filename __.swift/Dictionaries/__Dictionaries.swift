@@ -39,18 +39,7 @@ extension __ {
         return result
     }
     
-    class func extend<K, V>(var dict0: Dictionary<K, V>, to dict1: Dictionary<K, V>) -> Dictionary<K, V> {
-        for (key, value) in dict1 {
-            dict0[key] = value
-        }
-        return dict0
-    }
-    
     class func extend<K, V>(var dict: Dictionary<K, V>, to dictionaries: Dictionary<K, V>...) -> Dictionary<K, V> {
-        return __.extend(dict, to: dictionaries)
-    }
-    
-    class func extend<K, V>(var dict: Dictionary<K, V>, to dictionaries: Dictionary<K, V>[]) -> Dictionary<K, V> {
         for item in dictionaries {
             for (key, value) in item {
                 dict[key] = value
@@ -60,10 +49,6 @@ extension __ {
     }
     
     class func pick<K, V>(from dict: Dictionary<K, V>, keys: K...) -> Dictionary<K, V> {
-        return __.pick(from: dict, keys: keys)
-    }
-    
-    class func pick<K, V>(from dict: Dictionary<K, V>, keys: K[]) -> Dictionary<K, V> {
         var result : Dictionary<K, V> = [:]
         for key in keys {
             if let value = dict[key] {
@@ -74,10 +59,6 @@ extension __ {
     }
     
     class func omit<K, V>(var from dict: Dictionary<K, V>, keys: K...) -> Dictionary<K, V> {
-        return __.omit(from: dict, keys: keys)
-    }
-    
-    class func omit<K, V>(var from dict: Dictionary<K, V>, keys: K[]) -> Dictionary<K, V> {
         for key in keys {
             dict.removeValueForKey(key)
         }
@@ -85,10 +66,6 @@ extension __ {
     }
     
     class func defaults<K, V>(var dict: Dictionary<K, V>, defaults: Dictionary<K, V>...) -> Dictionary<K, V> {
-        return __.defaults(dict, defaults: defaults)
-    }
-    
-    class func defaults<K, V>(var dict: Dictionary<K, V>, defaults: Dictionary<K, V>[]) -> Dictionary<K, V> {
         for option in defaults {
             for key in option.keys {
                 if !dict[key] {

@@ -115,7 +115,7 @@ extension __.Chain {
 
     func without<U: Equatable>( values: U...) -> __.Chain<U[]>? {
         if let wrapped = self._wrapped as? U[] {
-            return __.chain( __.without(wrapped, values: values) )
+            return __.chain( __.without(wrapped, values: reinterpretCast(values)) )
         }
         return nil
     }
@@ -131,7 +131,7 @@ extension __.Chain {
     
     func difference<U: Equatable>(array: U[], others: U[]...) -> __.Chain<U[]>? {
         if let wrapped = self._wrapped as? U[] {
-            return __.chain( __.difference(wrapped, others: others) )
+            return __.chain( __.difference(wrapped, others: reinterpretCast(others)) )
         }
         return nil
     }
