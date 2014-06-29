@@ -103,11 +103,11 @@ extension __ {
         return dict[key].getLogicValue()
     }
     
-    class func property<K, V>(key: K) -> Dictionary<K, V> -> V? {
-        return { $0[key] }
+    class func property<K, V>(key: K)(dict: Dictionary<K, V>) -> V? {
+        return dict[key]
     }
     
-    class func matches<K, V: Equatable>(attrs: Dictionary<K, V>) -> Dictionary<K, V> -> Bool {
-        return { __.hasSubDictionary($0, subDictionary: attrs) }
+    class func matches<K, V: Equatable>(attrs: Dictionary<K, V>)(dict: Dictionary<K, V>) -> Bool {
+        return __.hasSubDictionary(dict, subDictionary: attrs)
     }
 }

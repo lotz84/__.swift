@@ -85,7 +85,7 @@ class __FunctionsTests: XCTestCase {
             return str.str0 + " " + f("Hey") + " " + str.str1
         })
         
-        XCTAssert(wrapped(("This", "What")) == "This Hey!! What")
+        XCTAssert(wrapped(arg: ("This", "What")) == "This Hey!! What")
     }
     
     func testCompose(){
@@ -98,6 +98,6 @@ class __FunctionsTests: XCTestCase {
         
         let h = __.compose(g, f)
         
-        XCTAssert(h("hey") == "HEY hey")
+        XCTAssert(h(x: "hey") == "HEY hey")
     }
 }

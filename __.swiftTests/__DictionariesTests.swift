@@ -72,14 +72,14 @@ class __DictionariesTests: XCTestCase {
     
     func testProperty() {
         
-        let value = __.property("a")(["a":1, "b":2, "c":3, "d":4])
+        let value = __.property("a")(dict: ["a":1, "b":2, "c":3, "d":4])
         
         XCTAssert(value == 1)
     }
     
     func testMatches(){
         
-        let result = __.matches(["a":1, "b":2])(["a":1, "b":2, "c":3, "d":4])
+        let result = __.matches(["a":1, "b":2])(dict: ["a":1, "b":2, "c":3, "d":4])
         
         XCTAssert(result)
     }

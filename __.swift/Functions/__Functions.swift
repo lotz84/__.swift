@@ -110,17 +110,11 @@ extension __ {
         return NSDate().timeIntervalSince1970
     }
     
-    class func wrap<T, U, V, W>(f: T -> U, withWrapper wrapper:(T -> U , V) -> W) -> V -> W {
-        func executor(arg: V) -> W {
-            return wrapper(f, arg)
-        }
-        return executor
+    class func wrap<T, U, V, W>(f: T -> U, withWrapper wrapper:(T -> U , V) -> W)(arg: V) -> W {
+        return wrapper(f, arg)
     }
     
-    class func compose<T, U, V>(g: U -> V, _ f: T -> U) -> T -> V {
-        func h(arg: T) -> V {
-            return g(f(arg))
-        }
-        return h
+    class func compose<T, U, V>(g: U -> V, _ f: T -> U)(x: T) -> V {
+        return g(f(x))
     }
 }
