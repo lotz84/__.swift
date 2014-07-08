@@ -119,49 +119,49 @@ extension __.Chain {
     }
 
     func isArray<U>() -> Bool {
-        if let wrapped = self._wrapped as? [U] {
+        if let _ = self._wrapped as? [U] {
             return true
         }
         return false
     }
 
     func isDictionary<K : Hashable, V>() -> Bool {
-        if let wrapped = self._wrapped as? [[K:V]] {
+        if let _ = self._wrapped as? [[K:V]] {
             return true
         }
         return false
     }
 
     func isString() -> Bool {
-        if let wrapped = self._wrapped as? String {
+        if let _ = self._wrapped as? String {
             return true
         }
         return false
     }
 
     func isInt() -> Bool {
-        if let wrapped = self._wrapped as? Int {
+        if let _ = self._wrapped as? Int {
             return true
         }
         return false
     }
 
     func isFloat() -> Bool {
-        if let wrapped = self._wrapped as? Float {
+        if let _ = self._wrapped as? Float {
             return true
         }
         return false
     }
     
     func isDouble() -> Bool {
-        if let wrapped = self._wrapped as? Double {
+        if let _ = self._wrapped as? Double {
             return true
         }
         return false
     }
     
     func isBoolean() -> Bool {
-        if let wrapped = self._wrapped as? Bool {
+        if let _ = self._wrapped as? Bool {
             return true
         }
         return false
