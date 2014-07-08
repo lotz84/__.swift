@@ -25,7 +25,7 @@
 
 import Foundation
 
-var __uniqueIdCache : Dictionary<String, Int> = [:]
+var __uniqueIdCache : [String:Int] = [:]
 
 extension __ {
 
@@ -37,9 +37,9 @@ extension __ {
         return { x }
     }
     
-    class func times<T>(n: Int, _ iterator: Int -> T ) -> T[] {
-        var result : T[] = []
-        for i in 0..n {
+    class func times<T>(n: Int, _ iterator: Int -> T ) -> [T] {
+        var result : [T] = []
+        for i in 0..<n {
             result += iterator(i)
         }
         return result

@@ -31,15 +31,15 @@ extension __ {
     * Dictionaries Functions
     */
     
-    class func invert<K, V>(dict: Dictionary<K, V>) -> Dictionary<V, K> {
-        var result : Dictionary<V, K> = [:]
+    class func invert<K, V>(dict: [K:V]) -> [V:K] {
+        var result : [V:K] = [:]
         for (key, value) in dict {
             result[value] = key
         }
         return result
     }
     
-    class func extend<K, V>(var dict: Dictionary<K, V>, to dictionaries: Dictionary<K, V>...) -> Dictionary<K, V> {
+    class func extend<K, V>(var dict: [K:V], to dictionaries: [K:V]...) -> [K:V] {
         for item in dictionaries {
             for (key, value) in item {
                 dict[key] = value
@@ -48,8 +48,8 @@ extension __ {
         return dict
     }
     
-    class func pick<K, V>(from dict: Dictionary<K, V>, keys: K...) -> Dictionary<K, V> {
-        var result : Dictionary<K, V> = [:]
+    class func pick<K, V>(from dict: [K:V], keys: K...) -> [K:V] {
+        var result : [K:V] = [:]
         for key in keys {
             if let value = dict[key] {
                 result[key] = value
@@ -58,14 +58,14 @@ extension __ {
         return result
     }
     
-    class func omit<K, V>(var from dict: Dictionary<K, V>, keys: K...) -> Dictionary<K, V> {
+    class func omit<K, V>(var from dict: [K:V], keys: K...) -> [K:V] {
         for key in keys {
             dict.removeValueForKey(key)
         }
         return dict
     }
     
-    class func defaults<K, V>(var dict: Dictionary<K, V>, defaults: Dictionary<K, V>...) -> Dictionary<K, V> {
+    class func defaults<K, V>(var dict: [K:V], defaults: [K:V]...) -> [K:V] {
         for option in defaults {
             for key in option.keys {
                 if !dict[key] {
@@ -76,15 +76,15 @@ extension __ {
         return dict
     }
     
-    class func has<K, V>(dict: Dictionary<K, V>, key: K) -> Bool {
+    class func has<K, V>(dict: [K:V], key: K) -> Bool {
         return dict[key].getLogicValue()
     }
     
-    class func property<K, V>(key: K)(dict: Dictionary<K, V>) -> V? {
+    class func property<K, V>(key: K)(dict: [K:V]) -> V? {
         return dict[key]
     }
     
-    class func matches<K, V: Equatable>(attrs: Dictionary<K, V>)(dict: Dictionary<K, V>) -> Bool {
+    class func matches<K, V: Equatable>(attrs: [K:V])(dict: [K:V]) -> Bool {
         return __.hasSubDictionary(dict, subDictionary: attrs)
     }
 }

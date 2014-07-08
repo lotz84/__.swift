@@ -28,7 +28,7 @@ import Foundation
 extension __.Chain {
     
     func first<U>() -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.first(wrapped) )
         }
         return nil
@@ -44,84 +44,84 @@ extension __.Chain {
         return self.first()
     }
     
-    func first<U>(n: Int) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func first<U>(n: Int) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.first(wrapped, n) )
         }
         return nil
     }
     
     // alias for first
-    func head<U>(n: Int) -> __.Chain<U[]>? {
+    func head<U>(n: Int) -> __.Chain<[U]>? {
         return self.first(n)
     }
     
     // alias for first
-    func take<U>(n: Int) -> __.Chain<U[]>? {
+    func take<U>(n: Int) -> __.Chain<[U]>? {
         return self.first(n)
     }
     
-    func initial<U>(n: Int = 1) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func initial<U>(n: Int = 1) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.initial(wrapped, n) )
         }
         return nil
     }
 
     func last<U>() -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.last(wrapped) )
         }
         return nil
     }
     
-    func last<U>(n: Int) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func last<U>(n: Int) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.last(wrapped, n) )
         }
         return nil
     }
     
-    func rest<U>(n: Int = 1) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func rest<U>(n: Int = 1) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.rest(wrapped, n) )
         }
         return nil
     }
     
     // alias for rest
-    func tail<U>(n: Int = 1) -> __.Chain<U[]>? {
+    func tail<U>(n: Int = 1) -> __.Chain<[U]>? {
         return self.rest(n: n)
     }
     
     // alias for rest
-    func drop<U>(n: Int = 1) -> __.Chain<U[]>? {
+    func drop<U>(n: Int = 1) -> __.Chain<[U]>? {
         return self.rest(n: n)
     }
     
-    func compact<U : LogicValue>() -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func compact<U : LogicValue>() -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.compact(wrapped) )
         }
         return nil
     }
     
-    func flatten<U>() -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[][] {
+    func flatten<U>() -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [[U]] {
             return __.chain( __.flatten(wrapped) )
         }
         return nil
     }
 
-    func without<U: Equatable>( values: U...) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func without<U: Equatable>( values: U...) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.without(wrapped, values: reinterpretCast(values)) )
         }
         return nil
     }
     
-    func partition<U>( predicate: U -> Bool ) -> __.Chain<((U[], U[]))>? {
-        if let wrapped = self._wrapped as? U[] {
+    func partition<U>( predicate: U -> Bool ) -> __.Chain<(([U], [U]))>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.partition(wrapped, predicate: predicate) )
         }
         return nil
@@ -129,22 +129,22 @@ extension __.Chain {
     
     // union and intersection functions are not implemented
     
-    func difference<U: Equatable>(array: U[], others: U[]...) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func difference<U: Equatable>(array: [U], others: [U]...) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.difference(wrapped, others: reinterpretCast(others)) )
         }
         return nil
     }
     
-    func uniq<U : Equatable>(isSorted: Bool = false) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func uniq<U : Equatable>(isSorted: Bool = false) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.uniq( wrapped, isSorted: isSorted) )
         }
         return nil
     }
     
-    func uniq<U, V : Equatable>(isSorted: Bool, transform: U -> V) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func uniq<U, V : Equatable>(isSorted: Bool, transform: U -> V) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.uniq( wrapped, isSorted: isSorted, transform: transform) )
         }
         return nil
@@ -153,35 +153,35 @@ extension __.Chain {
     // zip and object functions are not implemented
     
     func indexOf<U: Equatable>(value:U) -> __.Chain<Int?>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.indexOf(wrapped, value: value) )
         }
         return nil
     }
     
     func indexOf<U: Comparable>(value:U, isSorted: Bool) -> __.Chain<Int?>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.indexOf(wrapped, value: value, isSorted: isSorted) )
         }
         return nil
     }
     
     func lastIndexOf<U : Equatable>(value: U) -> __.Chain<Int?>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.lastIndexOf(wrapped, value: value) )
         }
         return nil
     }
     
     func lastIndexOf<U : Equatable>(value: U, from: Int) -> __.Chain<Int?>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.lastIndexOf(wrapped, value: value, from: from) )
         }
         return nil
     }
     
-    func sortedIndex<U, V : Comparable>(array : U[], value : U, transform: U -> V ) -> __.Chain<Int?>? {
-        if let wrapped = self._wrapped as? U[] {
+    func sortedIndex<U, V : Comparable>(array : [U], value : U, transform: U -> V ) -> __.Chain<Int?>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.sortedIndex(wrapped, value: value, transform: transform) )
         }
         return nil

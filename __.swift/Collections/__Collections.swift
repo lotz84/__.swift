@@ -44,7 +44,7 @@ extension __ {
     }
     
     class func reduceRight<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
-        var array : Array<T.GeneratorType.Element> = []
+        var array : [T.GeneratorType.Element] = []
         var gen = seq.generate()
         while let elem = gen.next() {
             array += elem
@@ -71,8 +71,8 @@ extension __ {
         return __.find(seq, predicate)
     }
  
-    class func `where`<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Array<Dictionary<K,V>> {
-        var result : Array<Dictionary<K,V>> = []
+    class func `where`<K,V: Equatable>(array: [[K:V]], _ properties: [K:V]) -> [[K:V]] {
+        var result : [[K:V]] = []
         for dict in array {
             if __.hasSubDictionary(dict, subDictionary: properties) {
                 result += dict
@@ -81,7 +81,7 @@ extension __ {
         return result
     }
     
-    class func findWhere<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> Dictionary<K,V>? {
+    class func findWhere<K,V: Equatable>(array: [[K:V]], _ properties: [K:V]) -> [K:V]? {
         for dict in array {
             if __.hasSubDictionary(dict, subDictionary: properties) {
                 return dict
@@ -90,11 +90,11 @@ extension __ {
         return nil
     }
     
-    class func reject<T : Sequence>(seq: T, _ condition: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element[] {
+    class func reject<T : Sequence>(seq: T, _ condition: T.GeneratorType.Element -> Bool) -> [T.GeneratorType.Element] {
         return Array(filter(seq, { !condition($0) }))
     }
     
-    class func every<L: LogicValue>(array: L[]) -> Bool {
+    class func every<L: LogicValue>(array: [L]) -> Bool {
         return __.every(array, predicate: { $0.getLogicValue() })
     }
     
@@ -103,7 +103,7 @@ extension __ {
     }
     
     // alias for every
-    class func all<L: LogicValue>(array: L[]) -> Bool {
+    class func all<L: LogicValue>(array: [L]) -> Bool {
         return __.every(array)
     }
     
@@ -112,7 +112,7 @@ extension __ {
         return __.every(seq, predicate: predicate)
     }
     
-    class func some<L: LogicValue>(array: L[]) -> Bool {
+    class func some<L: LogicValue>(array: [L]) -> Bool {
         return __.some(array, predicate: { $0.getLogicValue() })
     }
     
@@ -121,7 +121,7 @@ extension __ {
     }
     
     // alias for some
-    class func any<L: LogicValue>(array: L[]) -> Bool {
+    class func any<L: LogicValue>(array: [L]) -> Bool {
         return __.some(array)
     }
     
@@ -130,8 +130,8 @@ extension __ {
         return __.some(seq, predicate: predicate)
     }
     
-    class func pluck<K, V>(array: Array<Dictionary<K, V>>, key: K) -> V[] {
-        var result : V[] = []
+    class func pluck<K, V>(array: [[K:V]], key: K) -> [V] {
+        var result : [V] = []
         for item in array {
             if let value = item[key] {
                 result += value
@@ -141,14 +141,14 @@ extension __ {
     }
     
     // quick sort
-    class func sortBy<T : Sequence, C: Comparable>(seq: T, transform: T.GeneratorType.Element -> C) -> T.GeneratorType.Element[] {
+    class func sortBy<T : Sequence, C: Comparable>(seq: T, transform: T.GeneratorType.Element -> C) -> [T.GeneratorType.Element] {
         
         var gen = seq.generate()
         
         if let first = gen.next() {
             
-            var smaller : Array<T.GeneratorType.Element> = []
-            var bigger  : Array<T.GeneratorType.Element> = []
+            var smaller : [T.GeneratorType.Element] = []
+            var bigger  : [T.GeneratorType.Element] = []
             
             while let elem = gen.next() {
                 if transform(first) < transform(elem) {
@@ -168,8 +168,8 @@ extension __ {
         }
     }
     
-    class func groupBy<K, V>(array: V[], transform: V -> K) -> Dictionary<K, V[]> {
-        var result : Dictionary<K, V[]> = [:]
+    class func groupBy<K, V>(array: [V], transform: V -> K) -> [K:[V]] {
+        var result : [K:[V]] = [:]
         
         for item in array {
             let key = transform(item)
@@ -183,16 +183,16 @@ extension __ {
         return result
     }
     
-    class func indexBy<K, V>(array: Array< Dictionary<K, V> >, key: K) -> Dictionary<V, Dictionary<K,V>> {
-        var result = Dictionary<V, Dictionary<K,V>>()
+    class func indexBy<K, V>(array: [[K:V]], key: K) -> [V:[K:V]] {
+        var result = [V:[K:V]]()
         for item in array {
             result[item[key]!] = item
         }
         return result
     }
     
-    class func countBy<T, U>(array: T[], transform: T -> U) -> Dictionary<U, Int> {
-        var result : Dictionary<U, Int> = [:]
+    class func countBy<T, U>(array: [T], transform: T -> U) -> [U:Int] {
+        var result : [U:Int] = [:]
         for item in array {
             if let count = result[transform(item)] {
                 result[transform(item)] = count + 1
@@ -203,25 +203,25 @@ extension __ {
         return result
     }
     
-    class func shuffle<T>(array: T[]) -> T[] {
+    class func shuffle<T>(array: [T]) -> [T] {
         let length = array.count
-        var random = Array(0..length)
-        for i in 1..length {
+        var random = Array(0..<length)
+        for i in 1..<length {
             let j = Int(arc4random() % UInt32(i+1))
             swap(&random[i], &random[j])
         }
         return random.map { array[$0] }
     }
     
-    class func sample<T>(array: T[]) -> T {
+    class func sample<T>(array: [T]) -> T {
         let index = Int(arc4random() % UInt32(array.count))
         return array[index]
     }
     
-    class func sample<T>(array: T[], _ n:Int) -> T[] {
-        var result : T[] = []
-        let random = __.shuffle(Array(0..array.count))
-        for i in 0..n {
+    class func sample<T>(array: [T], _ n:Int) -> [T] {
+        var result : [T] = []
+        let random = __.shuffle(Array(0..<array.count))
+        for i in 0..<n {
             result += array[random[i]]
         }
         return result
@@ -237,7 +237,7 @@ extension __ {
     }
     
     // Whether dict has subDictionary
-    class func hasSubDictionary<K, V: Equatable>(dict:Dictionary<K,V>, subDictionary: Dictionary<K,V>) -> Bool {
+    class func hasSubDictionary<K, V: Equatable>(dict:[K:V], subDictionary: [K:V]) -> Bool {
         let eqList = map(subDictionary) { (key: K, value: V) -> Bool in
             if let v = dict[key] {
                 return v == value

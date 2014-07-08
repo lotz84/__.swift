@@ -27,57 +27,57 @@ import Foundation
 
 extension __.Chain {
 
-    func keys<K : Hashable, V>() -> __.Chain<(K[])>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func keys<K : Hashable, V>() -> __.Chain<([K])>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped.keys) )
         }
         return nil
     }
 
-    func values<K : Hashable, V>() -> __.Chain<(V[])>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func values<K : Hashable, V>() -> __.Chain<([V])>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped.values) )
         }
         return nil
     }
 
-    func pairs<K : Hashable, V>() -> __.Chain<(K, V)[]>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func pairs<K : Hashable, V>() -> __.Chain<[(K, V)]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped) )
         }
         return nil
     }
 
-    func invert<K : Hashable, V : Hashable>() -> __.Chain<Dictionary<V,K>>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func invert<K : Hashable, V : Hashable>() -> __.Chain<[V:K]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.invert(wrapped) )
         }
         return nil
     }
 
-    func extend<K : Hashable, V>(to dictionaries: Dictionary<K, V>...) -> __.Chain<Dictionary<K, V>>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func extend<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.extend(wrapped, to: reinterpretCast(dictionaries)) )
         }
         return nil
     }
 
-    func pick<K : Hashable, V>(keys: K...) -> __.Chain<Dictionary<K, V>>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func pick<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.pick(from: wrapped, keys: reinterpretCast(keys)) )
         }
         return nil
     }
 
-    func omit<K : Hashable, V>(keys: K...) -> __.Chain<Dictionary<K, V>>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func omit<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.omit(from: wrapped, keys: reinterpretCast(keys)) )
         }
         return nil
     }
 
-    func defaults<K : Hashable, V>(to dictionaries: Dictionary<K, V>...) -> __.Chain<Dictionary<K, V>>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func defaults<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.defaults(wrapped, defaults: reinterpretCast(dictionaries)) )
         }
         return nil
@@ -89,7 +89,7 @@ extension __.Chain {
     }
 
     func has<K : Hashable, V>(key: K) -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.has(wrapped, key: key) )
         }
         return nil
@@ -97,36 +97,36 @@ extension __.Chain {
 
     // property function is not implemented
 
-    func matches<K, V: Equatable>() -> __.Chain<Dictionary<K, V> -> Bool>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+    func matches<K, V: Equatable>() -> __.Chain<[K:V] -> Bool>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.matches(wrapped) )
         }
         return nil
     }
 
     func isEmpty<U>() -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( wrapped.isEmpty )
         }
         return nil
     }
 
     func isEmpty<K : Hashable, V>() -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( wrapped.count == 0 )
         }
         return nil
     }
 
     func isArray<U>() -> Bool {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return true
         }
         return false
     }
 
     func isDictionary<K : Hashable, V>() -> Bool {
-        if let wrapped = self._wrapped as? Dictionary<K, V>[] {
+        if let wrapped = self._wrapped as? [[K:V]] {
             return true
         }
         return false
@@ -167,7 +167,10 @@ extension __.Chain {
         return false
     }
     
-    func isNil() -> Bool? {
-        return self._wrapped == nil
-    }
+//    func isNil() -> Bool? {
+//        if let wrapped = self._wrapped as? NilLiteralConvertible {
+//            return true
+//        }
+//        return false
+//    }
 }

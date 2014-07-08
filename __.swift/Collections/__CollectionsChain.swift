@@ -28,13 +28,13 @@ import Foundation
 extension __.Chain {
     
     func each<U>(iterator: U -> Any) -> () {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             __.each(wrapped, iterator)
         }
     }
     
     func each<K : Hashable, V>(iterator: (K, V) -> Any) -> () {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+        if let wrapped = self._wrapped as? [K:V] {
             __.each(wrapped, iterator)
         }
     }
@@ -49,17 +49,17 @@ extension __.Chain {
         self.each(iterator)
     }
     
-    func map<U, V>(transform: U -> V) -> __.Chain<Array<V>>? {
-        if let wrapped = self._wrapped as? U[] {
+    func map<U, V>(transform: U -> V) -> __.Chain<[V]>? {
+        if let wrapped = self._wrapped as? [U] {
             // If you miss the prefix "__.", it doesn't work for now.
             return __.chain(wrapped.map(transform))
         }
         return nil
     }
     
-    func map<K : Hashable, V, U>(transform: (K, V) -> U) -> __.Chain<Array<U>>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
-            var result : U[] = []
+    func map<K : Hashable, V, U>(transform: (K, V) -> U) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [K:V] {
+            var result : [U] = []
             var gen = wrapped.generate()
             while let elem = gen.next() {
                 result += transform(elem)
@@ -69,23 +69,23 @@ extension __.Chain {
         return nil
     }
     
-    func collect<U, V>(transform: U -> V) -> __.Chain<Array<V>>? {
+    func collect<U, V>(transform: U -> V) -> __.Chain<[V]>? {
         return self.map(transform)
     }
     
-    func collect<K : Hashable, V, U>(transform: (K, V) -> U) -> __.Chain<Array<U>>? {
+    func collect<K : Hashable, V, U>(transform: (K, V) -> U) -> __.Chain<[U]>? {
         return self.map(transform)
     }
     
     func reduce<U, V>(initial: V, combine:(V, U) -> V ) -> __.Chain<V>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain(wrapped.reduce(initial, combine: combine))
         }
         return nil
     }
     
     // The native reduce function for Sequence doesn't work for now. This is only temporary.
-    static func reduce<K : Hashable, V, U>(dict: Dictionary<K, V>, initial: U, combine:(U, (K, V)) -> U) -> U {
+    static func reduce<K : Hashable, V, U>(dict: [K:V], initial: U, combine:(U, (K, V)) -> U) -> U {
         var accum = initial
         var gen = dict.generate()
         while let elem = gen.next() {
@@ -95,7 +95,7 @@ extension __.Chain {
     }
     
     func reduce<K : Hashable, V, U>(initial: U, combine:(U, (K, V)) -> U) -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+        if let wrapped = self._wrapped as? [K:V] {
             var accum = initial
             var gen = wrapped.generate()
             while let elem = gen.next() {
@@ -127,14 +127,14 @@ extension __.Chain {
     }
     
     func reduceRight<U, V>(initial: V, combine:(U, V) -> V ) -> __.Chain<V>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.reduceRight(wrapped, initial: initial, combine: combine) )
         }
         return nil
     }
     
     func reduceRight<K : Hashable, V, U>(initial: U, combine:((K, V), U) -> U) -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.reduceRight(wrapped, initial: initial, combine: combine) )
         }
         return nil
@@ -151,14 +151,14 @@ extension __.Chain {
     }
     
     func find<U>(predicate: U -> Bool) -> __.Chain<U?>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.find(wrapped, predicate: predicate) )
         }
         return nil
     }
     
     func find<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<(K, V)?>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.find(wrapped, predicate: predicate) )
         }
         return nil
@@ -174,16 +174,16 @@ extension __.Chain {
         return self.find(predicate)
     }
     
-    func filter<U>(predicate: U -> Bool) -> __.Chain<Array<U>>? {
-        if let wrapped = self._wrapped as? U[] {
+    func filter<U>(predicate: U -> Bool) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( wrapped.filter(predicate) )
         }
         return nil
     }
     
-    func filter<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<Array<(K, V)>>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
-            var result : Array<(K, V)> = []
+    func filter<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<[(K, V)]>? {
+        if let wrapped = self._wrapped as? [K:V] {
+            var result : [(K, V)] = []
             for (key, value) in wrapped {
                 if predicate(key, value) {
                     result += (key, value)
@@ -195,52 +195,52 @@ extension __.Chain {
     }
     
     // alias for filter
-    func select<U>(predicate: U -> Bool) -> __.Chain<Array<U>>? {
+    func select<U>(predicate: U -> Bool) -> __.Chain<[U]>? {
         return self.filter(predicate)
     }
     
     // alias for filter
-    func select<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<Array<(K, V)>>? {
+    func select<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<[(K, V)]>? {
         return self.filter(predicate)
     }
     
-    func `where`<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> __.Chain<Array<Dictionary<K,V>>>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+    func `where`<K,V: Equatable>(array: [[K:V]], _ properties: [K:V]) -> __.Chain<[[K:V]]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.`where`(array, properties) )
         }
         return nil
     }
     
-    func findWhere<K,V: Equatable>(array: Array<Dictionary<K,V>>, _ properties: Dictionary<K,V>) -> __.Chain<Dictionary<K,V>?>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+    func findWhere<K,V: Equatable>(array: [[K:V]], _ properties: [K:V]) -> __.Chain<[K:V]?>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.findWhere(array, properties) )
         }
         return nil
     }
     
-    func reject<U>(predicate: U -> Bool) -> __.Chain<Array<U>>? {
-        if let wrapped = self._wrapped as? U[] {
+    func reject<U>(predicate: U -> Bool) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( wrapped.filter({ !predicate($0) }) )
         }
         return nil
     }
     
-    func reject<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<Array<(K, V)>>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+    func reject<K : Hashable, V>(predicate: (K,V) -> Bool) -> __.Chain<[(K, V)]>? {
+        if let wrapped = self._wrapped as? [K:V] {
             return self.filter({ !predicate($0) })
         }
         return nil
     }
     
     func every<L: LogicValue>() -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? L[] {
+        if let wrapped = self._wrapped as? [L] {
             return __.chain( __.every(wrapped) )
         }
         return nil
     }
     
     func every<U>(predicate: U -> Bool ) -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.every(wrapped, predicate) )
         }
         return nil
@@ -257,14 +257,14 @@ extension __.Chain {
     }
     
     func some<L: LogicValue>() -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? L[] {
+        if let wrapped = self._wrapped as? [L] {
             return __.chain( __.some(wrapped) )
         }
         return nil
     }
     
     func some<U>(predicate: U -> Bool ) -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.some(wrapped, predicate) )
         }
         return nil
@@ -281,7 +281,7 @@ extension __.Chain {
     }
     
     func contains<U : Equatable>(x: U) -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             var gen = wrapped.generate()
             while let elem = gen.next() {
                 if elem == x {
@@ -294,7 +294,7 @@ extension __.Chain {
     }
     
     func contains<K : Hashable, V : Equatable>(x: (K, V)) -> __.Chain<Bool>? {
-        if let wrapped = self._wrapped as? Dictionary<K,V> {
+        if let wrapped = self._wrapped as? [K:V] {
             for (key, value) in wrapped {
                 if key==x.0 && value==x.1 {
                     return __.chain(true)
@@ -315,85 +315,85 @@ extension __.Chain {
         return self.contains(x)
     }
     
-    func pluck<K : Hashable, V>(key : K) -> __.Chain<Array<V>>? {
-        if let wrapped = self._wrapped as? Array<Dictionary<K, V>> {
+    func pluck<K : Hashable, V>(key : K) -> __.Chain<[V]>? {
+        if let wrapped = self._wrapped as? [[K:V]] {
             return __.chain( __.pluck(wrapped, key: key) )
         }
         return nil
     }
     
     func max<U : Comparable>() -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( maxElement(wrapped) )
         }
         return nil
     }
     
     func min<U : Comparable>() -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( minElement(wrapped) )
         }
         return nil
     }
     
-    func sortBy<U, V : Comparable>(transform: U -> V) -> __.Chain<Array<U>>? {
-        if let wrapped = self._wrapped as? U[] {
+    func sortBy<U, V : Comparable>(transform: U -> V) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.sortBy(wrapped, transform: transform) )
         }
         return nil
     }
     
-    func groupBy<K, V>(transform: V -> K) -> __.Chain<Dictionary<K, Array<V>>>? {
-        if let wrapped = self._wrapped as? V[] {
+    func groupBy<K, V>(transform: V -> K) -> __.Chain<[K:[V]]>? {
+        if let wrapped = self._wrapped as? [V] {
             return __.chain( __.groupBy(wrapped, transform) )
         }
         return nil
     }
     
-    func indexBy<K, V>(key: K) -> __.Chain<Dictionary<V, Dictionary<K,V>>>? {
-        if let wrapped = self._wrapped as? Array<Dictionary<K, V>> {
+    func indexBy<K, V>(key: K) -> __.Chain<[V:[K:V]]>? {
+        if let wrapped = self._wrapped as? [[K:V]] {
             return __.chain( __.indexBy(wrapped, key: key) )
         }
         return nil
     }
     
-    func countBy<U, V>(transform: U -> V) -> __.Chain<Dictionary<V, Int>>? {
-        if let wrapped = self._wrapped as? U[] {
+    func countBy<U, V>(transform: U -> V) -> __.Chain<[V:Int]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.countBy(wrapped, transform:transform) )
         }
         return nil
     }
     
-    func shuffle<U>() -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func shuffle<U>() -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.shuffle(wrapped) )
         }
         return nil
     }
     
     func sample<U>() -> __.Chain<U>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.sample(wrapped) )
         }
         return nil
     }
     
-    func sample<U>(n:Int) -> __.Chain<U[]>? {
-        if let wrapped = self._wrapped as? U[] {
+    func sample<U>(n:Int) -> __.Chain<[U]>? {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.sample(wrapped, n) )
         }
         return nil
     }
     
     func size<U>() -> __.Chain<Int>? {
-        if let wrapped = self._wrapped as? U[] {
+        if let wrapped = self._wrapped as? [U] {
             return __.chain( __.size(wrapped) )
         }
         return nil
     }
     
     func size<K : Hashable,V>() -> __.Chain<Int>? {
-        if let wrapped = self._wrapped as? Dictionary<K, V> {
+        if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.size(wrapped) )
         }
         return nil
