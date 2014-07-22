@@ -25,19 +25,19 @@
 
 import Foundation
 
-var __uniqueIdCache : [String:Int] = [:]
+private var __uniqueIdCache : [String:Int] = [:]
 
-extension __ {
+public extension __ {
 
-    class func identity<T>(x:T) -> T {
+    public class func identity<T>(x:T) -> T {
         return x
     }
     
-    class func constant<T>(x:T) -> () -> T {
+    public class func constant<T>(x:T) -> () -> T {
         return { x }
     }
     
-    class func times<T>(n: Int, _ iterator: Int -> T ) -> [T] {
+    public class func times<T>(n: Int, _ iterator: Int -> T ) -> [T] {
         var result : [T] = []
         for i in 0..<n {
             result += iterator(i)
@@ -45,15 +45,15 @@ extension __ {
         return result
     }
     
-    class func random(n: Int) -> Int {
+    public class func random(n: Int) -> Int {
         return __.random(min: 0, max: n)
     }
     
-    class func random(#min: Int, max: Int) -> Int {
+    public class func random(#min: Int, max: Int) -> Int {
         return min + Int(arc4random() % UInt32(max-min+1))
     }
     
-    class func uniqueId(id: String) -> String {
+    public class func uniqueId(id: String) -> String {
         if let count = __uniqueIdCache[id] {
             __uniqueIdCache[id] = count + 1
             return id + String(count + 1)
@@ -63,7 +63,7 @@ extension __ {
         }
     }
     
-    class func escape(var str: String) -> String {
+    public class func escape(var str: String) -> String {
         return [
             ("&",  "&amp;"),
             ("<",  "&lt;"),
@@ -75,7 +75,7 @@ extension __ {
         }
     }
     
-    class func unescape(var str: String) -> String {
+    public class func unescape(var str: String) -> String {
         return reduce([
             "&amp;"  : "&",
             "&lt;"   : "<",

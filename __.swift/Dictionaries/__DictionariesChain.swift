@@ -25,70 +25,70 @@
 
 import Foundation
 
-extension __.Chain {
+public extension __.Chain {
 
-    func keys<K : Hashable, V>() -> __.Chain<([K])>! {
+    public func keys<K : Hashable, V>() -> __.Chain<([K])>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped.keys) )
         }
         return nil
     }
 
-    func values<K : Hashable, V>() -> __.Chain<([V])>! {
+    public func values<K : Hashable, V>() -> __.Chain<([V])>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped.values) )
         }
         return nil
     }
 
-    func pairs<K : Hashable, V>() -> __.Chain<[(K, V)]>! {
+    public func pairs<K : Hashable, V>() -> __.Chain<[(K, V)]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped) )
         }
         return nil
     }
 
-    func invert<K : Hashable, V : Hashable>() -> __.Chain<[V:K]>! {
+    public func invert<K : Hashable, V : Hashable>() -> __.Chain<[V:K]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.invert(wrapped) )
         }
         return nil
     }
 
-    func extend<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
+    public func extend<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.extend(wrapped, to: reinterpretCast(dictionaries)) )
         }
         return nil
     }
 
-    func pick<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
+    public func pick<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.pick(from: wrapped, keys: reinterpretCast(keys)) )
         }
         return nil
     }
 
-    func omit<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
+    public func omit<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.omit(from: wrapped, keys: reinterpretCast(keys)) )
         }
         return nil
     }
 
-    func defaults<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
+    public func defaults<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.defaults(wrapped, defaults: reinterpretCast(dictionaries)) )
         }
         return nil
     }
 
-    func tap<U>(interceptor: WrappedType -> U) -> __.Chain<WrappedType> {
+    public func tap<U>(interceptor: WrappedType -> U) -> __.Chain<WrappedType> {
         interceptor(self._wrapped)
         return self
     }
 
-    func has<K : Hashable, V>(key: K) -> __.Chain<Bool>! {
+    public func has<K : Hashable, V>(key: K) -> __.Chain<Bool>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.has(wrapped, key: key) )
         }
@@ -97,70 +97,70 @@ extension __.Chain {
 
     // property function is not implemented
 
-    func matches<K, V: Equatable>() -> __.Chain<[K:V] -> Bool>! {
+    public func matches<K, V: Equatable>() -> __.Chain<[K:V] -> Bool>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.matches(wrapped) )
         }
         return nil
     }
 
-    func isEmpty<U>() -> __.Chain<Bool>! {
+    public func isEmpty<U>() -> __.Chain<Bool>! {
         if let wrapped = self._wrapped as? [U] {
             return __.chain( wrapped.isEmpty )
         }
         return nil
     }
 
-    func isEmpty<K : Hashable, V>() -> __.Chain<Bool>! {
+    public func isEmpty<K : Hashable, V>() -> __.Chain<Bool>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( wrapped.count == 0 )
         }
         return nil
     }
 
-    func isArray<U>() -> Bool {
+    public func isArray<U>() -> Bool {
         if let _ = self._wrapped as? [U] {
             return true
         }
         return false
     }
 
-    func isDictionary<K : Hashable, V>() -> Bool {
+    public func isDictionary<K : Hashable, V>() -> Bool {
         if let _ = self._wrapped as? [[K:V]] {
             return true
         }
         return false
     }
 
-    func isString() -> Bool {
+    public func isString() -> Bool {
         if let _ = self._wrapped as? String {
             return true
         }
         return false
     }
 
-    func isInt() -> Bool {
+    public func isInt() -> Bool {
         if let _ = self._wrapped as? Int {
             return true
         }
         return false
     }
 
-    func isFloat() -> Bool {
+    public func isFloat() -> Bool {
         if let _ = self._wrapped as? Float {
             return true
         }
         return false
     }
     
-    func isDouble() -> Bool {
+    public func isDouble() -> Bool {
         if let _ = self._wrapped as? Double {
             return true
         }
         return false
     }
     
-    func isBoolean() -> Bool {
+    public func isBoolean() -> Bool {
         if let _ = self._wrapped as? Bool {
             return true
         }

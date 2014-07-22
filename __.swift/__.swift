@@ -25,17 +25,17 @@
 
 import Foundation
 
-class __ {
+public class __ {
     
-    class func version() -> String {
+    public class func version() -> String {
         return "v0.2.0"
     }
     
-    class func chain<T>(wrapped: T) -> Chain<T> {
+    public class func chain<T>(wrapped: T) -> Chain<T> {
         return Chain(wrapped)
     }
     
-    struct Chain<WrappedType> {
+    public struct Chain<WrappedType> {
         
         
         var _wrapped: WrappedType
@@ -44,7 +44,7 @@ class __ {
             self._wrapped = wrapped
         }
         
-        func value() -> WrappedType {
+        public func value() -> WrappedType {
             return self._wrapped
         }
     }

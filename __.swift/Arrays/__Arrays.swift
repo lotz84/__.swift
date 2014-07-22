@@ -25,39 +25,40 @@
 
 import Foundation
 
-extension __ {
+public extension __ {
     
     /**
     * Array Functions
     */
     
-    class func first<T>(array:[T]) -> T! {
+    public class func first<T>(array:[T]) -> T! {
         if array.isEmpty { return nil }
         return array[array.startIndex]
     }
     
     // alias for first
-    class func head<T>(array:[T]) -> T! {
+    public class func head<T>(array:[T]) -> T! {
         return __.first(array)
     }
+    
     
     // alias for first
-    class func take<T>(array:[T]) -> T! {
+    public class func take<T>(array:[T]) -> T! {
         return __.first(array)
     }
     
-    class func first<T>(array:[T], _ n:Int) -> [T]! {
+    public class func first<T>(array:[T], _ n:Int) -> [T]! {
         let (first, _) = __.separate(array, array.count - n)
         return first
     }
     
     // alias for first
-    class func head<T>(array:[T], _ n:Int) -> [T]! {
+    public class func head<T>(array:[T], _ n:Int) -> [T]! {
         return __.first(array, n)
     }
     
     // alias for first
-    class func take<T>(array:[T], _ n:Int) -> [T]! {
+    public class func take<T>(array:[T], _ n:Int) -> [T]! {
         return __.first(array, n)
     }
     
@@ -65,37 +66,36 @@ extension __ {
     // when n > 1
     // array == __.initial(array, n) + __.last(array, n)
     
-    class func initial<T>(array:[T], _ n: Int = 1) -> [T] {
+    public class func initial<T>(array:[T], _ n: Int = 1) -> [T] {
         let (initial, _) = __.separate(array, n)
         return initial
     }
     
-    class func last<T>(array: [T]) -> T {
+    public class func last<T>(array: [T]) -> T {
         return array[array.endIndex-1]
     }
     
-    class func last<T>(array: [T], _ n: Int) -> [T] {
+    public class func last<T>(array: [T], _ n: Int) -> [T] {
         let (_, last) = __.separate(array, n)
         return last
     }
     
-    class func rest<T>(array: [T], _ n: Int = 1) -> [T] {
+    public class func rest<T>(array: [T], _ n: Int = 1) -> [T] {
         let (_, rest) = __.separate(array, array.count - n)
         return rest
     }
     
     // alias for rest method
-    class func tail<T>(array: [T], _ n: Int = 1) -> [T] {
+    public class func tail<T>(array: [T], _ n: Int = 1) -> [T] {
         return __.rest(array, n)
     }
     
     // alias for rest method
-    class func drop<T>(array: [T], _ n: Int = 1) -> [T] {
+    public class func drop<T>(array: [T], _ n: Int = 1) -> [T] {
         return __.rest(array, n)
     }
     
-    // This method should be private
-    class func separate<T>(array: [T], _ n: Int) -> ([T], [T]) {
+    private class func separate<T>(array: [T], _ n: Int) -> ([T], [T]) {
         if n < 1 { return (array, []) }
         
         let length = array.count
@@ -114,7 +114,7 @@ extension __ {
         return (initial, last)
     }
     
-    class func compact<T : LogicValue>(array: [T]) -> [T] {
+    public class func compact<T : LogicValue>(array: [T]) -> [T] {
         let validator = array.map {
             $0.getLogicValue()
         }
@@ -127,7 +127,7 @@ extension __ {
         return result
     }
     
-    class func flatten<T>(array: [[T]]) -> [T] {
+    public class func flatten<T>(array: [[T]]) -> [T] {
         var result : [T] = []
         for item in array {
             result += item
@@ -135,13 +135,13 @@ extension __ {
         return result
     }
     
-    class func without<T: Equatable>(array: [T], values: T...) -> [T] {
+    public class func without<T: Equatable>(array: [T], values: T...) -> [T] {
         return array.filter {
             !contains(values, $0)
         }
     }
     
-    class func partition<T>(array: [T], predicate: T -> Bool ) -> ([T], [T]) {
+    public class func partition<T>(array: [T], predicate: T -> Bool ) -> ([T], [T]) {
         var result = (filtered: [T](), rejected: [T]())
         for item in array {
             if predicate(item) {
@@ -153,11 +153,11 @@ extension __ {
         return result
     }
     
-    class func union<T : Equatable>(arrays: [T]...) -> [T] {
+    public class func union<T : Equatable>(arrays: [T]...) -> [T] {
         return __.uniq(__.flatten(arrays))
     }
     
-    class func intersection<T : Equatable>(arrays: [T]...) -> [T] {
+    public class func intersection<T : Equatable>(arrays: [T]...) -> [T] {
         if arrays.isEmpty { return [] }
         
         var sorted = arrays
@@ -182,7 +182,7 @@ extension __ {
         return result
     }
     
-    class func difference<T: Equatable>(array: [T], others: [T]...) -> [T] {
+    public class func difference<T: Equatable>(array: [T], others: [T]...) -> [T] {
         var result = array
         
         for other in others {
@@ -201,11 +201,11 @@ extension __ {
         return result
     }
     
-    class func uniq<T : Equatable>(array: [T], isSorted: Bool = false) -> [T] {
+    public class func uniq<T : Equatable>(array: [T], isSorted: Bool = false) -> [T] {
         return __.uniq(array, isSorted: isSorted) { $0 }
     }
     
-    class func uniq<T, U : Equatable>(array: [T], isSorted: Bool, transform: T -> U) -> [T] {
+    public class func uniq<T, U : Equatable>(array: [T], isSorted: Bool, transform: T -> U) -> [T] {
         if array.isEmpty { return [] }
         
         var result : [T] = []
@@ -229,7 +229,7 @@ extension __ {
         return result
     }
     
-    class func zip<T, U>(array0: [T], _ array1: [U]) -> [(T, U)] {
+    public class func zip<T, U>(array0: [T], _ array1: [U]) -> [(T, U)] {
         let length: Int = min(array0.count, array1.count)
         
         var result : [(T, U)] = []
@@ -241,7 +241,7 @@ extension __ {
         return result
     }
     
-    class func object<K : Hashable, V>(#keys: [K], values:[V] ) -> [K:V] {
+    public class func object<K : Hashable, V>(#keys: [K], values:[V] ) -> [K:V] {
         var result : [K:V] = [:]
         let length: Int = min(keys.count, values.count)
         for i in 0..<length {
@@ -250,7 +250,7 @@ extension __ {
         return result
     }
     
-    class func object<K : Hashable, V>(keyAndValues: [(K, V)]) -> [K:V] {
+    public class func object<K : Hashable, V>(keyAndValues: [(K, V)]) -> [K:V] {
         var result : [K:V] = [:]
         for item in keyAndValues {
             result[item.0] = item.1
@@ -258,14 +258,14 @@ extension __ {
         return result
     }
     
-    class func indexOf<T: Equatable>(array: [T], value:T) -> Int? {
+    public class func indexOf<T: Equatable>(array: [T], value:T) -> Int? {
         for (index, item) in enumerate(array) {
             if item == value { return index }
         }
         return nil
     }
     
-    class func indexOf<T: Comparable>(array: [T], value:T, isSorted: Bool) -> Int? {
+    public class func indexOf<T: Comparable>(array: [T], value:T, isSorted: Bool) -> Int? {
         if isSorted {
             return __.sortedIndex(array, value: value) { $0 }
         } else {
@@ -276,12 +276,12 @@ extension __ {
         return nil
     }
     
-    class func lastIndexOf<T : Equatable>(array : [T], value: T) -> Int? {
+    public class func lastIndexOf<T : Equatable>(array : [T], value: T) -> Int? {
         let length = array.count - 1
         return __.lastIndexOf(array, value: value, from: length)
     }
     
-    class func lastIndexOf<T : Equatable>(array : [T], value: T, from: Int) -> Int? {
+    public class func lastIndexOf<T : Equatable>(array : [T], value: T, from: Int) -> Int? {
         for index in __.range(start:from, stop: 0, step: -1) {
             if array[index] == value {
                 return index
@@ -290,7 +290,7 @@ extension __ {
         return nil
     }
     
-    class func sortedIndex<T, U : Comparable>(array : [T], value : T, transform: T -> U ) -> Int? {
+    public class func sortedIndex<T, U : Comparable>(array : [T], value : T, transform: T -> U ) -> Int? {
         let target = transform(value)
         var low  = 0
         var high = array.count-1
@@ -308,18 +308,18 @@ extension __ {
         return nil
     }
     
-    class func range(stop: Int) -> [Int] {
+    public class func range(stop: Int) -> [Int] {
         return Array(0..<stop)
     }
     
-    class func range(#start: Int, stop: Int) -> [Int] {
+    public class func range(#start: Int, stop: Int) -> [Int] {
         if start > stop {
             return __.range(start: start, stop: stop, step: -1)
         }
         return Array(start..<stop)
     }
     
-    class func range(#start: Int, stop: Int, step: Int) -> [Int] {
+    public class func range(#start: Int, stop: Int, step: Int) -> [Int] {
         if step > 0 ? start > stop : start < stop { return [] }
         var result : [Int] = []
         var temp = start

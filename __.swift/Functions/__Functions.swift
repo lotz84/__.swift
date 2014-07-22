@@ -25,40 +25,40 @@
 
 import Foundation
 
-extension __ {
+public extension __ {
     
     // partial apply to function which takes 2 variables
-    class func partial<T, U, V>(f: (T, U) -> V, _ arg: T ) -> ( U -> V ) {
+    public class func partial<T, U, V>(f: (T, U) -> V, _ arg: T ) -> ( U -> V ) {
         return { f(arg, $0) }
     }
     
     // partially act to function which takes 3 variables
-    class func partial<T, U, V, W>(f: (T, U, V) -> W, _ arg: T ) -> ( (U, V) -> W ) {
+    public class func partial<T, U, V, W>(f: (T, U, V) -> W, _ arg: T ) -> ( (U, V) -> W ) {
         return { f(arg, $0, $1) }
     }
     
     // partially act to function which takes 4 variables
-    class func partial<T, U, V, W, X>(f: (T, U, V, W) -> X, _ arg: T ) -> ( (U, V, W) -> X ) {
+    public class func partial<T, U, V, W, X>(f: (T, U, V, W) -> X, _ arg: T ) -> ( (U, V, W) -> X ) {
         return { f(arg, $0, $1, $2) }
     }
     
     // partially act to function which takes 5 variables
-    class func partial<T, U, V, W, X, Y>(f: (T, U, V, W, X) -> Y, _ arg: T ) -> ( (U, V, W, X) -> Y ) {
+    public class func partial<T, U, V, W, X, Y>(f: (T, U, V, W, X) -> Y, _ arg: T ) -> ( (U, V, W, X) -> Y ) {
         return { f(arg, $0, $1, $2, $3) }
     }
     
     // partially act to function which takes 6 variables
-    class func partial<T, U, V, W, X, Y, Z>(f: (T, U, V, W, X, Y) -> Z, _ arg: T ) -> ( (U, V, W, X, Y) -> Z ) {
+    public class func partial<T, U, V, W, X, Y, Z>(f: (T, U, V, W, X, Y) -> Z, _ arg: T ) -> ( (U, V, W, X, Y) -> Z ) {
         return { f(arg, $0, $1, $2, $3, $4) }
     }
     
     // partially act to function which takes 7 variables
-    class func partial<T, U, V, W, X, Y, Z, A>(f: (T, U, V, W, X, Y, Z) -> A, _ arg: T ) -> ( (U, V, W, X, Y, Z) -> A ) {
+    public class func partial<T, U, V, W, X, Y, Z, A>(f: (T, U, V, W, X, Y, Z) -> A, _ arg: T ) -> ( (U, V, W, X, Y, Z) -> A ) {
         return { f(arg, $0, $1, $2, $3, $4, $5) }
     }
     
     // This is amazing memoize function in [Advanced Swift](https://developer.apple.com/videos/wwdc/2014/?id=404)
-    class func memoize<T: Hashable, U>(body: (T->U, T) -> U ) -> T -> U {
+    public class func memoize<T: Hashable, U>(body: (T->U, T) -> U ) -> T -> U {
         var memo : [T:U] = [:]
         var result: (T -> U)!
         result = { x in
@@ -70,7 +70,7 @@ extension __ {
         return result
     }
     
-    class func throttle<T, U>(f: T -> U, wait: Double) -> T -> U? {
+    public class func throttle<T, U>(f: T -> U, wait: Double) -> T -> U? {
         var lastFiredTime: Double?
         func executor(arg: T) -> U? {
             let now = __.now()
@@ -84,7 +84,7 @@ extension __ {
         return executor
     }
     
-    class func once<T, U>(f: T-> U) -> T -> U? {
+    public class func once<T, U>(f: T-> U) -> T -> U? {
         var isExecuted = false
         func executor(arg: T) -> U? {
             if isExecuted {
@@ -97,7 +97,7 @@ extension __ {
         return executor
     }
     
-    class func after<T, U>(count: Int, function: T -> U ) -> T -> U? {
+    public class func after<T, U>(count: Int, function: T -> U ) -> T -> U? {
         var now = 0
         func executor(arg:T) -> U? {
             now += 1
@@ -106,15 +106,15 @@ extension __ {
         return executor
     }
     
-    class func now() -> Double {
+    public class func now() -> Double {
         return NSDate().timeIntervalSince1970
     }
     
-    class func wrap<T, U, V, W>(f: T -> U, withWrapper wrapper:(T -> U , V) -> W)(arg: V) -> W {
+    public class func wrap<T, U, V, W>(f: T -> U, withWrapper wrapper:(T -> U , V) -> W)(arg: V) -> W {
         return wrapper(f, arg)
     }
     
-    class func compose<T, U, V>(g: U -> V, _ f: T -> U)(x: T) -> V {
+    public class func compose<T, U, V>(g: U -> V, _ f: T -> U)(x: T) -> V {
         return g(f(x))
     }
 }
