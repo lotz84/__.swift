@@ -282,7 +282,7 @@ public extension __ {
     }
     
     public class func lastIndexOf<T : Equatable>(array : [T], value: T, from: Int) -> Int? {
-        for index in __.range(start:from, stop: 0, step: -1) {
+        for index in stride(from: from, through: 0, by: -1) {
             if array[index] == value {
                 return index
             }
@@ -310,23 +310,5 @@ public extension __ {
     
     public class func range(stop: Int) -> [Int] {
         return Array(0..<stop)
-    }
-    
-    public class func range(#start: Int, stop: Int) -> [Int] {
-        if start > stop {
-            return __.range(start: start, stop: stop, step: -1)
-        }
-        return Array(start..<stop)
-    }
-    
-    public class func range(#start: Int, stop: Int, step: Int) -> [Int] {
-        if step > 0 ? start > stop : start < stop { return [] }
-        var result : [Int] = []
-        var temp = start
-        while step < 0 ? temp > stop : temp < stop {
-            result += temp
-            temp += step
-        }
-        return result
     }
 }

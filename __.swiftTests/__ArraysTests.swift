@@ -212,13 +212,5 @@ class __ArraysTests: XCTestCase {
         
         XCTAssert(range0==[0,1,2,3,4])
         
-        let range1 = __.range(start: 4, stop: -1)
-    
-        XCTAssert(range1==[4, 3, 2, 1, 0])
-        
-        
-        let range2 = __.range(start: 4, stop: -1, step: -2)
-        
-        XCTAssert(range2==[4, 2, 0])
     }
 }
