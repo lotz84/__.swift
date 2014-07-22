@@ -81,7 +81,7 @@ class __ArraysTests: XCTestCase {
         let item1: Int? = nil
         let item2: Int? = 2
         
-        let compacted: Int?[] = __.compact([item0, item1, item2]);
+        let compacted: [Int?] = __.compact([item0, item1, item2]);
         let unwrapped = compacted.map { $0! }
         
         XCTAssert(unwrapped == [1,2])
@@ -113,30 +113,30 @@ class __ArraysTests: XCTestCase {
     
     func testUnion(){
     
-        let r : Int[] = __.union([1, 2, 3], [101, 2, 1, 10], [2, 1])
+        let r : [Int] = __.union([1, 2, 3], [101, 2, 1, 10], [2, 1])
         
         XCTAssert(r == [1, 2, 3, 101, 10])
     }
     
     func testIntersection(){
         
-        let r : Int[] = __.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])
+        let r : [Int] = __.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])
         
         XCTAssert(r == [1,2])
     }
     
     func testDifference(){
         
-        let r : Int[] = __.difference([1, 2, 3, 4, 5], others: [5, 2, 10])
+        let r : [Int] = __.difference([1, 2, 3, 4, 5], others: [5, 2, 10])
         
         XCTAssert(r == [1,3,4])
     }
     
     func testUniq(){
         
-        let r0: Int[] = __.uniq([1,1,2,2,3,3,2,2,1,1])
-        let r1: Int[] = __.uniq([1,1,2,2,3,3,4,4], isSorted: true)
-        let r2: Int[] = __.uniq([1,1,2,2,3,3,4,4,5,5,6,6,7,7], isSorted: false, transform: { $0 % 3})
+        let r0: [Int] = __.uniq([1,1,2,2,3,3,2,2,1,1])
+        let r1: [Int] = __.uniq([1,1,2,2,3,3,4,4], isSorted: true)
+        let r2: [Int] = __.uniq([1,1,2,2,3,3,4,4,5,5,6,6,7,7], isSorted: false, transform: { $0 % 3})
         
         XCTAssert(r0 == [1,2,3])
         XCTAssert(r1 == [1,2,3,4])
