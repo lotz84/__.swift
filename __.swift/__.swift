@@ -35,17 +35,16 @@ class __ {
         return Chain(wrapped)
     }
     
-    struct Chain<T> {
+    struct Chain<WrappedType> {
         
-        typealias Wrapped = T
         
-        var _wrapped: Wrapped
+        var _wrapped: WrappedType
         
-        init(_ wrapped: Wrapped) {
+        init(_ wrapped: WrappedType) {
             self._wrapped = wrapped
         }
         
-        func value() -> Wrapped {
+        func value() -> WrappedType {
             return self._wrapped
         }
     }

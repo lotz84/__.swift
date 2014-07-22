@@ -27,8 +27,8 @@ import Foundation
 
 extension __.Chain {
     
-    func each<U>(iterator: U -> Any) -> () {
-        if let wrapped = self._wrapped as? [U] {
+    func each<T>(iterator: T -> Any) -> () {
+        if let wrapped = self._wrapped as? [T] {
             __.each(wrapped, iterator)
         }
     }
@@ -40,7 +40,7 @@ extension __.Chain {
     }
     
     // alias for each
-    func forEach<U>(iterator: U -> Any) -> () {
+    func forEach<T>(iterator: T -> Any) -> () {
         self.each(iterator)
     }
     
@@ -49,17 +49,17 @@ extension __.Chain {
         self.each(iterator)
     }
     
-    func map<U, V>(transform: U -> V) -> __.Chain<[V]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func map<T, U>(transform: T -> U) -> __.Chain<[U]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain(wrapped.map(transform))
         }
         return nil
     }
     
     
-    func map<K : Hashable, V, U>(transform: (K, V) -> U) -> __.Chain<[U]>! {
+    func map<K : Hashable, V, T>(transform: (K, V) -> T) -> __.Chain<[T]>! {
         if let wrapped = self._wrapped as? [K:V] {
-            var result : [U] = []
+            var result : [T] = []
             var gen = wrapped.generate()
             while let elem = gen.next() {
                 result += transform(elem)
@@ -69,22 +69,22 @@ extension __.Chain {
         return nil
     }
     
-    func collect<U, V>(transform: U -> V) -> __.Chain<[V]>! {
+    func collect<T, U>(transform: T -> U) -> __.Chain<[U]>! {
         return self.map(transform)
     }
     
-    func collect<K : Hashable, V, U>(transform: (K, V) -> U) -> __.Chain<[U]>! {
+    func collect<K : Hashable, V, T>(transform: (K, V) -> T) -> __.Chain<[T]>! {
         return self.map(transform)
     }
     
-    func reduce<U, V>(initial: V, combine:(V, U) -> V ) -> __.Chain<V>! {
-        if let wrapped = self._wrapped as? [U] {
+    func reduce<T, U>(initial: U, combine:(U, T) -> U) -> __.Chain<U>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain(wrapped.reduce(initial, combine: combine))
         }
         return nil
     }
     
-    func reduce<K : Hashable, V, U>(initial: U, combine:(U, (K, V)) -> U) -> __.Chain<U>! {
+    func reduce<K : Hashable, V, T>(initial: T, combine:(T, (K, V)) -> T) -> __.Chain<T>! {
         if let wrapped = self._wrapped as? [K:V] {
             var accum = initial
             var gen = wrapped.generate()
@@ -97,33 +97,33 @@ extension __.Chain {
     }
     
     // alias for reduce
-    func inject<U, V>(initial: V, combine:(V, U) -> V ) -> __.Chain<V>! {
+    func inject<T, U>(initial: U, combine:(U, T) -> U ) -> __.Chain<U>! {
         return self.reduce(initial, combine: combine)
     }
     
     // alias for reduce
-    func inject<K : Hashable, V, U>(initial: U, combine:(U, (K, V)) -> U) -> __.Chain<U>! {
+    func inject<K : Hashable, V, T>(initial: T, combine:(T, (K, V)) -> T) -> __.Chain<T>! {
         return self.reduce(initial, combine: combine)
     }
     
     // alias for reduce
-    func foldl<U, V>(initial: V, combine:(V, U) -> V ) -> __.Chain<V>! {
+    func foldl<T, U>(initial: U, combine:(U, T) -> U ) -> __.Chain<U>! {
         return self.reduce(initial, combine: combine)
     }
     
     // alias for reduce
-    func foldl<K : Hashable, V, U>(initial: U, combine:(U, (K, V)) -> U) -> __.Chain<U>! {
+    func foldl<K : Hashable, V, T>(initial: T, combine:(T, (K, V)) -> T) -> __.Chain<T>! {
         return self.reduce(initial, combine: combine)
     }
     
-    func reduceRight<U, V>(initial: V, combine:(U, V) -> V ) -> __.Chain<V>! {
-        if let wrapped = self._wrapped as? [U] {
+    func reduceRight<T, U>(initial: U, combine:(T, U) -> U) -> __.Chain<U>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.reduceRight(wrapped, initial: initial, combine: combine) )
         }
         return nil
     }
     
-    func reduceRight<K : Hashable, V, U>(initial: U, combine:((K, V), U) -> U) -> __.Chain<U>! {
+    func reduceRight<K : Hashable, V, T>(initial: T, combine:((K, V), T) -> T) -> __.Chain<T>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.reduceRight(wrapped, initial: initial, combine: combine) )
         }
@@ -131,17 +131,17 @@ extension __.Chain {
     }
     
     // alias for reduceRight
-    func foldr<U, V>(initial: V, combine:(U, V) -> V ) -> __.Chain<V>! {
+    func foldr<T, U>(initial: U, combine:(T, U) -> U) -> __.Chain<U>! {
         return self.reduceRight(initial, combine: combine)
     }
     
     // alias for reduceRight
-    func foldr<K : Hashable, V, U>(initial: U, combine:((K, V), U) -> U) -> __.Chain<U>! {
+    func foldr<K : Hashable, V, T>(initial: T, combine:((K, V), T) -> T) -> __.Chain<T>! {
         return self.reduceRight(initial, combine: combine)
     }
     
-    func find<U>(predicate: U -> Bool) -> __.Chain<U?>! {
-        if let wrapped = self._wrapped as? [U] {
+    func find<T>(predicate: T -> Bool) -> __.Chain<T?>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.find(wrapped, predicate: predicate) )
         }
         return nil
@@ -155,7 +155,7 @@ extension __.Chain {
     }
     
     // alias for find
-    func detect<U>(predicate: U -> Bool) -> __.Chain<U?>! {
+    func detect<T>(predicate: T -> Bool) -> __.Chain<T?>! {
         return self.find(predicate)
     }
     
@@ -164,8 +164,8 @@ extension __.Chain {
         return self.find(predicate)
     }
     
-    func filter<U>(predicate: U -> Bool) -> __.Chain<[U]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func filter<T>(predicate: T -> Bool) -> __.Chain<[T]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( wrapped.filter(predicate) )
         }
         return nil
@@ -185,7 +185,7 @@ extension __.Chain {
     }
     
     // alias for filter
-    func select<U>(predicate: U -> Bool) -> __.Chain<[U]>! {
+    func select<T>(predicate: T -> Bool) -> __.Chain<[T]>! {
         return self.filter(predicate)
     }
     
@@ -208,8 +208,8 @@ extension __.Chain {
         return nil
     }
     
-    func reject<U>(predicate: U -> Bool) -> __.Chain<[U]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func reject<T>(predicate: T -> Bool) -> __.Chain<[T]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( wrapped.filter({ !predicate($0) }) )
         }
         return nil
@@ -229,8 +229,8 @@ extension __.Chain {
         return nil
     }
     
-    func every<U>(predicate: U -> Bool ) -> __.Chain<Bool>! {
-        if let wrapped = self._wrapped as? [U] {
+    func every<T>(predicate: T -> Bool ) -> __.Chain<Bool>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.every(wrapped, predicate) )
         }
         return nil
@@ -242,7 +242,7 @@ extension __.Chain {
     }
     
     // alias for every
-    func all<U>(predicate: U -> Bool ) -> __.Chain<Bool>! {
+    func all<T>(predicate: T -> Bool ) -> __.Chain<Bool>! {
         return self.every(predicate)
     }
     
@@ -253,8 +253,8 @@ extension __.Chain {
         return nil
     }
     
-    func some<U>(predicate: U -> Bool ) -> __.Chain<Bool>! {
-        if let wrapped = self._wrapped as? [U] {
+    func some<T>(predicate: T -> Bool ) -> __.Chain<Bool>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.some(wrapped, predicate) )
         }
         return nil
@@ -266,12 +266,12 @@ extension __.Chain {
     }
     
     // alias for some
-    func any<U>(predicate: U -> Bool ) -> __.Chain<Bool>! {
+    func any<T>(predicate: T -> Bool ) -> __.Chain<Bool>! {
         return self.some(predicate)
     }
     
-    func contains<U : Equatable>(x: U) -> __.Chain<Bool>! {
-        if let wrapped = self._wrapped as? [U] {
+    func contains<E : Equatable>(x: E) -> __.Chain<Bool>! {
+        if let wrapped = self._wrapped as? [E] {
             var gen = wrapped.generate()
             while let elem = gen.next() {
                 if elem == x {
@@ -296,7 +296,7 @@ extension __.Chain {
     }
     
     // alias for contains
-    func include<U : Equatable>(x: U) -> __.Chain<Bool>! {
+    func include<E : Equatable>(x: E) -> __.Chain<Bool>! {
         return self.contains(x)
     }
     
@@ -312,22 +312,22 @@ extension __.Chain {
         return nil
     }
     
-    func max<U : Comparable>() -> __.Chain<U>! {
-        if let wrapped = self._wrapped as? [U] {
+    func max<C : Comparable>() -> __.Chain<C>! {
+        if let wrapped = self._wrapped as? [C] {
             return __.chain( maxElement(wrapped) )
         }
         return nil
     }
     
-    func min<U : Comparable>() -> __.Chain<U>! {
-        if let wrapped = self._wrapped as? [U] {
+    func min<C : Comparable>() -> __.Chain<C>! {
+        if let wrapped = self._wrapped as? [C] {
             return __.chain( minElement(wrapped) )
         }
         return nil
     }
     
-    func sortBy<U, V : Comparable>(transform: U -> V) -> __.Chain<[U]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func sortBy<T, U : Comparable>(transform: T -> U) -> __.Chain<[T]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.sortBy(wrapped, transform: transform) )
         }
         return nil
@@ -347,36 +347,36 @@ extension __.Chain {
         return nil
     }
     
-    func countBy<U, V>(transform: U -> V) -> __.Chain<[V:Int]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func countBy<T, U>(transform: T -> U) -> __.Chain<[U:Int]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.countBy(wrapped, transform:transform) )
         }
         return nil
     }
     
-    func shuffle<U>() -> __.Chain<[U]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func shuffle<T>() -> __.Chain<[T]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.shuffle(wrapped) )
         }
         return nil
     }
     
-    func sample<U>() -> __.Chain<U>! {
-        if let wrapped = self._wrapped as? [U] {
+    func sample<T>() -> __.Chain<T>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.sample(wrapped) )
         }
         return nil
     }
     
-    func sample<U>(n:Int) -> __.Chain<[U]>! {
-        if let wrapped = self._wrapped as? [U] {
+    func sample<T>(n:Int) -> __.Chain<[T]>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.sample(wrapped, n) )
         }
         return nil
     }
     
-    func size<U>() -> __.Chain<Int>! {
-        if let wrapped = self._wrapped as? [U] {
+    func size<T>() -> __.Chain<Int>! {
+        if let wrapped = self._wrapped as? [T] {
             return __.chain( __.size(wrapped) )
         }
         return nil

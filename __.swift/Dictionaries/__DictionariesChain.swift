@@ -83,7 +83,7 @@ extension __.Chain {
         return nil
     }
 
-    func tap<U>(interceptor: T -> U) -> __.Chain<T> {
+    func tap<U>(interceptor: WrappedType -> U) -> __.Chain<WrappedType> {
         interceptor(self._wrapped)
         return self
     }
