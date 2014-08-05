@@ -62,7 +62,7 @@ public extension __.Chain {
             var result : [T] = []
             var gen = wrapped.generate()
             while let elem = gen.next() {
-                result += transform(elem)
+                result.append(transform(elem))
             }
             return __.chain( result )
         }
@@ -176,7 +176,7 @@ public extension __.Chain {
             var result : [(K, V)] = []
             for (key, value) in wrapped {
                 if predicate(key, value) {
-                    result += (key, value)
+                    result.append(key, value)
                 }
             }
             return __.chain( result )
@@ -222,7 +222,7 @@ public extension __.Chain {
         return nil
     }
     
-    public func every<L: LogicValue>() -> __.Chain<Bool>! {
+    public func every<L: BooleanType>() -> __.Chain<Bool>! {
         if let wrapped = self._wrapped as? [L] {
             return __.chain( __.every(wrapped) )
         }
@@ -237,8 +237,8 @@ public extension __.Chain {
     }
     
     // alias for every
-    public func all<L: LogicValue>() -> __.Chain<Bool>! {
-        return self.every({ (x:LogicValue) -> Bool in x.getLogicValue() })
+    public func all<L: BooleanType>() -> __.Chain<Bool>! {
+        return self.every({ (x:BooleanType) -> Bool in x.boolValue })
     }
     
     // alias for every
@@ -246,7 +246,7 @@ public extension __.Chain {
         return self.every(predicate)
     }
     
-    public func some<L: LogicValue>() -> __.Chain<Bool>! {
+    public func some<L: BooleanType>() -> __.Chain<Bool>! {
         if let wrapped = self._wrapped as? [L] {
             return __.chain( __.some(wrapped) )
         }
@@ -261,8 +261,8 @@ public extension __.Chain {
     }
     
     // alias for some
-    public func any<L: LogicValue>() -> __.Chain<Bool>! {
-        return self.some({ (x:LogicValue) -> Bool in x.getLogicValue() })
+    public func any<L: BooleanType>() -> __.Chain<Bool>! {
+        return self.some({ (x:BooleanType) -> Bool in x.boolValue })
     }
     
     // alias for some

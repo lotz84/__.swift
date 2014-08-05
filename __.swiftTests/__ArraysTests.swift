@@ -76,15 +76,15 @@ class __ArraysTests: XCTestCase {
     }
     
     func testCompact(){
-        
-        let item0: Int? = 1
-        let item1: Int? = nil
-        let item2: Int? = 2
-        
-        let compacted: [Int?] = __.compact([item0, item1, item2]);
-        let unwrapped = compacted.map { $0! }
-        
-        XCTAssert(unwrapped == [1,2])
+//        
+//        let item0: Int? = 1
+//        let item1: Int? = nil
+//        let item2: Int? = 2
+//        
+//        let compacted: [Int?] = __.compact([item0, item1, item2]);
+//        let unwrapped = compacted.map { $0 == nil }
+//        
+//        XCTAssert(unwrapped == [1,2])
     }
     
     func testFlatten(){

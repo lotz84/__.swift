@@ -74,7 +74,7 @@ public extension __ {
         var lastFiredTime: Double?
         func executor(arg: T) -> U? {
             let now = __.now()
-            if !lastFiredTime || (now - lastFiredTime! > wait) {
+            if lastFiredTime == nil || (now - lastFiredTime! > wait) {
                 lastFiredTime = now
                 return f(arg)
             } else {

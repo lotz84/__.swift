@@ -27,20 +27,20 @@ import Foundation
 
 public extension __.Chain {
     
-    public func first<T>() -> __.Chain<T>! {
+    public func first<T>() -> __.Chain<T?>! {
         if let wrapped = self._wrapped as? [T] {
-            return __.chain( __.first(wrapped) )
+            return __.chain( wrapped.first )
         }
         return nil
     }
     
     // alias for first
-    public func head<T>() -> __.Chain<T>! {
+    public func head<T>() -> __.Chain<T?>! {
         return self.first()
     }
     
     // alias for first
-    public func take<T>() -> __.Chain<T>! {
+    public func take<T>() -> __.Chain<T?>! {
         return self.first()
     }
     
@@ -68,9 +68,9 @@ public extension __.Chain {
         return nil
     }
 
-    public func last<T>() -> __.Chain<T>! {
+    public func last<T>() -> __.Chain<T?>! {
         if let wrapped = self._wrapped as? [T] {
-            return __.chain( __.last(wrapped) )
+            return __.chain( wrapped.last )
         }
         return nil
     }
@@ -99,7 +99,7 @@ public extension __.Chain {
         return self.rest(n: n)
     }
     
-    public func compact<L : LogicValue>() -> __.Chain<[L]>! {
+    public func compact<L : BooleanType>() -> __.Chain<[L]>! {
         if let wrapped = self._wrapped as? [L] {
             return __.chain( __.compact(wrapped) )
         }
@@ -115,14 +115,14 @@ public extension __.Chain {
 
     public func without<E: Equatable>( values: E...) -> __.Chain<[E]>! {
         if let wrapped = self._wrapped as? [E] {
-            return __.chain( __.without(wrapped, values: reinterpretCast(values)) )
+            return __.chain( __.without(wrapped, values: unsafeBitCast(values, E.self)) )
         }
         return nil
     }
     
     public func partition<T>( predicate: T -> Bool ) -> __.Chain<([T], [T])>! {
         if let wrapped = self._wrapped as? [T] {
-            return __.chain( reinterpretCast(__.partition(wrapped, predicate: predicate)) )
+            //return __.chain( unsafeBitCast(__.partition(wrapped, predicate: predicate), (([T].self, [T].self)).self ))
         }
         return nil
     }
@@ -131,7 +131,7 @@ public extension __.Chain {
     
     public func difference<E: Equatable>(array: [E], others: [E]...) -> __.Chain<[E]>! {
         if let wrapped = self._wrapped as? [E] {
-            return __.chain( __.difference(wrapped, others: reinterpretCast(others)) )
+            return __.chain( __.difference(wrapped, others: unsafeBitCast(others, [E].self)) )
         }
         return nil
     }

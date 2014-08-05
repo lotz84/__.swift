@@ -57,28 +57,28 @@ public extension __.Chain {
 
     public func extend<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
-            return __.chain( __.extend(wrapped, to: reinterpretCast(dictionaries)) )
+            return __.chain( __.extend(wrapped, to: unsafeBitCast(dictionaries, [K:V].self)) )
         }
         return nil
     }
 
     public func pick<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
-            return __.chain( __.pick(from: wrapped, keys: reinterpretCast(keys)) )
+            return __.chain( __.pick(from: wrapped, keys: unsafeBitCast(keys, K.self)) )
         }
         return nil
     }
 
     public func omit<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
-            return __.chain( __.omit(from: wrapped, keys: reinterpretCast(keys)) )
+            return __.chain( __.omit(from: wrapped, keys: unsafeBitCast(keys, K.self)) )
         }
         return nil
     }
 
     public func defaults<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
-            return __.chain( __.defaults(wrapped, defaults: reinterpretCast(dictionaries)) )
+            return __.chain( __.defaults(wrapped, defaults: unsafeBitCast(dictionaries, [K:V].self)) )
         }
         return nil
     }
@@ -167,10 +167,10 @@ public extension __.Chain {
         return false
     }
     
-//    func isNil() -> Bool? {
-//        if let wrapped = self._wrapped as? NilLiteralConvertible {
-//            return true
-//        }
-//        return false
-//    }
+    func isNil() -> Bool? {
+        if self._wrapped == nil {
+            return true
+        }
+        return false
+    }
 }

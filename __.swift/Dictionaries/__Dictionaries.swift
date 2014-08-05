@@ -68,7 +68,7 @@ public extension __ {
     public class func defaults<K, V>(var dict: [K:V], defaults: [K:V]...) -> [K:V] {
         for option in defaults {
             for key in option.keys {
-                if !dict[key] {
+                if dict[key] == nil {
                     dict[key] = option[key]
                 }
             }
@@ -77,7 +77,7 @@ public extension __ {
     }
     
     public class func has<K, V>(dict: [K:V], key: K) -> Bool {
-        return dict[key].getLogicValue()
+        return dict[key] != nil
     }
     
     public class func property<K, V>(key: K)(dict: [K:V]) -> V? {

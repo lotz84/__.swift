@@ -31,7 +31,7 @@ public extension __ {
     * Collection Functions (Arrays or Dictionaries)
     */
     
-    public class func each<T : Sequence>(seq: T, _ iterator: T.GeneratorType.Element -> Any){
+    public class func each<T : SequenceType>(seq: T, _ iterator: T.Generator.Element -> Any){
         var gen = seq.generate()
         while let elem = gen.next() {
             iterator(elem)
@@ -39,24 +39,24 @@ public extension __ {
     }
     
     // alias for each
-    public class func forEach<T : Sequence>(seq: T, _ iterator: T.GeneratorType.Element -> Any){
+    public class func forEach<T : SequenceType>(seq: T, _ iterator: T.Generator.Element -> Any){
         __.each(seq, iterator)
     }
     
-    public class func reduceRight<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
-        var array : [T.GeneratorType.Element] = []
+    public class func reduceRight<T : SequenceType, U>(seq: T, initial: U, combine: (T.Generator.Element, U) -> U) -> U {
+        var array : [T.Generator.Element] = []
         var gen = seq.generate()
         while let elem = gen.next() {
-            array += elem
+            array.append(elem)
         }
         return array.reverse().reduce(initial, combine: { combine($1,$0) } )
     }
     
-    public class func foldr<T : Sequence, U>(seq: T, initial: U, combine: (T.GeneratorType.Element, U) -> U) -> U {
+    public class func foldr<T : SequenceType, U>(seq: T, initial: U, combine: (T.Generator.Element, U) -> U) -> U {
         return __.reduceRight(seq, initial: initial, combine: combine)
     }
     
-    public class func find<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
+    public class func find<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> T.Generator.Element? {
         var gen = seq.generate()
         while let elem = gen.next() {
             if predicate(elem) {
@@ -67,7 +67,7 @@ public extension __ {
     }
     
     // alias for find
-    public class func detect<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> T.GeneratorType.Element? {
+    public class func detect<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> T.Generator.Element? {
         return __.find(seq, predicate)
     }
  
@@ -75,7 +75,7 @@ public extension __ {
         var result : [[K:V]] = []
         for dict in array {
             if __.hasSubDictionary(dict, subDictionary: properties) {
-                result += dict
+                result.append(dict)
             }
         }
         return result
@@ -90,43 +90,43 @@ public extension __ {
         return nil
     }
     
-    public class func reject<T : Sequence>(seq: T, _ condition: T.GeneratorType.Element -> Bool) -> [T.GeneratorType.Element] {
+    public class func reject<T : SequenceType>(seq: T, _ condition: T.Generator.Element -> Bool) -> [T.Generator.Element] {
         return Array(filter(seq, { !condition($0) }))
     }
     
-    public class func every<L: LogicValue>(array: [L]) -> Bool {
-        return __.every(array, predicate: { $0.getLogicValue() })
+    public class func every<L: BooleanType>(array: [L]) -> Bool {
+        return __.every(array, predicate: { $0.boolValue })
     }
     
-    public class func every<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool ) -> Bool {
-        return __.find(seq, { !predicate($0) }) ? false : true
+    public class func every<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool ) -> Bool {
+        return __.find(seq, { !predicate($0) }) == nil ? true : false
     }
     
     // alias for every
-    public class func all<L: LogicValue>(array: [L]) -> Bool {
+    public class func all<L: BooleanType>(array: [L]) -> Bool {
         return __.every(array)
     }
     
     // alias for every
-    public class func all<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
+    public class func all<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> Bool {
         return __.every(seq, predicate: predicate)
     }
     
-    public class func some<L: LogicValue>(array: [L]) -> Bool {
-        return __.some(array, predicate: { $0.getLogicValue() })
+    public class func some<L: BooleanType>(array: [L]) -> Bool {
+        return __.some(array, predicate: { $0.boolValue })
     }
     
-    public class func some<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
-        return __.find(seq, predicate ) ? true : false
+    public class func some<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> Bool {
+        return __.find(seq, predicate) == nil ? false : true
     }
     
     // alias for some
-    public class func any<L: LogicValue>(array: [L]) -> Bool {
+    public class func any<L: BooleanType>(array: [L]) -> Bool {
         return __.some(array)
     }
     
     // alias for some
-    public class func any<T : Sequence>(seq: T, predicate: T.GeneratorType.Element -> Bool) -> Bool {
+    public class func any<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> Bool {
         return __.some(seq, predicate: predicate)
     }
     
@@ -134,32 +134,32 @@ public extension __ {
         var result : [V] = []
         for item in array {
             if let value = item[key] {
-                result += value
+                result.append(value)
             }
         }
         return result
     }
     
     // quick sort
-    public class func sortBy<T : Sequence, C: Comparable>(seq: T, transform: T.GeneratorType.Element -> C) -> [T.GeneratorType.Element] {
+    public class func sortBy<T : SequenceType, C: Comparable>(seq: T, transform: T.Generator.Element -> C) -> [T.Generator.Element] {
         
         var gen = seq.generate()
         
         if let first = gen.next() {
             
-            var smaller : [T.GeneratorType.Element] = []
-            var bigger  : [T.GeneratorType.Element] = []
+            var smaller : [T.Generator.Element] = []
+            var bigger  : [T.Generator.Element] = []
             
             while let elem = gen.next() {
                 if transform(first) < transform(elem) {
-                    bigger += elem
+                    bigger.append(elem)
                 } else {
-                    smaller += elem
+                    smaller.append(elem)
                 }
             }
             
             var result = sortBy(smaller, transform: transform)
-            result += first
+            result.append(first)
             result += sortBy(bigger, transform: transform)
             
             return result
@@ -222,15 +222,15 @@ public extension __ {
         var result : [T] = []
         let random = __.shuffle(Array(0..<array.count))
         for i in 0..<n {
-            result += array[random[i]]
+            result.append(array[random[i]])
         }
         return result
     }
     
-    public class func size<T : Sequence>(seq: T) -> Int {
+    public class func size<T : SequenceType>(seq: T) -> Int {
         var count = 0
         var gen = seq.generate()
-        while gen.next() {
+        while gen.next() != nil {
             count += 1
         }
         return count

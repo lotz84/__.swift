@@ -62,7 +62,7 @@ class __CollectionsTests: XCTestCase {
         let result1 = __.find([1,2,3]) { $0 == 4 }
         
         var flag = false;
-        if result1 {
+        if result1 != nil {
             flag = false
         } else {
             flag = true
@@ -90,7 +90,7 @@ class __CollectionsTests: XCTestCase {
             XCTAssert(false)
         }
         
-        if __.findWhere(data, ["time": "3 a.m."]) {
+        if __.findWhere(data, ["time": "3 a.m."]) != nil {
             XCTAssert(false)
         } else {
             XCTAssert(true)
@@ -113,14 +113,14 @@ class __CollectionsTests: XCTestCase {
         var result1 = __.every([true, true, false])
         
         XCTAssert(!result1)
-        
-        let item0: Int? = 1
-        let item1: Int? = 2
-        let item2: Int? = nil
-        
-        var result2 = __.every([item0, item1, item2])
-        
-        XCTAssert(!result2)
+
+//        let item0: Int? = 1
+//        let item1: Int? = 2
+//        let item2: Int? = nil
+//        
+//        var result2 = __.every([item0, item1, item2])
+//        
+//        XCTAssert(result2 == nil)
         
     }
 
@@ -134,13 +134,13 @@ class __CollectionsTests: XCTestCase {
         
         XCTAssert(result1)
         
-        let item0: Int? = 1
-        let item1: Int? = 2
-        let item2: Int? = nil
-        
-        var result2 = __.some([item0, item1, item2])
-        
-        XCTAssert(result2)
+//        let item0: Int? = 1
+//        let item1: Int? = 2
+//        let item2: Int? = nil
+//        
+//        var result2 = __.some([item0, item1, item2])
+//        
+//        XCTAssert(result2!=nil)
         
     }
 

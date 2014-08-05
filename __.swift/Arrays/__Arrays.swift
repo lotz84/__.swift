@@ -31,22 +31,6 @@ public extension __ {
     * Array Functions
     */
     
-    public class func first<T>(array:[T]) -> T! {
-        if array.isEmpty { return nil }
-        return array[array.startIndex]
-    }
-    
-    // alias for first
-    public class func head<T>(array:[T]) -> T! {
-        return __.first(array)
-    }
-    
-    
-    // alias for first
-    public class func take<T>(array:[T]) -> T! {
-        return __.first(array)
-    }
-    
     public class func first<T>(array:[T], _ n:Int) -> [T]! {
         let (first, _) = __.separate(array, array.count - n)
         return first
@@ -69,10 +53,6 @@ public extension __ {
     public class func initial<T>(array:[T], _ n: Int = 1) -> [T] {
         let (initial, _) = __.separate(array, n)
         return initial
-    }
-    
-    public class func last<T>(array: [T]) -> T {
-        return array[array.endIndex-1]
     }
     
     public class func last<T>(array: [T], _ n: Int) -> [T] {
@@ -106,22 +86,22 @@ public extension __ {
         var last    : [T] = []
         for i in 0..<length {
             if i < length-n {
-                initial += array[i]
+                initial.append(array[i])
             } else {
-                last    += array[i]
+                last.append(array[i])
             }
         }
         return (initial, last)
     }
     
-    public class func compact<T : LogicValue>(array: [T]) -> [T] {
+    public class func compact<T : BooleanType>(array: [T]) -> [T] {
         let validator = array.map {
-            $0.getLogicValue()
+            $0.boolValue
         }
         var result : [T] = []
         for (index, item) in enumerate(array) {
             if validator[index] {
-                result += item
+                result.append(item)
             }
         }
         return result
@@ -145,9 +125,9 @@ public extension __ {
         var result = (filtered: [T](), rejected: [T]())
         for item in array {
             if predicate(item) {
-                result.filtered += item
+                result.filtered.append(item)
             } else {
-                result.rejected += item
+                result.rejected.append(item)
             }
         }
         return result
@@ -171,7 +151,7 @@ public extension __ {
             var removeList : [Int] = []
             for (index,item) in enumerate(result) {
                 if !contains(sorted[index], item){
-                    removeList += index
+                    removeList.append(index)
                 }
             }
             let reversedRemoveList = removeList.reverse()
@@ -189,7 +169,7 @@ public extension __ {
             var removeList : [Int] = []
             for (index,item) in enumerate(result) {
                 if contains(other, item) {
-                    removeList += index
+                    removeList.append(index)
                 }
             }
             let reversedRemoveList = removeList.reverse()
@@ -210,10 +190,10 @@ public extension __ {
         
         var result : [T] = []
         if isSorted {
-            result += __.first(array)
+            result.append(array.first!)
             for item in array {
-                if transform(__.last(result)) != transform(item) {
-                    result += item
+                if transform(result.last!) != transform(item) {
+                    result.append(item)
                 }
             }
         } else {
@@ -221,8 +201,8 @@ public extension __ {
             for item in array {
                 let transformed = transform(item)
                 if !contains(seen, transformed) {
-                    result += item
-                    seen += transformed
+                    result.append(item)
+                    seen.append(transformed)
                 }
             }
         }
@@ -235,7 +215,7 @@ public extension __ {
         var result : [(T, U)] = []
 
         for i in 0..<length {
-            result += (array0[i], array1[i])
+            result.append(array0[i], array1[i])
         }
         
         return result

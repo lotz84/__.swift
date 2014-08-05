@@ -40,7 +40,7 @@ public extension __ {
     public class func times<T>(n: Int, _ iterator: Int -> T ) -> [T] {
         var result : [T] = []
         for i in 0..<n {
-            result += iterator(i)
+            result.append(iterator(i))
         }
         return result
     }
