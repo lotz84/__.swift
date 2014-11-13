@@ -31,18 +31,18 @@ public extension __ {
     * Array Functions
     */
     
-    public class func first<T>(array:[T], _ n:Int) -> [T]! {
+    public class func first<T>(array:[T], _ n:Int = 1) -> [T]! {
         let (first, _) = __.separate(array, array.count - n)
         return first
     }
     
     // alias for first
-    public class func head<T>(array:[T], _ n:Int) -> [T]! {
+    public class func head<T>(array:[T], _ n:Int = 1) -> [T]! {
         return __.first(array, n)
     }
     
     // alias for first
-    public class func take<T>(array:[T], _ n:Int) -> [T]! {
+    public class func take<T>(array:[T], _ n:Int = 1) -> [T]! {
         return __.first(array, n)
     }
     
@@ -55,7 +55,7 @@ public extension __ {
         return initial
     }
     
-    public class func last<T>(array: [T], _ n: Int) -> [T] {
+    public class func last<T>(array: [T], _ n: Int = 1) -> [T] {
         let (_, last) = __.separate(array, n)
         return last
     }

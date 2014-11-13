@@ -31,21 +31,21 @@ public class __ {
         return "v0.2.0"
     }
     
-    public class func chain<T>(wrapped: T) -> Chain<T> {
-        return Chain(wrapped)
+    public class func chain<T>(wrapped: T) -> __Chain<T> {
+        return __Chain(wrapped)
+    }
+}
+
+public struct __Chain<WrappedType> {
+    
+    
+    var _wrapped: WrappedType
+    
+    init(_ wrapped: WrappedType) {
+        self._wrapped = wrapped
     }
     
-    public struct Chain<WrappedType> {
-        
-        
-        var _wrapped: WrappedType
-        
-        init(_ wrapped: WrappedType) {
-            self._wrapped = wrapped
-        }
-        
-        public func value() -> WrappedType {
-            return self._wrapped
-        }
+    public func value() -> WrappedType {
+        return self._wrapped
     }
 }

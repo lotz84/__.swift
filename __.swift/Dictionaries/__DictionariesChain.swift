@@ -25,70 +25,70 @@
 
 import Foundation
 
-public extension __.Chain {
+public extension __Chain {
 
-    public func keys<K : Hashable, V>() -> __.Chain<([K])>! {
+    public func keys<K : Hashable, V>() -> __Chain<([K])>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped.keys) )
         }
         return nil
     }
 
-    public func values<K : Hashable, V>() -> __.Chain<([V])>! {
+    public func values<K : Hashable, V>() -> __Chain<([V])>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped.values) )
         }
         return nil
     }
 
-    public func pairs<K : Hashable, V>() -> __.Chain<[(K, V)]>! {
+    public func pairs<K : Hashable, V>() -> __Chain<[(K, V)]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( Array(wrapped) )
         }
         return nil
     }
 
-    public func invert<K : Hashable, V : Hashable>() -> __.Chain<[V:K]>! {
+    public func invert<K : Hashable, V : Hashable>() -> __Chain<[V:K]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.invert(wrapped) )
         }
         return nil
     }
 
-    public func extend<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
+    public func extend<K : Hashable, V>(to dictionaries: [K:V]...) -> __Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.extend(wrapped, to: unsafeBitCast(dictionaries, [K:V].self)) )
         }
         return nil
     }
 
-    public func pick<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
+    public func pick<K : Hashable, V>(keys: K...) -> __Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.pick(from: wrapped, keys: unsafeBitCast(keys, K.self)) )
         }
         return nil
     }
 
-    public func omit<K : Hashable, V>(keys: K...) -> __.Chain<[K:V]>! {
+    public func omit<K : Hashable, V>(keys: K...) -> __Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.omit(from: wrapped, keys: unsafeBitCast(keys, K.self)) )
         }
         return nil
     }
 
-    public func defaults<K : Hashable, V>(to dictionaries: [K:V]...) -> __.Chain<[K:V]>! {
+    public func defaults<K : Hashable, V>(to dictionaries: [K:V]...) -> __Chain<[K:V]>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.defaults(wrapped, defaults: unsafeBitCast(dictionaries, [K:V].self)) )
         }
         return nil
     }
 
-    public func tap<U>(interceptor: WrappedType -> U) -> __.Chain<WrappedType> {
+    public func tap<U>(interceptor: WrappedType -> U) -> __Chain<WrappedType> {
         interceptor(self._wrapped)
         return self
     }
 
-    public func has<K : Hashable, V>(key: K) -> __.Chain<Bool>! {
+    public func has<K : Hashable, V>(key: K) -> __Chain<Bool>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.has(wrapped, key: key) )
         }
@@ -97,26 +97,27 @@ public extension __.Chain {
 
     // property function is not implemented
 
-    public func matches<K, V: Equatable>() -> __.Chain<[K:V] -> Bool>! {
+    public func matches<K, V: Equatable>() -> __Chain<[K:V] -> Bool>! {
         if let wrapped = self._wrapped as? [K:V] {
             return __.chain( __.matches(wrapped) )
         }
         return nil
     }
 
-    public func isEmpty<U>() -> __.Chain<Bool>! {
+    public func isEmpty<U>() -> __Chain<Bool>! {
         if let wrapped = self._wrapped as? [U] {
             return __.chain( wrapped.isEmpty )
         }
         return nil
     }
 
-    public func isEmpty<K : Hashable, V>() -> __.Chain<Bool>! {
-        if let wrapped = self._wrapped as? [K:V] {
-            return __.chain( wrapped.count == 0 )
-        }
-        return nil
-    }
+    
+//    public func isEmpty<K : Hashable, V>() -> __Chain<Bool>! {
+//        if let wrapped = self._wrapped as? [K:V] {
+//            return __.chain( wrapped.count == 0 )
+//        }
+//        return nil
+//    }
 
     public func isArray<U>() -> Bool {
         if let _ = self._wrapped as? [U] {
@@ -167,10 +168,10 @@ public extension __.Chain {
         return false
     }
     
-    func isNil() -> Bool? {
-        if self._wrapped == nil {
-            return true
-        }
-        return false
-    }
+//    func isNil() -> Bool? {
+//        if self._wrapped == nil {
+//            return true
+//        }
+//        return false
+//    }
 }

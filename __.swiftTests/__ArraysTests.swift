@@ -31,11 +31,11 @@ class __ArraysTests: XCTestCase {
         
         let result0 = __.first([1,2,3])
         
-        XCTAssert(result0 == 1)
+        XCTAssert(result0 == [1])
         
         let result1 = __.first(["a","b","c"])
         
-        XCTAssert(result1 == "a")
+        XCTAssert(result1 == ["a"])
         
         let result2 = __.first([1,2,3], 2)
         
@@ -58,7 +58,7 @@ class __ArraysTests: XCTestCase {
         
         let result0 = __.last([1,2,3,4,5])
         
-        XCTAssert(result0==5)
+        XCTAssert(result0==[5])
         
         let result1 = __.last([1,2,3,4,5], 3)
         

@@ -25,23 +25,23 @@
 
 import Foundation
 
-public extension __.Chain {
+public extension __Chain {
     
-    public func uniqueId() -> __.Chain<String>! {
+    public func uniqueId() -> __Chain<String>! {
         if let wrapped = self._wrapped as? String {
             return __.chain( __.uniqueId(wrapped) )
         }
         return nil
     }
 
-    public func escape() -> __.Chain<String>! {
+    public func escape() -> __Chain<String>! {
         if let wrapped = self._wrapped as? String {
             return __.chain( __.escape(wrapped) )
         }
         return nil
     }
 
-    public func unescape() -> __.Chain<String>! {
+    public func unescape() -> __Chain<String>! {
         if let wrapped = self._wrapped as? String {
             return __.chain( __.unescape(wrapped) )
         }

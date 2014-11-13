@@ -37,7 +37,7 @@ class __ChainTests: XCTestCase {
             ["species": "cat", "legs": "4"]
         ]
         
-        var chain: __.Chain<[String]> = __.chain(data).pluck("legs")
+        var chain: __Chain<[String]> = __.chain(data).pluck("legs")
         let r2: [Int] = chain.map({(s:String) -> Int in s.toInt()! }).filter({ $0 <= 6 }).sortBy(__.identity).value()
         
         XCTAssert(r0 == [2,4,6])
