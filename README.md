@@ -1,9 +1,9 @@
 __.swift
 ========
 
-Now, __.swift is version 0.2.0! With the chain methods, __.swift becomes more flexible and extensible.
+Now, __.swift is version 0.2.0! With the chain of methods, __.swift became more flexible and extensible.
 
-**Document**: <http://lotz84.github.io/__.swift/v0.1/> (Update soon)
+**Documentation**: <http://lotz84.github.io/__.swift/v0.1/> (Updates coming soon..)
 
 __.swift aims to be an utility belt for a new programming language by Apple Inc., [Swift](https://developer.apple.com/swift/). And we decided  __.swift to be a clone of [Underscore.js](http://underscorejs.org/), which is an utility belt for JavaScript.
 
@@ -18,7 +18,7 @@ __.swift is a type-safe library because it uses type inference and generics. The
 ##Installation
 If you use `__` from swift file, copy `__.swift` folder into your project. That's all.
 
-##Example
+##Examples
 
     __.map([11,22,33]) { x in x * x }
     // [121, 484, 1089]
@@ -59,13 +59,13 @@ If you use `__` from swift file, copy `__.swift` folder into your project. That'
     __.chain(data).pluck("legs")?.map({(s:String) -> Int in s.toInt()! })?.sortBy(__.identity)?.value()
     // [4, 6, 8]
 
-##Altanatives
+##Alternatives
 * [pNre/ExSwift](https://github.com/pNre/ExSwift) - JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
 * [RuiAAPeres/Swift-Sugar](https://github.com/RuiAAPeres/Swift-Sugar) - Swift's Sugar. Heavily inspired on Objc Sugar
 * [ankurp/Dollar.swift](https://github.com/ankurp/Dollar.swift) - A functional tool-belt for Swift Language similar to Lo-Dash or Underscore in Javascript
 * [maxpow4h/swiftz](https://github.com/maxpow4h/swiftz) - Functional programming in Swift
 
-##Contributing
+##Contribution
 Feel free to send a PR or create a new [issue](https://github.com/lotz84/__.swift/issues).
 
 ##License
