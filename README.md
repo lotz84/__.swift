@@ -20,44 +20,47 @@ If you use `__` from swift file, copy `__.swift` folder into your project. That'
 
 ##Examples
 
-    __.map([11,22,33]) { x in x * x }
-    // [121, 484, 1089]
+```swift
+__.map([11,22,33]) { x in x * x }
+// [121, 484, 1089]
 
-    __.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], "", + )
-    // Hello Swift !!
+__.reduce(["H", "e", "l", "l", "o", " ", "S", "w", "i", "f", "t", " ", "!", "!"], "", + )
+// Hello Swift !!
 
-    func isPrime(n: Int) -> Bool {
-      if n < 2 { return false }
-      let max = Int(sqrt(Double(n)))
-      for i in 2...max {
-        if n % i == 0 { return false }
-      }
-      return true
-    }
-    __.find([1,33,173,46], isPrime)
-    // 173
+func isPrime(n: Int) -> Bool {
+  if n < 2 { return false }
+  let max = Int(sqrt(Double(n)))
+  for i in 2...max {
+    if n % i == 0 { return false }
+  }
+  return true
+}
 
-    __.filter(Array(2..100) , isPrime)
-    // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+__.find([1,33,173,46], isPrime)
+// 173
 
-    let data = [
-      ["plan": "walking", "time": "8 a.m."],
-      ["plan": "work",    "time": "10 a.m."],
-      ["plan": "lunch",   "time": "12 a.m."]
-    ]
-    __.pluck(data, "plan")
-    // [walking, work, lunch]
+__.filter(Array(2..100) , isPrime)
+// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
-    let data2: Array<Dictionary<String, String>> = [
-      ["species": "spider", "legs": "8"],
-      ["species": "ant", "legs": "6"],
-      ["species": "cat", "legs": "4"]
-    ]
+let data = [
+  ["plan": "walking", "time": "8 a.m."],
+  ["plan": "work",    "time": "10 a.m."],
+  ["plan": "lunch",   "time": "12 a.m."]
+]
+__.pluck(data, "plan")
+// [walking, work, lunch]
 
-    // Chain Example
+let data2: Array<Dictionary<String, String>> = [
+  ["species": "spider", "legs": "8"],
+  ["species": "ant", "legs": "6"],
+  ["species": "cat", "legs": "4"]
+]
+
+// Chain Example
     
-    __.chain(data).pluck("legs")?.map({(s:String) -> Int in s.toInt()! })?.sortBy(__.identity)?.value()
-    // [4, 6, 8]
+__.chain(data).pluck("legs")?.map({(s:String) -> Int in s.toInt()! })?.sortBy(__.identity)?.value()
+// [4, 6, 8]
+```
 
 ##Alternatives
 * [pNre/ExSwift](https://github.com/pNre/ExSwift) - JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
