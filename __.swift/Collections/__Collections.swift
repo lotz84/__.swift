@@ -68,7 +68,7 @@ public extension __ {
     
     // alias for find
     public class func detect<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> T.Generator.Element? {
-        return __.find(seq, predicate)
+        return __.find(seq, predicate: predicate)
     }
  
     public class func `where`<K,V: Equatable>(array: [[K:V]], _ properties: [K:V]) -> [[K:V]] {
@@ -99,7 +99,7 @@ public extension __ {
     }
     
     public class func every<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool ) -> Bool {
-        return __.find(seq, { !predicate($0) }) == nil ? true : false
+        return __.find(seq, predicate: { !predicate($0) }) == nil ? true : false
     }
     
     // alias for every
@@ -117,7 +117,7 @@ public extension __ {
     }
     
     public class func some<T : SequenceType>(seq: T, predicate: T.Generator.Element -> Bool) -> Bool {
-        return __.find(seq, predicate) == nil ? false : true
+        return __.find(seq, predicate: predicate) == nil ? false : true
     }
     
     // alias for some

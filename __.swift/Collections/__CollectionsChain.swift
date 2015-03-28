@@ -231,7 +231,7 @@ public extension __Chain {
     
     public func every<T>(predicate: T -> Bool ) -> __Chain<Bool>! {
         if let wrapped = self._wrapped as? [T] {
-            return __.chain( __.every(wrapped, predicate) )
+            return __.chain( __.every(wrapped, predicate: predicate) )
         }
         return nil
     }
@@ -255,7 +255,7 @@ public extension __Chain {
     
     public func some<T>(predicate: T -> Bool ) -> __Chain<Bool>! {
         if let wrapped = self._wrapped as? [T] {
-            return __.chain( __.some(wrapped, predicate) )
+            return __.chain( __.some(wrapped, predicate: predicate) )
         }
         return nil
     }
@@ -335,7 +335,7 @@ public extension __Chain {
     
     public func groupBy<K, V>(transform: V -> K) -> __Chain<[K:[V]]>! {
         if let wrapped = self._wrapped as? [V] {
-            return __.chain( __.groupBy(wrapped, transform) )
+            return __.chain( __.groupBy(wrapped, transform: transform) )
         }
         return nil
     }

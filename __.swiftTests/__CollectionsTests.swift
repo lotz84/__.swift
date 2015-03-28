@@ -171,14 +171,14 @@ class __CollectionsTests: XCTestCase {
             return length
         }
         
-        let result1 = __.sortBy(["Hello", " Swift", "!!"], size)
+        let result1 = __.sortBy(["Hello", " Swift", "!!"], transform: size)
         
         XCTAssert(result1 == ["!!", "Hello", " Swift"])
     }
 
     func testGroupBy(){
         
-        let result = __.groupBy([1.3, 2.1, 2.4], floor)
+        let result = __.groupBy([1.3, 2.1, 2.4], transform: floor)
         
         let list0 = result[1.0]!
         let list1 = result[2.0]!
