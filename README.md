@@ -9,16 +9,16 @@ __.swift aims to be an utility belt for a new programming language by Apple Inc.
 
 __.swift is a type-safe library because it uses type inference and generics. Therefore, you can write a program without most of the downcasting such as "as" or "as?".
 
-##Philosophy
+## Philosophy
 * Type safe
 * Flexible and Extensible
 * Do not reinvent the wheel
 * A port of Underscore.js to Swift
 
-##Installation
+## Installation
 If you use `__` from swift file, copy `__.swift` folder into your project. That's all.
 
-##Examples
+## Examples
 
 ```swift
 __.map([11,22,33]) { x in x * x }
@@ -62,13 +62,13 @@ __.chain(data).pluck("legs")?.map({(s:String) -> Int in s.toInt()! })?.sortBy(__
 // [4, 6, 8]
 ```
 
-##Alternatives
+## Alternatives
 * [pNre/ExSwift](https://github.com/pNre/ExSwift) - JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
 * [RuiAAPeres/Swift-Sugar](https://github.com/RuiAAPeres/Swift-Sugar) - Swift's Sugar. Heavily inspired on Objc Sugar
 * [ankurp/Dollar.swift](https://github.com/ankurp/Dollar.swift) - A functional tool-belt for Swift Language similar to Lo-Dash or Underscore in Javascript
 * [maxpow4h/swiftz](https://github.com/maxpow4h/swiftz) - Functional programming in Swift
 
-##Contribution
+## Contribution
 Feel free to send a PR or create a new [issue](https://github.com/lotz84/__.swift/issues).
 
 ##License
