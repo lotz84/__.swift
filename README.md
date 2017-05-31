@@ -71,5 +71,5 @@ __.chain(data).pluck("legs")?.map({(s:String) -> Int in s.toInt()! })?.sortBy(__
 ## Contribution
 Feel free to send a PR or create a new [issue](https://github.com/lotz84/__.swift/issues).
 
-##License
+## License
 MIT Licence
